@@ -1,8 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://bredshadowmain1"]
+[gd_scene load_steps=19 format=3 uid="uid://bredshadowmain1"]
 
 [ext_resource type="PackedScene" uid="uid://bredshadowplyr1" path="res://scenes/Player.tscn" id="1_player"]
 [ext_resource type="Shader" path="res://shaders/fog.gdshader" id="2_fog"]
 [ext_resource type="PackedScene" uid="uid://bredshadowenmy1" path="res://scenes/Enemy.tscn" id="3_enemy"]
+[ext_resource type="Script" path="res://scripts/Main.gd" id="4_main"]
 
 [sub_resource type="Gradient" id="grad_bg"]
 offsets = PackedFloat32Array(0, 0.45, 1)
@@ -83,6 +84,7 @@ scale_max = 0.8
 color = Color(1, 0.7, 0.6, 0.5)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("4_main")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("env")
