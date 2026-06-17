@@ -68,6 +68,8 @@ extends CharacterBody2D
 @export var attack_combo_window := 0.5
 @export var kick_duration := 0.26
 @export var kick_lunge := 190.0
+@export var attack_damage := 10.0
+@export var kick_damage := 14.0
 
 # --- State ---
 var facing := 1                  # 1 = right, -1 = left.
@@ -317,7 +319,7 @@ func start_attack():
 	_combo_timer = attack_combo_window
 	velocity.x = facing * attack_lunge
 	stealthed = false
-	_spawn_hitbox(Vector2(facing * 26, -4), Vector2(40, 28))
+	_spawn_hitbox(Vector2(facing * 26, -4), Vector2(40, 28), attack_damage)
 	_spawn_slash(false)
 
 
@@ -327,7 +329,7 @@ func start_kick():
 	_attack_timer = kick_duration
 	velocity.x = facing * kick_lunge
 	stealthed = false
-	_spawn_hitbox(Vector2(facing * 24, 14), Vector2(34, 22))
+	_spawn_hitbox(Vector2(facing * 24, 14), Vector2(34, 22), kick_damage)
 	_spawn_slash(true)
 
 
@@ -350,25 +352,30 @@ func _update_visual():
 	visual.modulate.a = stealth_alpha if stealthed else 1.0
 
 
-func _spawn_hitbox(offset: Vector2, size: Vector2):
-	# A short-lived Area2D so future enemies can be hit. Harmless for now.
+func _spawn_hitbox(offset: Vector2, size: Vector2, dmg: float):
+	# A short-lived Area2D that damages enemy bodies on layer bit 4.
 	var hb := Area2D.new()
 	hb.collision_layer = 0
-	hb.collision_mask = 0b1000   # Reserve bit 4 for "enemy" bodies/areas.
+	hb.collision_mask = 0b1000   # Bit 4 = "enemy" bodies.
 	var shape := CollisionShape2D.new()
 	var rect := RectangleShape2D.new()
 	rect.size = size
 	shape.shape = rect
 	hb.add_child(shape)
 	hb.position = offset
-	hb.body_entered.connect(_on_hitbox_body_entered)
+	hb.set_meta("dmg", dmg)
+	hb.body_entered.connect(_on_hitbox_body_entered.bind(hb))
 	add_child(hb)
 	get_tree().create_timer(0.08).timeout.connect(hb.queue_free)
 
 
-func _on_hitbox_body_entered(body):
-	# Hook for damage once enemies exist.
-	print("[RedShadow] %s hit: %s" % [current_action, body.name])
+func _on_hitbox_body_entered(body, hb):
+	# Deal damage + knockback away from the player.
+	if body.has_method("take_hit"):
+		var dir := signf(body.global_position.x - global_position.x)
+		if dir == 0.0:
+			dir = float(facing)
+		body.take_hit(hb.get_meta("dmg", 0.0), dir)
 
 
 func _spawn_slash(low: bool):
