@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://bredshadowplyr1"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_player"]
+[ext_resource type="Texture2D" path="res://assets/player.png" id="3_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(36, 92)
+
+[sub_resource type="Gradient" id="grad_aura"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="tex_aura"]
+gradient = SubResource("grad_aura")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_player")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Visual"]
+position = Vector2(2, -14)
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("3_tex")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="Aura" type="PointLight2D" parent="."]
+position = Vector2(0, -10)
+scale = Vector2(1.6, 1.6)
+color = Color(0.4, 0.62, 1, 1)
+energy = 0.9
+blend_mode = 0
+texture = SubResource("tex_aura")
