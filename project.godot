@@ -15,10 +15,6 @@ run/main_scene="res://scenes/Main.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
-[audio]
-
-buses/default_bus_layout="res://default_bus_layout.tres"
-
 [autoload]
 
 Music="*res://scripts/MusicManager.gd"
@@ -82,5 +78,3 @@ stealth={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="forward_plus"
-renderer/rendering_method.mobile="mobile"
