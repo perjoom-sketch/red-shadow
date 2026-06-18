@@ -105,16 +105,16 @@ z_as_relative = false
 z_index = -4
 texture = ExtResource("5_thigh")
 centered = true
-offset = Vector2(0, -111)
+offset = Vector2(0, 111)
 modulate = Color(0.45, 0.45, 0.45, 1.0)
 
-; shin_foot half_h=78 → offset.y=-78; position.y ≈ thigh height=223 (owner: set pivot)
+; shin_foot half_h=78 → offset.y=78; position.y ≈ thigh height=223 (owner: set pivot)
 [node name="FarShin" type="Sprite2D" parent="FarLeg/FarThigh"]
 z_as_relative = false
 z_index = -4
 texture = ExtResource("6_shin_foot")
 centered = true
-offset = Vector2(0, -78)
+offset = Vector2(0, 78)
 position = Vector2(0, 223)
 modulate = Color(0.45, 0.45, 0.45, 1.0)
 
@@ -125,26 +125,26 @@ z_as_relative = false
 z_index = -3
 texture = ExtResource("8_tail")
 centered = true
-offset = Vector2(0, -123)
+offset = Vector2(0, 123)
 script = ExtResource("12_clothsway")
 
 ; ── Sheath ──────────────────────────────────────────────────────────
-; sheath half_h=125 → offset.y=-125 (상단 부착점 피벗)
+; sheath half_h=125 → offset.y=125 (상단 부착점 피벗)
 [node name="Sheath" type="Sprite2D" parent="."]
 z_as_relative = false
 z_index = -3
 texture = ExtResource("11_sheath")
 centered = true
-offset = Vector2(0, -125)
+offset = Vector2(0, 125)
 
 ; ── CoatTails ───────────────────────────────────────────────────────
-; coat_tails half_h=138 → offset.y=-138 (상단 허리 부착점 피벗)
+; coat_tails half_h=138 → offset.y=138 (상단 허리 부착점 피벗)
 [node name="CoatTails" type="Sprite2D" parent="."]
 z_as_relative = false
 z_index = -1
 texture = ExtResource("7_coat_tails")
 centered = true
-offset = Vector2(0, -138)
+offset = Vector2(0, 138)
 script = ExtResource("12_clothsway")
 
 ; ── Torso ───────────────────────────────────────────────────────────
@@ -166,85 +166,85 @@ z_as_relative = false
 z_index = -2
 texture = ExtResource("3_upper_arm")
 centered = true
-offset = Vector2(0, -50)
+offset = Vector2(0, 50)
 modulate = Color(0.45, 0.45, 0.45, 1.0)
 
-; forearm_hand half_h=68 → offset.y=-68; position.y ≈ upper_arm height=101
+; forearm_hand half_h=68 → offset.y=68; position.y ≈ upper_arm height=101
 [node name="FarForearm" type="Sprite2D" parent="Torso/FarArm/FarUpperArm"]
 z_as_relative = false
 z_index = -2
 texture = ExtResource("4_forearm_hand")
 centered = true
-offset = Vector2(0, -68)
+offset = Vector2(0, 68)
 position = Vector2(0, 101)
 modulate = Color(0.45, 0.45, 0.45, 1.0)
 
 ; ── Head (Torso 자식) ───────────────────────────────────────────────
-; head half_h=75 → offset.y=+75 (목=하단 축 피벗)
+; head half_h=75 → offset.y=-75 (목=하단 축 피벗)
 [node name="Head" type="Sprite2D" parent="Torso"]
 z_as_relative = false
 z_index = 1
 texture = ExtResource("1_head")
 centered = true
-offset = Vector2(0, 75)
+offset = Vector2(0, -75)
 
 ; ── NearArm (Torso 자식) ────────────────────────────────────────────
 [node name="NearArm" type="Node2D" parent="Torso"]
 
-; upper_arm half_h=50 → offset.y=-50 (어깨 관절 피벗)
+; upper_arm half_h=50 → offset.y=50 (어깨 관절 피벗)
 [node name="NearUpperArm" type="Sprite2D" parent="Torso/NearArm"]
 z_as_relative = false
 z_index = 4
 texture = ExtResource("3_upper_arm")
 centered = true
-offset = Vector2(0, -50)
+offset = Vector2(0, 50)
 
-; forearm_hand half_h=68 → offset.y=-68; position.y ≈ upper_arm height=101
+; forearm_hand half_h=68 → offset.y=68; position.y ≈ upper_arm height=101
 [node name="NearForearm" type="Sprite2D" parent="Torso/NearArm/NearUpperArm"]
 z_as_relative = false
 z_index = 4
 texture = ExtResource("4_forearm_hand")
 centered = true
-offset = Vector2(0, -68)
+offset = Vector2(0, 68)
 position = Vector2(0, 101)
 
 ; ── Katana (NearForearm 자식) ───────────────────────────────────────
-; katana half_h=166 → offset.y=-166 (손잡이 상단 피벗)
+; katana half_h=166 → offset.y=166 (손잡이 상단 피벗)
 [node name="Katana" type="Sprite2D" parent="Torso/NearArm/NearUpperArm/NearForearm"]
 z_as_relative = false
 z_index = 5
 texture = ExtResource("10_katana")
 centered = true
-offset = Vector2(0, -166)
+offset = Vector2(0, 166)
 
 ; ── NearLeg ─────────────────────────────────────────────────────────
 [node name="NearLeg" type="Node2D" parent="."]
 
-; thigh half_h=111 → offset.y=-111
+; thigh half_h=111 → offset.y=111
 [node name="NearThigh" type="Sprite2D" parent="NearLeg"]
 z_as_relative = false
 z_index = 2
 texture = ExtResource("5_thigh")
 centered = true
-offset = Vector2(0, -111)
+offset = Vector2(0, 111)
 
-; shin_foot half_h=78 → offset.y=-78; position.y ≈ thigh height=223
+; shin_foot half_h=78 → offset.y=78; position.y ≈ thigh height=223
 [node name="NearShin" type="Sprite2D" parent="NearLeg/NearThigh"]
 z_as_relative = false
 z_index = 2
 texture = ExtResource("6_shin_foot")
 centered = true
-offset = Vector2(0, -78)
+offset = Vector2(0, 78)
 position = Vector2(0, 223)
 
 ; ── Scarf ───────────────────────────────────────────────────────────
-; scarf half_h=128 → offset.y=-128 (목 부착점 피벗)
+; scarf half_h=128 → offset.y=128 (목 부착점 피벗)
 [node name="Scarf" type="Sprite2D" parent="."]
 z_as_relative = false
 z_index = 3
 texture = ExtResource("9_scarf")
 centered = true
-offset = Vector2(0, -128)
+offset = Vector2(0, 128)
 script = ExtResource("12_clothsway")
 
 ; ── AnimationPlayer ─────────────────────────────────────────────────
