@@ -1,0 +1,202 @@
+[gd_scene load_steps=25 format=3 uid="uid://playerrig_tscn_001"]
+
+; ── 텍스처 ext_resource ──────────────────────────────────────────────
+[ext_resource type="Texture2D" path="res://assets/coat_tail.png" id="1_coat_tail"]
+[ext_resource type="Texture2D" path="res://assets/scarf.png"     id="2_scarf"]
+[ext_resource type="Texture2D" path="res://assets/limb_01.png"   id="3_limb01"]
+[ext_resource type="Texture2D" path="res://assets/limb_02.png"   id="4_limb02"]
+[ext_resource type="Texture2D" path="res://assets/limb_03.png"   id="5_limb03"]
+[ext_resource type="Texture2D" path="res://assets/limb_04.png"   id="6_limb04"]
+[ext_resource type="Texture2D" path="res://assets/torso.png"     id="7_torso"]
+[ext_resource type="Texture2D" path="res://assets/head.png"      id="8_head"]
+[ext_resource type="Texture2D" path="res://assets/limb_05.png"   id="9_limb05"]
+[ext_resource type="Texture2D" path="res://assets/limb_06.png"   id="10_limb06"]
+[ext_resource type="Texture2D" path="res://assets/limb_07.png"   id="11_limb07"]
+[ext_resource type="Texture2D" path="res://assets/katana.png"    id="12_katana"]
+[ext_resource type="Script"    path="res://scripts/ClothSway.gd" id="13_clothsway"]
+
+; ── AnimationLibrary (빈 애니메이션) ────────────────────────────────
+[sub_resource type="Animation" id="anim_RESET"]
+resource_name = "RESET"
+length = 0.001
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_idle"]
+resource_name = "idle"
+length = 1.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="anim_walk"]
+resource_name = "walk"
+length = 1.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="anim_run"]
+resource_name = "run"
+length = 1.0
+loop_mode = 1
+
+[sub_resource type="Animation" id="anim_jump"]
+resource_name = "jump"
+length = 0.6
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_somersault"]
+resource_name = "somersault"
+length = 0.6
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_fall"]
+resource_name = "fall"
+length = 0.4
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_attack"]
+resource_name = "attack"
+length = 0.4
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_attack_dash"]
+resource_name = "attack_dash"
+length = 0.3
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_attack_heavy"]
+resource_name = "attack_heavy"
+length = 0.6
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_defend"]
+resource_name = "defend"
+length = 0.3
+loop_mode = 0
+
+[sub_resource type="Animation" id="anim_hurt"]
+resource_name = "hurt"
+length = 0.3
+loop_mode = 0
+
+[sub_resource type="AnimationLibrary" id="anim_lib"]
+_data = {
+"RESET": SubResource("anim_RESET"),
+"idle": SubResource("anim_idle"),
+"walk": SubResource("anim_walk"),
+"run": SubResource("anim_run"),
+"jump": SubResource("anim_jump"),
+"somersault": SubResource("anim_somersault"),
+"fall": SubResource("anim_fall"),
+"attack": SubResource("anim_attack"),
+"attack_dash": SubResource("anim_attack_dash"),
+"attack_heavy": SubResource("anim_attack_heavy"),
+"defend": SubResource("anim_defend"),
+"hurt": SubResource("anim_hurt"),
+}
+
+; ── 노드 계층 ────────────────────────────────────────────────────────
+[node name="PlayerRig" type="Node2D"]
+
+[node name="Rig" type="Node2D" parent="."]
+
+; ── CoatTail — 코트 자락, 몸통 뒤 (z=-3) ───────────────────────────
+; 피벗: 위쪽(허리 부착점) → offset.y = +half_height (이미지를 아래로 밀어냄)
+; 오너가 에디터에서 정확한 픽셀 맞춤 필요
+[node name="CoatTail" type="Sprite2D" parent="Rig"]
+z_index = -3
+texture = ExtResource("1_coat_tail")
+offset = Vector2(0, 40)
+script = ExtResource("13_clothsway")
+amplitude = 0.06
+speed = 1.8
+damping = 0.12
+
+; ── Scarf — 흘러내리는 머플러, 몸통 앞 (z=-1) ──────────────────────
+; 피벗: 한쪽 끝(목 부착점) → offset.x = +half_width
+; 오너가 에디터에서 정확한 픽셀 맞춤 필요
+[node name="Scarf" type="Sprite2D" parent="Rig"]
+z_index = -1
+texture = ExtResource("2_scarf")
+offset = Vector2(20, 0)
+script = ExtResource("13_clothsway")
+amplitude = 0.10
+speed = 2.2
+damping = 0.18
+
+; ── FarArmUpper — 반대편 상박 (z=-2) ────────────────────────────────
+; limb_01 임시 배정 — 오너가 시각적으로 교체
+; 피벗: 위쪽 끝(어깨 관절) → offset.y = +half_height
+[node name="FarArmUpper" type="Sprite2D" parent="Rig"]
+z_index = -2
+texture = ExtResource("3_limb01")
+offset = Vector2(0, 20)
+
+; ── FarArmLower — 반대편 하박 ────────────────────────────────────────
+; limb_02 임시 배정 — 오너가 시각적으로 교체
+; 피벗: 위쪽 끝(팔꿈치 관절) → offset.y = +half_height
+[node name="FarArmLower" type="Sprite2D" parent="Rig/FarArmUpper"]
+texture = ExtResource("4_limb02")
+offset = Vector2(0, 20)
+
+; ── FarLegUpper — 반대편 허벅지 (z=-2) ─────────────────────────────
+; limb_03 임시 배정 — 오너가 시각적으로 교체
+[node name="FarLegUpper" type="Sprite2D" parent="Rig"]
+z_index = -2
+texture = ExtResource("5_limb03")
+offset = Vector2(0, 20)
+
+; ── FarLegLower — 반대편 정강이 ─────────────────────────────────────
+; limb_04 임시 배정 — 오너가 시각적으로 교체
+[node name="FarLegLower" type="Sprite2D" parent="Rig/FarLegUpper"]
+texture = ExtResource("6_limb04")
+offset = Vector2(0, 20)
+
+; ── Torso — 몸통 (z=0) ──────────────────────────────────────────────
+; 피벗: 아래-중앙(골반/루트 기준점) → offset.y = +half_height
+[node name="Torso" type="Sprite2D" parent="Rig"]
+z_index = 0
+texture = ExtResource("7_torso")
+offset = Vector2(0, 40)
+
+; ── Head — 머리+모자+얼굴 머플러 (z=1, Torso 자식) ──────────────────
+; 피벗: 아래-중앙(목) → offset.y = +half_height
+[node name="Head" type="Sprite2D" parent="Rig/Torso"]
+z_index = 1
+texture = ExtResource("8_head")
+offset = Vector2(0, 30)
+
+; ── NearLegUpper — 앞쪽 허벅지 (z=1) ──────────────────────────────
+; limb_05 임시 배정 — 오너가 시각적으로 교체
+[node name="NearLegUpper" type="Sprite2D" parent="Rig"]
+z_index = 1
+texture = ExtResource("9_limb05")
+offset = Vector2(0, 20)
+
+; ── NearLegLower — 앞쪽 정강이 ─────────────────────────────────────
+; limb_06 임시 배정 — 오너가 시각적으로 교체
+[node name="NearLegLower" type="Sprite2D" parent="Rig/NearLegUpper"]
+texture = ExtResource("10_limb06")
+offset = Vector2(0, 20)
+
+; ── NearArmUpper — 앞쪽 상박 (z=2) ────────────────────────────────
+; limb_07 임시 배정 — 오너가 시각적으로 교체
+[node name="NearArmUpper" type="Sprite2D" parent="Rig"]
+z_index = 2
+texture = ExtResource("11_limb07")
+offset = Vector2(0, 20)
+
+; ── NearArmLower — 앞쪽 하박 ────────────────────────────────────────
+; 별도 limb 없음 — 오너가 적절한 limb PNG로 교체
+[node name="NearArmLower" type="Sprite2D" parent="Rig/NearArmUpper"]
+offset = Vector2(0, 20)
+
+; ── Katana — 검 (z=3, NearArmLower 자식) ───────────────────────────
+; 피벗: 손잡이 끝(손에 쥐는 지점) → offset.y = +half_height
+[node name="Katana" type="Sprite2D" parent="Rig/NearArmUpper/NearArmLower"]
+z_index = 3
+texture = ExtResource("12_katana")
+offset = Vector2(0, 40)
+
+; ── AnimationPlayer ─────────────────────────────────────────────────
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Rig"]
+libraries = {
+"": SubResource("anim_lib"),
+}
