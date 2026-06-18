@@ -1,254 +1,201 @@
-[gd_scene load_steps=36 format=3 uid="uid://playerrig_tscn_001"]
+[gd_scene format=3 uid="uid://dyekevua2ri06"]
 
-; ── 텍스처 ext_resource ──────────────────────────────────────────────
-[ext_resource type="Texture2D" path="res://assets/head.png"         id="1_head"]
-[ext_resource type="Texture2D" path="res://assets/torso.png"        id="2_torso"]
-[ext_resource type="Texture2D" path="res://assets/upper_arm.png"    id="3_upper_arm"]
-[ext_resource type="Texture2D" path="res://assets/forearm_hand.png" id="4_forearm_hand"]
-[ext_resource type="Texture2D" path="res://assets/thigh.png"        id="5_thigh"]
-[ext_resource type="Texture2D" path="res://assets/shin_foot.png"    id="6_shin_foot"]
-[ext_resource type="Texture2D" path="res://assets/coat_tails.png"   id="7_coat_tails"]
-[ext_resource type="Texture2D" path="res://assets/tail.png"         id="8_tail"]
-[ext_resource type="Texture2D" path="res://assets/scarf.png"        id="9_scarf"]
-[ext_resource type="Texture2D" path="res://assets/katana.png"       id="10_katana"]
-[ext_resource type="Texture2D" path="res://assets/sheath.png"       id="11_sheath"]
-[ext_resource type="Script"    path="res://scripts/ClothSway.gd"    id="12_clothsway"]
+[ext_resource type="Texture2D" uid="uid://dqapwjlx3rwft" path="res://assets/head.png" id="1_head"]
+[ext_resource type="Texture2D" uid="uid://bnyt2enyyp6vn" path="res://assets/torso.png" id="2_torso"]
+[ext_resource type="Texture2D" uid="uid://bf4s35obwt44a" path="res://assets/upper_arm.png" id="3_upper_arm"]
+[ext_resource type="Texture2D" uid="uid://dohkdijk73huy" path="res://assets/forearm_hand.png" id="4_forearm_hand"]
+[ext_resource type="Texture2D" uid="uid://i6ex7odrt3si" path="res://assets/thigh.png" id="5_thigh"]
+[ext_resource type="Texture2D" uid="uid://udma2qp51wu2" path="res://assets/shin_foot.png" id="6_shin_foot"]
+[ext_resource type="Texture2D" uid="uid://6o2mr53i61m4" path="res://assets/coat_tails.png" id="7_coat_tails"]
+[ext_resource type="Texture2D" uid="uid://1wm5bogihitp" path="res://assets/tail.png" id="8_tail"]
+[ext_resource type="Texture2D" uid="uid://bbstafv0x0wc4" path="res://assets/scarf.png" id="9_scarf"]
+[ext_resource type="Texture2D" uid="uid://cbqj0fyoks0u4" path="res://assets/katana.png" id="10_katana"]
+[ext_resource type="Texture2D" uid="uid://d2nwnqay5irsg" path="res://assets/sheath.png" id="11_sheath"]
+[ext_resource type="Script" path="res://scripts/ClothSway.gd" id="12_clothsway"]
 
-; ── 애니메이션 sub_resource ──────────────────────────────────────────
 [sub_resource type="Animation" id="anim_RESET"]
 resource_name = "RESET"
 length = 0.001
-loop_mode = 0
+
+[sub_resource type="Animation" id="anim_attack"]
+resource_name = "attack"
+length = 0.4
+
+[sub_resource type="Animation" id="anim_attack_dash"]
+resource_name = "attack_dash"
+length = 0.3
+
+[sub_resource type="Animation" id="anim_attack_heavy"]
+resource_name = "attack_heavy"
+length = 0.6
+
+[sub_resource type="Animation" id="anim_defend"]
+resource_name = "defend"
+length = 0.3
+
+[sub_resource type="Animation" id="anim_fall"]
+resource_name = "fall"
+length = 0.4
+
+[sub_resource type="Animation" id="anim_hurt"]
+resource_name = "hurt"
+length = 0.3
 
 [sub_resource type="Animation" id="anim_idle"]
 resource_name = "idle"
-length = 1.0
-loop_mode = 1
-
-[sub_resource type="Animation" id="anim_walk"]
-resource_name = "walk"
-length = 1.0
-loop_mode = 1
-
-[sub_resource type="Animation" id="anim_run"]
-resource_name = "run"
-length = 1.0
 loop_mode = 1
 
 [sub_resource type="Animation" id="anim_jump"]
 resource_name = "jump"
 length = 0.6
-loop_mode = 0
+
+[sub_resource type="Animation" id="anim_run"]
+resource_name = "run"
+loop_mode = 1
 
 [sub_resource type="Animation" id="anim_somersault"]
 resource_name = "somersault"
 length = 0.6
-loop_mode = 0
 
-[sub_resource type="Animation" id="anim_fall"]
-resource_name = "fall"
-length = 0.4
-loop_mode = 0
-
-[sub_resource type="Animation" id="anim_attack"]
-resource_name = "attack"
-length = 0.4
-loop_mode = 0
-
-[sub_resource type="Animation" id="anim_attack_dash"]
-resource_name = "attack_dash"
-length = 0.3
-loop_mode = 0
-
-[sub_resource type="Animation" id="anim_attack_heavy"]
-resource_name = "attack_heavy"
-length = 0.6
-loop_mode = 0
-
-[sub_resource type="Animation" id="anim_defend"]
-resource_name = "defend"
-length = 0.3
-loop_mode = 0
-
-[sub_resource type="Animation" id="anim_hurt"]
-resource_name = "hurt"
-length = 0.3
-loop_mode = 0
+[sub_resource type="Animation" id="anim_walk"]
+resource_name = "walk"
+loop_mode = 1
 
 [sub_resource type="AnimationLibrary" id="anim_lib"]
 _data = {
-"RESET": SubResource("anim_RESET"),
-"idle": SubResource("anim_idle"),
-"walk": SubResource("anim_walk"),
-"run": SubResource("anim_run"),
-"jump": SubResource("anim_jump"),
-"somersault": SubResource("anim_somersault"),
-"fall": SubResource("anim_fall"),
-"attack": SubResource("anim_attack"),
-"attack_dash": SubResource("anim_attack_dash"),
-"attack_heavy": SubResource("anim_attack_heavy"),
-"defend": SubResource("anim_defend"),
-"hurt": SubResource("anim_hurt"),
+&"RESET": SubResource("anim_RESET"),
+&"attack": SubResource("anim_attack"),
+&"attack_dash": SubResource("anim_attack_dash"),
+&"attack_heavy": SubResource("anim_attack_heavy"),
+&"defend": SubResource("anim_defend"),
+&"fall": SubResource("anim_fall"),
+&"hurt": SubResource("anim_hurt"),
+&"idle": SubResource("anim_idle"),
+&"jump": SubResource("anim_jump"),
+&"run": SubResource("anim_run"),
+&"somersault": SubResource("anim_somersault"),
+&"walk": SubResource("anim_walk")
 }
 
-; ── 노드 계층 ────────────────────────────────────────────────────────
-; 루트 = 골반 앵커(원점). 캐릭터 facing +X (오른쪽).
-[node name="PlayerRig" type="Node2D"]
+[node name="PlayerRig" type="Node2D" unique_id=280895874]
 
-; ── FarLeg ─────────────────────────────────────────────────────────
-[node name="FarLeg" type="Node2D" parent="."]
+[node name="FarLeg" type="Node2D" parent="." unique_id=1921416120]
 
-; thigh half_h=111 → offset.y=-111 (상단 관절 피벗)
-; z_as_relative=false, z_index=-4
-[node name="FarThigh" type="Sprite2D" parent="FarLeg"]
-z_as_relative = false
+[node name="FarThigh" type="Sprite2D" parent="FarLeg" unique_id=1271056742]
+modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -4
+z_as_relative = false
+position = Vector2(7, 54)
 texture = ExtResource("5_thigh")
-centered = true
 offset = Vector2(0, 111)
-modulate = Color(0.45, 0.45, 0.45, 1.0)
 
-; shin_foot half_h=78 → offset.y=78; position.y ≈ thigh height=223 (owner: set pivot)
-[node name="FarShin" type="Sprite2D" parent="FarLeg/FarThigh"]
-z_as_relative = false
+[node name="FarShin" type="Sprite2D" parent="FarLeg/FarThigh" unique_id=2018776807]
+modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -4
-texture = ExtResource("6_shin_foot")
-centered = true
-offset = Vector2(0, 78)
-position = Vector2(0, 223)
-modulate = Color(0.45, 0.45, 0.45, 1.0)
-
-; ── Tail ────────────────────────────────────────────────────────────
-; tail half_h=123 → offset.y=-123 (상단 부착점 피벗)
-[node name="Tail" type="Sprite2D" parent="."]
 z_as_relative = false
+position = Vector2(3, 215)
+texture = ExtResource("6_shin_foot")
+offset = Vector2(0, 78)
+
+[node name="Tail" type="Sprite2D" parent="." unique_id=828514743]
 z_index = -3
+z_as_relative = false
+position = Vector2(-98, -160)
 texture = ExtResource("8_tail")
-centered = true
 offset = Vector2(0, 123)
 script = ExtResource("12_clothsway")
 
-; ── Sheath ──────────────────────────────────────────────────────────
-; sheath half_h=125 → offset.y=125 (상단 부착점 피벗)
-[node name="Sheath" type="Sprite2D" parent="."]
-z_as_relative = false
+[node name="Sheath" type="Sprite2D" parent="." unique_id=613770302]
 z_index = -3
+z_as_relative = false
+position = Vector2(-42, 134)
 texture = ExtResource("11_sheath")
-centered = true
 offset = Vector2(0, 125)
 
-; ── CoatTails ───────────────────────────────────────────────────────
-; coat_tails half_h=138 → offset.y=138 (상단 허리 부착점 피벗)
-[node name="CoatTails" type="Sprite2D" parent="."]
-z_as_relative = false
+[node name="CoatTails" type="Sprite2D" parent="." unique_id=1186865338]
 z_index = -1
+z_as_relative = false
+position = Vector2(-20, -129)
 texture = ExtResource("7_coat_tails")
-centered = true
 offset = Vector2(0, 138)
 script = ExtResource("12_clothsway")
 
-; ── Torso ───────────────────────────────────────────────────────────
-; torso half_h=95 → offset.y=-95 (상단 기준; 골반 앵커는 하단)
-; owner: torso 하단을 골반 원점에 맞추려면 offset.y=+95 로 조정 필요
-[node name="Torso" type="Sprite2D" parent="."]
+[node name="Torso" type="Sprite2D" parent="." unique_id=814511573]
 z_as_relative = false
-z_index = 0
+position = Vector2(-24, -23)
 texture = ExtResource("2_torso")
-centered = true
-offset = Vector2(0, 0)
 
-; ── FarArm (Torso 자식) ─────────────────────────────────────────────
-[node name="FarArm" type="Node2D" parent="Torso"]
+[node name="FarArm" type="Node2D" parent="Torso" unique_id=1444275097]
 
-; upper_arm half_h=50 → offset.y=-50 (어깨 관절 피벗)
-[node name="FarUpperArm" type="Sprite2D" parent="Torso/FarArm"]
-z_as_relative = false
+[node name="FarUpperArm" type="Sprite2D" parent="Torso/FarArm" unique_id=327091531]
+modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -2
+z_as_relative = false
+position = Vector2(15, -116)
 texture = ExtResource("3_upper_arm")
-centered = true
 offset = Vector2(0, 50)
-modulate = Color(0.45, 0.45, 0.45, 1.0)
 
-; forearm_hand half_h=68 → offset.y=68; position.y ≈ upper_arm height=101
-[node name="FarForearm" type="Sprite2D" parent="Torso/FarArm/FarUpperArm"]
-z_as_relative = false
+[node name="FarForearm" type="Sprite2D" parent="Torso/FarArm/FarUpperArm" unique_id=308314427]
+modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -2
-texture = ExtResource("4_forearm_hand")
-centered = true
-offset = Vector2(0, 68)
-position = Vector2(0, 101)
-modulate = Color(0.45, 0.45, 0.45, 1.0)
-
-; ── Head (Torso 자식) ───────────────────────────────────────────────
-; head half_h=75 → offset.y=-75 (목=하단 축 피벗)
-[node name="Head" type="Sprite2D" parent="Torso"]
 z_as_relative = false
+position = Vector2(9, 87)
+texture = ExtResource("4_forearm_hand")
+offset = Vector2(0, 68)
+
+[node name="Head" type="Sprite2D" parent="Torso" unique_id=775360654]
 z_index = 1
+z_as_relative = false
+position = Vector2(8, -96)
 texture = ExtResource("1_head")
-centered = true
 offset = Vector2(0, -75)
 
-; ── NearArm (Torso 자식) ────────────────────────────────────────────
-[node name="NearArm" type="Node2D" parent="Torso"]
+[node name="NearArm" type="Node2D" parent="Torso" unique_id=1226735022]
 
-; upper_arm half_h=50 → offset.y=50 (어깨 관절 피벗)
-[node name="NearUpperArm" type="Sprite2D" parent="Torso/NearArm"]
-z_as_relative = false
+[node name="NearUpperArm" type="Sprite2D" parent="Torso/NearArm" unique_id=1999510097]
 z_index = 4
+z_as_relative = false
+position = Vector2(-49, -99)
 texture = ExtResource("3_upper_arm")
-centered = true
 offset = Vector2(0, 50)
 
-; forearm_hand half_h=68 → offset.y=68; position.y ≈ upper_arm height=101
-[node name="NearForearm" type="Sprite2D" parent="Torso/NearArm/NearUpperArm"]
-z_as_relative = false
+[node name="NearForearm" type="Sprite2D" parent="Torso/NearArm/NearUpperArm" unique_id=1502433442]
 z_index = 4
-texture = ExtResource("4_forearm_hand")
-centered = true
-offset = Vector2(0, 68)
-position = Vector2(0, 101)
-
-; ── Katana (NearForearm 자식) ───────────────────────────────────────
-; katana half_h=166 → offset.y=166 (손잡이 상단 피벗)
-[node name="Katana" type="Sprite2D" parent="Torso/NearArm/NearUpperArm/NearForearm"]
 z_as_relative = false
+position = Vector2(11, 91)
+texture = ExtResource("4_forearm_hand")
+offset = Vector2(0, 68)
+
+[node name="Katana" type="Sprite2D" parent="Torso/NearArm/NearUpperArm/NearForearm" unique_id=1397173913]
 z_index = 5
+z_as_relative = false
+position = Vector2(26, 79)
 texture = ExtResource("10_katana")
-centered = true
 offset = Vector2(0, 166)
 
-; ── NearLeg ─────────────────────────────────────────────────────────
-[node name="NearLeg" type="Node2D" parent="."]
+[node name="NearLeg" type="Node2D" parent="." unique_id=1439520029]
 
-; thigh half_h=111 → offset.y=111
-[node name="NearThigh" type="Sprite2D" parent="NearLeg"]
-z_as_relative = false
+[node name="NearThigh" type="Sprite2D" parent="NearLeg" unique_id=2083792057]
 z_index = 2
+z_as_relative = false
+position = Vector2(-12, 63)
 texture = ExtResource("5_thigh")
-centered = true
 offset = Vector2(0, 111)
 
-; shin_foot half_h=78 → offset.y=78; position.y ≈ thigh height=223
-[node name="NearShin" type="Sprite2D" parent="NearLeg/NearThigh"]
-z_as_relative = false
+[node name="NearShin" type="Sprite2D" parent="NearLeg/NearThigh" unique_id=1298742034]
 z_index = 2
-texture = ExtResource("6_shin_foot")
-centered = true
-offset = Vector2(0, 78)
-position = Vector2(0, 223)
-
-; ── Scarf ───────────────────────────────────────────────────────────
-; scarf half_h=128 → offset.y=128 (목 부착점 피벗)
-[node name="Scarf" type="Sprite2D" parent="."]
 z_as_relative = false
+position = Vector2(1, 215)
+texture = ExtResource("6_shin_foot")
+offset = Vector2(0, 78)
+
+[node name="Scarf" type="Sprite2D" parent="." unique_id=171870703]
 z_index = 3
+z_as_relative = false
+position = Vector2(52, -163)
 texture = ExtResource("9_scarf")
-centered = true
 offset = Vector2(0, 128)
 script = ExtResource("12_clothsway")
 
-; ── AnimationPlayer ─────────────────────────────────────────────────
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("anim_lib"),
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=267253529]
+libraries/ = SubResource("anim_lib")
