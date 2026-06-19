@@ -1,24 +1,9 @@
-[gd_scene format=3 uid="uid://c0mpe0ys1hjfo"]
+[gd_scene load_steps=19 format=3 uid="uid://bredshadowmain1"]
 
-[ext_resource type="PackedScene" uid="uid://c0mpe0ys4s0jo" path="res://scenes/Player.tscn" id="1_player"]
-[ext_resource type="Shader" uid="uid://4s34dsmbig70" path="res://shaders/fog.gdshader" id="2_fog"]
-[ext_resource type="PackedScene" uid="uid://c0mpe0yssunqo" path="res://scenes/Enemy.tscn" id="3_enemy"]
-[ext_resource type="Script" uid="uid://b5l4rsen7yg2k" path="res://scripts/Main.gd" id="4_main"]
-
-[sub_resource type="Environment" id="env"]
-background_mode = 3
-glow_enabled = true
-glow_intensity = 1.0
-glow_strength = 1.1
-glow_bloom = 0.25
-glow_hdr_threshold = 0.75
-
-[sub_resource type="ShaderMaterial" id="mat_fog"]
-shader = ExtResource("2_fog")
-shader_parameter/fog_color = Color(0.26, 0.46, 0.64, 1)
-shader_parameter/speed = 0.03
-shader_parameter/density = 0.3
-shader_parameter/scale = Vector2(3, 2)
+[ext_resource type="PackedScene" uid="uid://bredshadowplyr1" path="res://scenes/Player.tscn" id="1_player"]
+[ext_resource type="Shader" path="res://shaders/fog.gdshader" id="2_fog"]
+[ext_resource type="PackedScene" uid="uid://bredshadowenmy1" path="res://scenes/Enemy.tscn" id="3_enemy"]
+[ext_resource type="Script" path="res://scripts/Main.gd" id="4_main"]
 
 [sub_resource type="Gradient" id="grad_bg"]
 offsets = PackedFloat32Array(0, 0.45, 1)
@@ -28,7 +13,20 @@ colors = PackedColorArray(0.12, 0.16, 0.28, 1, 0.24, 0.34, 0.5, 1, 0.08, 0.12, 0
 gradient = SubResource("grad_bg")
 width = 1152
 height = 648
+fill_from = Vector2(0, 0)
 fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="grad_vig"]
+offsets = PackedFloat32Array(0.55, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.35)
+
+[sub_resource type="GradientTexture2D" id="tex_vig"]
+gradient = SubResource("grad_vig")
+width = 1152
+height = 648
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="RectangleShape2D" id="shape_ground"]
 size = Vector2(1152, 96)
@@ -45,7 +43,24 @@ size = Vector2(640, 32)
 [sub_resource type="RectangleShape2D" id="shape_ledge"]
 size = Vector2(180, 28)
 
+[sub_resource type="Environment" id="env"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 1.0
+glow_strength = 1.1
+glow_bloom = 0.25
+glow_blend_mode = 1
+glow_hdr_threshold = 0.75
+
+[sub_resource type="ShaderMaterial" id="mat_fog"]
+shader = ExtResource("2_fog")
+shader_parameter/fog_color = Color(0.26, 0.46, 0.64, 1)
+shader_parameter/speed = 0.03
+shader_parameter/density = 0.3
+shader_parameter/scale = Vector2(3, 2)
+
 [sub_resource type="Gradient" id="grad_dot"]
+offsets = PackedFloat32Array(0, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="tex_dot"]
@@ -61,246 +76,235 @@ emission_shape = 3
 emission_box_extents = Vector3(620, 360, 1)
 direction = Vector3(0, -1, 0)
 spread = 25.0
+gravity = Vector3(0, -6, 0)
 initial_velocity_min = 4.0
 initial_velocity_max = 16.0
-gravity = Vector3(0, -6, 0)
 scale_min = 0.2
 scale_max = 0.8
 color = Color(1, 0.7, 0.6, 0.5)
 
-[sub_resource type="Gradient" id="grad_vig"]
-offsets = PackedFloat32Array(0.55, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.35)
-
-[sub_resource type="GradientTexture2D" id="tex_vig"]
-gradient = SubResource("grad_vig")
-width = 1152
-height = 648
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
-
-[node name="Main" type="Node2D" unique_id=588414122]
+[node name="Main" type="Node2D"]
 script = ExtResource("4_main")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=58878832]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("env")
 
-[node name="Fog" type="CanvasLayer" parent="." unique_id=283158170]
+[node name="Fog" type="CanvasLayer" parent="."]
 layer = -5
 
-[node name="F" type="ColorRect" parent="Fog" unique_id=1313673063]
+[node name="F" type="ColorRect" parent="Fog"]
 material = SubResource("mat_fog")
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
 
-[node name="BG" type="CanvasLayer" parent="." unique_id=2073466721]
+[node name="BG" type="CanvasLayer" parent="."]
 layer = -10
 
-[node name="Sky" type="TextureRect" parent="BG" unique_id=1580641429]
+[node name="Sky" type="TextureRect" parent="BG"]
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
 texture = SubResource("tex_bg")
 
-[node name="Player" parent="." unique_id=1765591554 instance=ExtResource("1_player")]
+[node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(240, 460)
 
-[node name="Enemy" parent="." unique_id=1790138396 instance=ExtResource("3_enemy")]
+[node name="Enemy" parent="." instance=ExtResource("3_enemy")]
 position = Vector2(520, 486)
 
-[node name="Ground" type="StaticBody2D" parent="." unique_id=988972144]
+[node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(576, 560)
 
-[node name="V" type="ColorRect" parent="Ground" unique_id=1109508084]
+[node name="V" type="ColorRect" parent="Ground"]
 offset_left = -576.0
 offset_top = -48.0
 offset_right = 576.0
 offset_bottom = 48.0
 color = Color(0.16, 0.13, 0.15, 1)
 
-[node name="C" type="CollisionShape2D" parent="Ground" unique_id=751540213]
+[node name="C" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("shape_ground")
 
-[node name="WallLeftOuter" type="StaticBody2D" parent="." unique_id=2011300498]
+[node name="WallLeftOuter" type="StaticBody2D" parent="."]
 position = Vector2(180, -254)
 
-[node name="V" type="ColorRect" parent="WallLeftOuter" unique_id=2065763585]
+[node name="V" type="ColorRect" parent="WallLeftOuter"]
 offset_left = -20.0
 offset_top = -770.0
 offset_right = 20.0
 offset_bottom = 770.0
 color = Color(0.12, 0.09, 0.11, 1)
 
-[node name="C" type="CollisionShape2D" parent="WallLeftOuter" unique_id=1761872213]
+[node name="C" type="CollisionShape2D" parent="WallLeftOuter"]
 shape = SubResource("shape_wall_outer")
 
-[node name="WallLeftInner" type="StaticBody2D" parent="." unique_id=325881341]
+[node name="WallLeftInner" type="StaticBody2D" parent="."]
 position = Vector2(300, -194)
 
-[node name="V" type="ColorRect" parent="WallLeftInner" unique_id=300199453]
+[node name="V" type="ColorRect" parent="WallLeftInner"]
 offset_left = -20.0
 offset_top = -710.0
 offset_right = 20.0
 offset_bottom = 710.0
 color = Color(0.12, 0.09, 0.11, 1)
 
-[node name="C" type="CollisionShape2D" parent="WallLeftInner" unique_id=312169246]
+[node name="C" type="CollisionShape2D" parent="WallLeftInner"]
 shape = SubResource("shape_wall_inner")
 
-[node name="TopBridge" type="StaticBody2D" parent="." unique_id=1116711413]
+[node name="TopBridge" type="StaticBody2D" parent="."]
 position = Vector2(610, -940)
 
-[node name="V" type="ColorRect" parent="TopBridge" unique_id=1717604664]
+[node name="V" type="ColorRect" parent="TopBridge"]
 offset_left = -320.0
 offset_top = -16.0
 offset_right = 320.0
 offset_bottom = 16.0
 color = Color(0.28, 0.2, 0.22, 1)
 
-[node name="C" type="CollisionShape2D" parent="TopBridge" unique_id=98111111]
+[node name="C" type="CollisionShape2D" parent="TopBridge"]
 shape = SubResource("shape_bridge")
 
-[node name="LedgeR1" type="StaticBody2D" parent="." unique_id=1842608064]
+[node name="LedgeR1" type="StaticBody2D" parent="."]
 position = Vector2(860, -820)
 
-[node name="V" type="ColorRect" parent="LedgeR1" unique_id=1235136714]
+[node name="V" type="ColorRect" parent="LedgeR1"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR1" unique_id=1255225176]
+[node name="C" type="CollisionShape2D" parent="LedgeR1"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR2" type="StaticBody2D" parent="." unique_id=1132431054]
+[node name="LedgeR2" type="StaticBody2D" parent="."]
 position = Vector2(760, -680)
 
-[node name="V" type="ColorRect" parent="LedgeR2" unique_id=1706261190]
+[node name="V" type="ColorRect" parent="LedgeR2"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR2" unique_id=1591203331]
+[node name="C" type="CollisionShape2D" parent="LedgeR2"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR3" type="StaticBody2D" parent="." unique_id=1370922886]
+[node name="LedgeR3" type="StaticBody2D" parent="."]
 position = Vector2(880, -540)
 
-[node name="V" type="ColorRect" parent="LedgeR3" unique_id=2035828410]
+[node name="V" type="ColorRect" parent="LedgeR3"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR3" unique_id=1168829066]
+[node name="C" type="CollisionShape2D" parent="LedgeR3"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR4" type="StaticBody2D" parent="." unique_id=552073005]
+[node name="LedgeR4" type="StaticBody2D" parent="."]
 position = Vector2(760, -400)
 
-[node name="V" type="ColorRect" parent="LedgeR4" unique_id=7966819]
+[node name="V" type="ColorRect" parent="LedgeR4"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR4" unique_id=100706774]
+[node name="C" type="CollisionShape2D" parent="LedgeR4"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR5" type="StaticBody2D" parent="." unique_id=382522619]
+[node name="LedgeR5" type="StaticBody2D" parent="."]
 position = Vector2(900, -260)
 
-[node name="V" type="ColorRect" parent="LedgeR5" unique_id=1090476463]
+[node name="V" type="ColorRect" parent="LedgeR5"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR5" unique_id=1946340982]
+[node name="C" type="CollisionShape2D" parent="LedgeR5"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR6" type="StaticBody2D" parent="." unique_id=385640355]
+[node name="LedgeR6" type="StaticBody2D" parent="."]
 position = Vector2(760, -120)
 
-[node name="V" type="ColorRect" parent="LedgeR6" unique_id=613330315]
+[node name="V" type="ColorRect" parent="LedgeR6"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR6" unique_id=541318805]
+[node name="C" type="CollisionShape2D" parent="LedgeR6"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR7" type="StaticBody2D" parent="." unique_id=443757643]
+[node name="LedgeR7" type="StaticBody2D" parent="."]
 position = Vector2(900, 20)
 
-[node name="V" type="ColorRect" parent="LedgeR7" unique_id=268087742]
+[node name="V" type="ColorRect" parent="LedgeR7"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR7" unique_id=308613209]
+[node name="C" type="CollisionShape2D" parent="LedgeR7"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR8" type="StaticBody2D" parent="." unique_id=503007340]
+[node name="LedgeR8" type="StaticBody2D" parent="."]
 position = Vector2(760, 180)
 
-[node name="V" type="ColorRect" parent="LedgeR8" unique_id=1285748420]
+[node name="V" type="ColorRect" parent="LedgeR8"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR8" unique_id=1400647551]
+[node name="C" type="CollisionShape2D" parent="LedgeR8"]
 shape = SubResource("shape_ledge")
 
-[node name="LedgeR9" type="StaticBody2D" parent="." unique_id=1928743432]
+[node name="LedgeR9" type="StaticBody2D" parent="."]
 position = Vector2(880, 340)
 
-[node name="V" type="ColorRect" parent="LedgeR9" unique_id=1704689157]
+[node name="V" type="ColorRect" parent="LedgeR9"]
 offset_left = -90.0
 offset_top = -14.0
 offset_right = 90.0
 offset_bottom = 14.0
 color = Color(0.22, 0.16, 0.18, 1)
 
-[node name="C" type="CollisionShape2D" parent="LedgeR9" unique_id=976840006]
+[node name="C" type="CollisionShape2D" parent="LedgeR9"]
 shape = SubResource("shape_ledge")
 
-[node name="Motes" type="CanvasLayer" parent="." unique_id=691086828]
+[node name="Motes" type="CanvasLayer" parent="."]
+layer = 1
 
-[node name="P" type="GPUParticles2D" parent="Motes" unique_id=1639050942]
+[node name="P" type="GPUParticles2D" parent="Motes"]
 position = Vector2(576, 324)
 amount = 70
-texture = SubResource("tex_dot")
 lifetime = 7.0
 process_material = SubResource("ppm")
+texture = SubResource("tex_dot")
 
-[node name="Vignette" type="CanvasLayer" parent="." unique_id=646546542]
+[node name="Vignette" type="CanvasLayer" parent="."]
 layer = 2
 
-[node name="V" type="TextureRect" parent="Vignette" unique_id=261586834]
+[node name="V" type="TextureRect" parent="Vignette"]
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
 texture = SubResource("tex_vig")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=2002925873]
+[node name="UI" type="CanvasLayer" parent="."]
 layer = 3
 
-[node name="HUD" type="Label" parent="UI" unique_id=969845375]
+[node name="HUD" type="Label" parent="UI"]
 offset_left = 16.0
 offset_top = 12.0
 offset_right = 820.0
