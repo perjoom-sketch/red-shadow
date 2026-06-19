@@ -19,6 +19,7 @@ Godot 4.6.3 2D side-scroller. This file is the operating contract for **all** co
   on the next sync. (This repo has lost HUD edits and rules files exactly this way.)
 - Never upload files through the GitHub web UI; it diverges from local.
 - **One PR = one concern.** One PR is owned end-to-end by one tool — no mid-handoff between tools.
+- Stage only the explicit files for the current PR (`git add <paths>`). Never `git add -A` / `git add .` — it sweeps unrelated working-tree files into the commit.
 - **Agents do NOT merge.** The owner is the merge gate. Push the PR and stop.
 
 ## Godot scene (.tscn / .tres) hygiene — CRITICAL
