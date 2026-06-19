@@ -309,8 +309,8 @@ offset_left = 16.0
 offset_top = 12.0
 offset_right = 820.0
 offset_bottom = 210.0
-text = "붉은 그림자 / Red Shadow — 수직 순환 프로토타입
-[벽타기] 좁은 통로에서 벽 쪽으로 ←/→ 누른 채 Space 연타 → 양쪽 벽을 차고 등반!
-좌측 통로로 오르고 → 상단 브릿지 → 우측 발판으로 내려와 → 바닥 한 바퀴
-←/→ A/D : Move    Space : Jump (2단)    Shift : Dash (경공)
-↓/S : Flip    L : Blink    C : Stealth    J/LMB : Sword    K : Kick"
+text = "Red Shadow — Vertical Loop Prototype
+[Wall Climb] In a narrow shaft, hold Left/Right into the wall and tap Space to kick off both walls and climb!
+Up the left shaft -> top bridge -> down the right platforms -> loop the floor
+A/D : Move    Space : Jump (double)    Shift : Dash
+S : Flip    L : Blink    C : Stealth    J/LMB : Sword    K : Kick"
