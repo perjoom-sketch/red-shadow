@@ -17,6 +17,7 @@ extends CharacterBody2D
 
 # --- Cached child node that we rotate during the flip ---
 @onready var visual: Node2D = $Visual
+@onready var anim: AnimationPlayer = $Visual/Rig/AnimationPlayer
 
 # --- Movement tuning (live-editable in the Inspector) ---
 @export_group("Movement")
@@ -117,6 +118,7 @@ func _physics_process(delta):
 			velocity = _dash_dir * dash_speed * 0.35
 		move_and_slide()
 		_update_visual()
+		_update_animation()
 		return
 
 	if on_floor:
@@ -153,6 +155,7 @@ func _physics_process(delta):
 	update_flip(delta)
 	move_and_slide()
 	_update_visual()
+	_update_animation()
 
 
 func _tick_timers(delta):
@@ -350,6 +353,13 @@ func _pressing_into_wall() -> bool:
 func _update_visual():
 	visual.scale.x = facing
 	visual.modulate.a = stealth_alpha if stealthed else 1.0
+
+
+func _update_animation() -> void:
+	# 현재 authored 애니는 idle뿐. run/jump/attack 등은 트랙이 채워지면 여기 분기 추가.
+	var next := "idle"
+	if anim.current_animation != next:
+		anim.play(next)
 
 
 func _spawn_hitbox(offset: Vector2, size: Vector2, dmg: float):
