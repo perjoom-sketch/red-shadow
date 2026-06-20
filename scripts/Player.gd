@@ -316,9 +316,10 @@ func do_blink():
 func start_attack():
 	attacking = true
 	current_action = "attack"
-	_attack_timer = attack_duration
 	# Advance the 3-hit combo if we are still inside the window.
 	combo_step = (combo_step + 1) % 3 if _combo_timer > 0.0 else 0
+	# 3rd hit lingers for a heavier finish (matches anim_attack_dash length 0.26).
+	_attack_timer = attack_duration + 0.04 if combo_step == 2 else attack_duration
 	_combo_timer = attack_combo_window
 	velocity.x = facing * attack_lunge
 	stealthed = false
@@ -358,7 +359,10 @@ func _update_visual():
 func _update_animation() -> void:
 	var next := "idle"
 	if attacking:
-		next = current_action          # "attack" or "kick"
+		if current_action == "attack":
+			next = ["attack", "attack_heavy", "attack_dash"][combo_step]
+		else:
+			next = current_action          # "kick"
 	elif is_on_floor() and not dashing:
 		var spd := absf(velocity.x)
 		if spd >= 150.0:
