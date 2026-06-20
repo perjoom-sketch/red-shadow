@@ -75,3 +75,7 @@ not the agent's own "done" claim.
 2. STAGE  — explicit paths only: `git add <path1> <path2>`. Never `git add -A` / `git add .`.
 3. VERIFY — `git diff origin/main`: only intended files, 0 `uid://` removals. Anything unexpected → STOP.
 4. COMMIT & PUSH. Never merge — owner merges.
+
+## Communication rules (의사소통 규칙)
+- **사용자에게 묻거나 설명할 때는 항상 한국어로 답한다.**
+- 짧은 용어 나열이 아니라, 문장으로 풀어서 설명한다.
