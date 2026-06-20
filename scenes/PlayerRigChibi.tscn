@@ -1,13 +1,14 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://d1lox2fmfg3r4"]
 
-[ext_resource type="Texture2D" path="res://assets/chibi/leg/left_leg.png" id="1_left_leg"]
-[ext_resource type="Texture2D" path="res://assets/chibi/arm/left_arm.png" id="2_left_arm"]
-[ext_resource type="Texture2D" path="res://assets/chibi/tail/cat_tail.png" id="3_tail"]
-[ext_resource type="Texture2D" path="res://assets/chibi/torso/torso_a_sleeveless.png" id="4_torso"]
-[ext_resource type="Texture2D" path="res://assets/chibi/head/head_a_relaxed.png" id="5_head"]
-[ext_resource type="Texture2D" path="res://assets/chibi/scarf/scarf_a_base.png" id="6_scarf"]
-[ext_resource type="Texture2D" path="res://assets/chibi/leg/right_leg.png" id="7_right_leg"]
-[ext_resource type="Texture2D" path="res://assets/chibi/arm/right_arm_sword.png" id="8_right_arm"]
+[ext_resource type="Texture2D" uid="uid://cu34oktytpox7" path="res://assets/chibi/leg/left_leg.png" id="1_left_leg"]
+[ext_resource type="Texture2D" uid="uid://bv6aa2dul47c" path="res://assets/chibi/arm/left_arm.png" id="2_left_arm"]
+[ext_resource type="Texture2D" uid="uid://dfvrbhxr2mwjg" path="res://assets/chibi/tail/cat_tail.png" id="3_tail"]
+[ext_resource type="Texture2D" uid="uid://g2j6t1m2my5d" path="res://assets/chibi/torso/torso_a_sleeveless.png" id="4_torso"]
+[ext_resource type="Texture2D" uid="uid://bt5ak5tximedy" path="res://assets/chibi/scarf/scarf_b_wind.png" id="6_e2fnr"]
+[ext_resource type="Texture2D" uid="uid://scp51u2gfa8v" path="res://assets/chibi/scarf/scarf_a_base.png" id="6_scarf"]
+[ext_resource type="Texture2D" uid="uid://8unohn05rdm5" path="res://assets/chibi/leg/right_leg.png" id="7_right_leg"]
+[ext_resource type="Texture2D" uid="uid://cfjmx7d4eicym" path="res://assets/chibi/head/head_c_glare.png" id="8_0yksh"]
+[ext_resource type="Texture2D" uid="uid://co736ryy6irvl" path="res://assets/chibi/arm/right_arm_sword.png" id="8_right_arm"]
 [ext_resource type="Script" path="res://scripts/ClothSway.gd" id="9_clothsway"]
 
 [sub_resource type="Animation" id="anim_RESET"]
@@ -103,57 +104,65 @@ _data = {
 &"RESET": SubResource("anim_RESET")
 }
 
-[node name="PlayerRigChibi" type="Node2D"]
+[node name="PlayerRigChibi" type="Node2D" unique_id=330699588]
+position = Vector2(1, -149)
 
-[node name="FarLeg" type="Sprite2D" parent="."]
+[node name="FarArm" type="Sprite2D" parent="." unique_id=456139498]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(8, 20)
-texture = ExtResource("1_left_leg")
-offset = Vector2(0, 30)
-
-[node name="FarArm" type="Sprite2D" parent="."]
-modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(12, -20)
+position = Vector2(22.053955, -6.762909)
 texture = ExtResource("2_left_arm")
 offset = Vector2(0, 25)
 
-[node name="Tail" type="Sprite2D" parent="."]
-position = Vector2(30, 15)
+[node name="Tail" type="Sprite2D" parent="." unique_id=1579025982]
+position = Vector2(-109.94603, 71.23706)
+scale = Vector2(0.42667425, 0.6515152)
 texture = ExtResource("3_tail")
 offset = Vector2(60, 0)
 script = ExtResource("9_clothsway")
 amplitude = 0.1
 speed = 2.5
 
-[node name="Torso" type="Sprite2D" parent="."]
-position = Vector2(0, 0)
+[node name="FarLeg" type="Sprite2D" parent="." unique_id=842828410]
+modulate = Color(0.62, 0.62, 0.62, 1)
+position = Vector2(21.053986, 77.23707)
+scale = Vector2(0.81410253, 0.78207403)
+texture = ExtResource("1_left_leg")
+offset = Vector2(0, 30)
+
+[node name="NearLeg" type="Sprite2D" parent="." unique_id=462082129]
+position = Vector2(-24.94603, 69.23706)
+texture = ExtResource("7_right_leg")
+offset = Vector2(0, 30)
+
+[node name="Torso" type="Sprite2D" parent="." unique_id=520478125]
 texture = ExtResource("4_torso")
 offset = Vector2(0, 20)
 
-[node name="Head" type="Sprite2D" parent="Torso"]
-position = Vector2(0, -35)
-texture = ExtResource("5_head")
-offset = Vector2(0, -30)
+[node name="ScarfBWind" type="Sprite2D" parent="Torso" unique_id=1893231140]
+position = Vector2(-56.999996, -38)
+rotation = -0.69963324
+scale = Vector2(0.35755676, 0.6616316)
+texture = ExtResource("6_e2fnr")
 
-[node name="Scarf" type="Sprite2D" parent="Torso"]
-position = Vector2(-5, -25)
+[node name="Scarf" type="Sprite2D" parent="Torso" unique_id=24538974]
+position = Vector2(48, -62)
+scale = Vector2(0.76950353, 1)
 texture = ExtResource("6_scarf")
 offset = Vector2(-40, 0)
 script = ExtResource("9_clothsway")
 amplitude = 0.12
 speed = 3.0
 
-[node name="NearLeg" type="Sprite2D" parent="."]
-position = Vector2(-5, 20)
-texture = ExtResource("7_right_leg")
-offset = Vector2(0, 30)
+[node name="Head" type="Sprite2D" parent="Torso" unique_id=1432468080]
+position = Vector2(16, -106)
+scale = Vector2(1, 0.91463417)
+texture = ExtResource("8_0yksh")
+offset = Vector2(0, -30)
 
-[node name="NearArm" type="Sprite2D" parent="."]
-position = Vector2(-15, -18)
+[node name="NearArm" type="Sprite2D" parent="." unique_id=1793171012]
+position = Vector2(-14.946045, 34.23706)
 texture = ExtResource("8_right_arm")
 offset = Vector2(70, 15)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("anim_lib")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=100053449]
+libraries/ = SubResource("anim_lib")
