@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cfjmx7d4eicym" path="res://assets/chibi/head/head_c_glare.png" id="8_0yksh"]
 [ext_resource type="Texture2D" uid="uid://co736ryy6irvl" path="res://assets/chibi/arm/right_arm_sword.png" id="8_right_arm"]
 [ext_resource type="Script" path="res://scripts/ClothSway.gd" id="9_clothsway"]
+[ext_resource type="Texture2D" path="res://assets/chibi/sword/back_sword.png" id="10_back_sword"]
 
 [sub_resource type="Animation" id="anim_RESET"]
 resource_name = "RESET"
@@ -146,6 +147,12 @@ offset = Vector2(0, 30)
 position = Vector2(-41, 27)
 texture = ExtResource("4_torso")
 offset = Vector2(0, 20)
+
+[node name="BackSword" type="Sprite2D" parent="Torso"]
+position = Vector2(30, -20)
+rotation = 0.5
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("10_back_sword")
 
 [node name="ScarfBWind" type="Sprite2D" parent="Torso" unique_id=1893231140]
 position = Vector2(-56.999996, -38)
