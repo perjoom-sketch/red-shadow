@@ -152,7 +152,7 @@ position = Vector2(1, -149)
 
 [node name="FarArm" type="Sprite2D" parent="." unique_id=456139498]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(30, -10)
+position = Vector2(32.000015, -1)
 texture = ExtResource("2_left_arm")
 offset = Vector2(0, 25)
 
@@ -203,7 +203,7 @@ texture = ExtResource("8_0yksh")
 offset = Vector2(0, -30)
 
 [node name="NearArm" type="Sprite2D" parent="." unique_id=1793171012]
-position = Vector2(6.0000076, 36)
+position = Vector2(-1, 38)
 texture = ExtResource("8_right_arm")
 offset = Vector2(70, 15)
 
