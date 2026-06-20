@@ -356,8 +356,13 @@ func _update_visual():
 
 
 func _update_animation() -> void:
-	# 현재 authored 애니는 idle뿐. run/jump/attack 등은 트랙이 채워지면 여기 분기 추가.
 	var next := "idle"
+	if is_on_floor() and not attacking and not dashing:
+		var spd := absf(velocity.x)
+		if spd >= 150.0:
+			next = "run"
+		elif spd >= 30.0:
+			next = "walk"
 	if anim.current_animation != next:
 		anim.play(next)
 
