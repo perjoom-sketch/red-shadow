@@ -53,6 +53,7 @@ Godot 4.6.3 2D side-scroller. This file is the operating contract for **all** co
   `godot --headless --export-release "Web" build/web/index.html`
 - That PR must change `build/web/*` only — 0 source/scene/`uid://` changes (verify: `git diff origin/main`).
 - Skip re-export for PRs that don't affect the game (CI, docs, tooling, AGENTS.md edits).
+- MANDATORY — a merge is NOT done until its re-export is: a game-affecting PR and its build/web re-export PR are ONE unit. Whoever merges the source PR opens the build/web PR in the same session, before the next task. A game-affecting merge left without a follow-up build/web PR is a regression — the deployed site silently falls behind source.
 
 ## Model routing
 - **Godot work (`.tscn`, GDScript, scene structure) → use a top model (Claude Opus 4.6+).** It does
