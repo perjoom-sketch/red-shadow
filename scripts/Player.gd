@@ -357,7 +357,9 @@ func _update_visual():
 
 func _update_animation() -> void:
 	var next := "idle"
-	if is_on_floor() and not attacking and not dashing:
+	if attacking:
+		next = current_action          # "attack" or "kick"
+	elif is_on_floor() and not dashing:
 		var spd := absf(velocity.x)
 		if spd >= 150.0:
 			next = "run"
