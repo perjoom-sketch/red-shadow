@@ -153,12 +153,14 @@ _data = {
 [node name="PlayerRig" type="Node2D" unique_id=280895874]
 
 [node name="FarLeg" type="Node2D" parent="." unique_id=1921416120]
+position = Vector2(7.0000005, -63)
+rotation = 0.0073724785
 
 [node name="FarThigh" type="Sprite2D" parent="FarLeg" unique_id=1271056742]
 modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -4
 z_as_relative = false
-position = Vector2(7, 54)
+position = Vector2(-43, 67)
 texture = ExtResource("5_thigh")
 offset = Vector2(0, 111)
 
@@ -167,13 +169,15 @@ modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -4
 z_as_relative = false
 position = Vector2(3, 215)
+rotation = 0.25625187
 texture = ExtResource("6_shin_foot")
 offset = Vector2(0, 78)
 
 [node name="Tail" type="Sprite2D" parent="." unique_id=828514743]
 z_index = -3
 z_as_relative = false
-position = Vector2(-98, -160)
+position = Vector2(-295, 152)
+rotation = -1.8726132
 texture = ExtResource("8_tail")
 offset = Vector2(0, 123)
 script = ExtResource("12_clothsway")
@@ -181,14 +185,16 @@ script = ExtResource("12_clothsway")
 [node name="Sheath" type="Sprite2D" parent="." unique_id=613770302]
 z_index = -3
 z_as_relative = false
-position = Vector2(-42, 134)
+position = Vector2(44.999985, 64.000015)
+rotation = 0.88971436
 texture = ExtResource("11_sheath")
 offset = Vector2(0, 125)
 
 [node name="CoatTails" type="Sprite2D" parent="." unique_id=1186865338]
 z_index = -1
 z_as_relative = false
-position = Vector2(-20, -129)
+position = Vector2(-25, -136)
+rotation = 0.13082337
 texture = ExtResource("7_coat_tails")
 offset = Vector2(0, 138)
 script = ExtResource("12_clothsway")
@@ -204,7 +210,8 @@ texture = ExtResource("2_torso")
 modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -2
 z_as_relative = false
-position = Vector2(15, -116)
+position = Vector2(4, -96)
+rotation = -0.59088033
 texture = ExtResource("3_upper_arm")
 offset = Vector2(0, 50)
 
@@ -212,7 +219,7 @@ offset = Vector2(0, 50)
 modulate = Color(0.45, 0.45, 0.45, 1)
 z_index = -2
 z_as_relative = false
-position = Vector2(9, 87)
+position = Vector2(9, 99)
 texture = ExtResource("4_forearm_hand")
 offset = Vector2(0, 68)
 
@@ -224,11 +231,12 @@ texture = ExtResource("1_head")
 offset = Vector2(0, -75)
 
 [node name="NearArm" type="Node2D" parent="Torso" unique_id=1226735022]
+position = Vector2(86, -45)
 
 [node name="NearUpperArm" type="Sprite2D" parent="Torso/NearArm" unique_id=1999510097]
 z_index = 4
 z_as_relative = false
-position = Vector2(-49, -99)
+position = Vector2(-115, -85)
 texture = ExtResource("3_upper_arm")
 offset = Vector2(0, 50)
 
@@ -242,16 +250,20 @@ offset = Vector2(0, 68)
 [node name="Katana" type="Sprite2D" parent="Torso/NearArm/NearUpperArm/NearForearm" unique_id=1397173913]
 z_index = 5
 z_as_relative = false
-position = Vector2(26, 79)
+position = Vector2(233, -61)
+rotation = 0.8130349
 texture = ExtResource("10_katana")
 offset = Vector2(0, 166)
+flip_v = true
 
 [node name="NearLeg" type="Node2D" parent="." unique_id=1439520029]
+position = Vector2(-41, -63)
+rotation = -0.0927877
 
 [node name="NearThigh" type="Sprite2D" parent="NearLeg" unique_id=2083792057]
 z_index = 2
 z_as_relative = false
-position = Vector2(-12, 63)
+position = Vector2(18, 72)
 texture = ExtResource("5_thigh")
 offset = Vector2(0, 111)
 
@@ -259,15 +271,19 @@ offset = Vector2(0, 111)
 z_index = 2
 z_as_relative = false
 position = Vector2(1, 215)
+rotation = 0.13371965
 texture = ExtResource("6_shin_foot")
 offset = Vector2(0, 78)
 
 [node name="Scarf" type="Sprite2D" parent="." unique_id=171870703]
 z_index = 3
 z_as_relative = false
-position = Vector2(52, -163)
+position = Vector2(-29.000004, -162)
+rotation = 0.7947084
 texture = ExtResource("9_scarf")
 offset = Vector2(0, 128)
+flip_h = true
+flip_v = true
 script = ExtResource("12_clothsway")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=267253529]
