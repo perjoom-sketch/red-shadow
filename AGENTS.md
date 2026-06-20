@@ -47,6 +47,13 @@ Godot 4.6.3 2D side-scroller. This file is the operating contract for **all** co
 - Re-export only at milestones (it churns large binaries), as a separate "build PR":
   `godot --headless --export-release "Web" build/web/index.html`, then commit `build/web/`.
 
+## Web build (build/web) — manual export artifact
+- `build/web/` is the static export Vercel serves as the live site. It does NOT auto-update from source.
+- After merging any change that should appear on the deployed game (scenes, scripts, assets, `project.godot` display/rendering), re-export and open a SEPARATE PR with build/web only:
+  `godot --headless --export-release "Web" build/web/index.html`
+- That PR must change `build/web/*` only — 0 source/scene/`uid://` changes (verify: `git diff origin/main`).
+- Skip re-export for PRs that don't affect the game (CI, docs, tooling, AGENTS.md edits).
+
 ## Model routing
 - **Godot work (`.tscn`, GDScript, scene structure) → use a top model (Claude Opus 4.6+).** It does
   surgical edits and self-checks its diff; weaker models miss sync/uid hygiene and corrupt scenes.
