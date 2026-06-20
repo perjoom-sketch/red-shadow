@@ -21,6 +21,7 @@ Godot 4.6.3 2D side-scroller. This file is the operating contract for **all** co
 - **One PR = one concern.** One PR is owned end-to-end by one tool — no mid-handoff between tools.
 - Stage only the explicit files for the current PR (`git add <paths>`). Never `git add -A` / `git add .` — it sweeps unrelated working-tree files into the commit.
 - **Agents do NOT merge.** The owner is the merge gate. Push the PR and stop.
+- **After a PR is merged, `git checkout main && git pull` immediately** to keep local in sync before starting the next task.
 
 ## Godot scene (.tscn / .tres) hygiene — CRITICAL
 - **Edit `.tscn` / `.tres` files as TEXT only.**
