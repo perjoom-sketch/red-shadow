@@ -24,7 +24,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(-35, 28)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -60,7 +60,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-1.2273952]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -72,7 +72,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [-1.4837407]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -114,7 +114,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, -2), Vector2(0, 0)]
+"values": [Vector2(-35, 28), Vector2(-35, 26), Vector2(-35, 28)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -138,7 +138,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0175, 0.0]
+"values": [-1.2273952, -1.2098952, -1.2273952]
 }
 
 [sub_resource type="AnimationLibrary" id="anim_lib"]
@@ -152,12 +152,13 @@ position = Vector2(1, -149)
 
 [node name="FarArm" type="Sprite2D" parent="." unique_id=456139498]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(22.053955, -6.762909)
+position = Vector2(32.00003, -2)
+rotation = -1.4837407
 texture = ExtResource("2_left_arm")
 offset = Vector2(0, 25)
 
 [node name="Tail" type="Sprite2D" parent="." unique_id=1579025982]
-position = Vector2(-109.94603, 71.23706)
+position = Vector2(-96.999985, 55.999992)
 scale = Vector2(0.42667425, 0.6515152)
 texture = ExtResource("3_tail")
 offset = Vector2(60, 0)
@@ -167,17 +168,18 @@ speed = 2.5
 
 [node name="FarLeg" type="Sprite2D" parent="." unique_id=842828410]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(21.053986, 77.23707)
+position = Vector2(20, 77.000015)
 scale = Vector2(0.81410253, 0.78207403)
 texture = ExtResource("1_left_leg")
 offset = Vector2(0, 30)
 
 [node name="NearLeg" type="Sprite2D" parent="." unique_id=462082129]
-position = Vector2(-24.94603, 69.23706)
+position = Vector2(-18.94603, 70.23706)
 texture = ExtResource("7_right_leg")
 offset = Vector2(0, 30)
 
 [node name="Torso" type="Sprite2D" parent="." unique_id=520478125]
+position = Vector2(-35, 28)
 texture = ExtResource("4_torso")
 offset = Vector2(0, 20)
 
@@ -203,7 +205,8 @@ texture = ExtResource("8_0yksh")
 offset = Vector2(0, -30)
 
 [node name="NearArm" type="Sprite2D" parent="." unique_id=1793171012]
-position = Vector2(-14.946045, 34.23706)
+position = Vector2(-5, 36)
+rotation = -1.2273952
 texture = ExtResource("8_right_arm")
 offset = Vector2(70, 15)
 
