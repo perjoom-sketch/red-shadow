@@ -152,12 +152,12 @@ position = Vector2(1, -149)
 
 [node name="FarArm" type="Sprite2D" parent="." unique_id=456139498]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(22.053955, -6.762909)
+position = Vector2(30, -10)
 texture = ExtResource("2_left_arm")
 offset = Vector2(0, 25)
 
 [node name="Tail" type="Sprite2D" parent="." unique_id=1579025982]
-position = Vector2(-109.94603, 71.23706)
+position = Vector2(-123.946014, 85.23706)
 scale = Vector2(0.42667425, 0.6515152)
 texture = ExtResource("3_tail")
 offset = Vector2(60, 0)
@@ -167,13 +167,13 @@ speed = 2.5
 
 [node name="FarLeg" type="Sprite2D" parent="." unique_id=842828410]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(21.053986, 77.23707)
+position = Vector2(19, 75.000015)
 scale = Vector2(0.81410253, 0.78207403)
 texture = ExtResource("1_left_leg")
 offset = Vector2(0, 30)
 
 [node name="NearLeg" type="Sprite2D" parent="." unique_id=462082129]
-position = Vector2(-24.94603, 69.23706)
+position = Vector2(-24.94603, 68.23706)
 texture = ExtResource("7_right_leg")
 offset = Vector2(0, 30)
 
@@ -203,7 +203,7 @@ texture = ExtResource("8_0yksh")
 offset = Vector2(0, -30)
 
 [node name="NearArm" type="Sprite2D" parent="." unique_id=1793171012]
-position = Vector2(-14.946045, 34.23706)
+position = Vector2(6.0000076, 36)
 texture = ExtResource("8_right_arm")
 offset = Vector2(70, 15)
 
