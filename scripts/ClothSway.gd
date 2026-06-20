@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	# 부모 이동 속도 기반 lag
 	var parent_vel_x := 0.0
 	if get_parent():
-		var cur_pos := get_parent().global_position
+		var cur_pos: Vector2 = get_parent().global_position
 		parent_vel_x = (cur_pos.x - _parent_prev_pos.x) / max(delta, 0.001)
 		_parent_prev_pos = cur_pos
 
