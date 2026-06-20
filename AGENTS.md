@@ -62,3 +62,9 @@ Godot 4.6.3 2D side-scroller. This file is the operating contract for **all** co
 
 If any check fails → **STOP and report. Do not commit.** A passing diff is the success criterion,
 not the agent's own "done" claim.
+
+## Session procedure (every task)
+1. START  — `git fetch && git pull`. Never start on a stale tree.
+2. STAGE  — explicit paths only: `git add <path1> <path2>`. Never `git add -A` / `git add .`.
+3. VERIFY — `git diff origin/main`: only intended files, 0 `uid://` removals. Anything unexpected → STOP.
+4. COMMIT & PUSH. Never merge — owner merges.

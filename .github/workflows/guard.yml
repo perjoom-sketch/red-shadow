@@ -1,0 +1,55 @@
+name: Guard
+
+# Server-side failsafe. Runs on every PR into main, regardless of which tool/model/human pushed.
+# Gate 1 (uid):   blocks Godot scene re-serialization (the #4 uid-regeneration class).
+# Gate 2 (parse): blocks PRs that do not load cleanly (the ClothSway type-revert class, broken refs).
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # ---- Gate 1: uid regeneration (pure bash, no dependencies) ----
+      - name: uid gate
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          # A REMOVED uid:// line in an existing .tscn/.tres == Godot re-serialized it.
+          # (A brand-new resource only ADDS uid lines, so we fail only on removals.)
+          BAD=$(git diff "$BASE" HEAD -- '*.tscn' '*.tres' | grep -E '^-.*uid://' || true)
+          if [ -n "$BAD" ]; then
+            echo "::error::uid:// removed/changed in a scene/resource = Godot re-serialization. Edit .tscn as TEXT; never re-save a scene through the editor for a change."
+            printf '%s\n' "$BAD"
+            exit 1
+          fi
+          echo "uid gate OK"
+
+      # ---- Gate 2: Godot headless parse/import ----
+      # URL verified working: 4.6.3-stable Linux asset returns HTTP 302 (exists).
+      - name: Install Godot
+        env:
+          GODOT_VERSION: 4.6.3-stable
+        run: |
+          curl -fL "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip" -o godot.zip
+          unzip -q godot.zip
+          sudo mv "Godot_v${GODOT_VERSION}_linux.x86_64" /usr/local/bin/godot
+          sudo chmod +x /usr/local/bin/godot
+          godot --version
+
+      - name: parse gate
+        run: |
+          set +e
+          godot --headless --import --path . > import.log 2>&1
+          godot --headless --quit-after 5 --path . > run.log 2>&1
+          cat import.log run.log
+          if grep -E 'SCRIPT ERROR|Parse Error|Cannot infer|Failed to load' import.log run.log; then
+            echo "::error::Godot reported parse/load errors - the project does not load cleanly (e.g. a reverted type fix or broken reference)."
+            exit 1
+          fi
+          echo "parse gate OK"
