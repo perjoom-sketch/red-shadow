@@ -377,7 +377,7 @@ func start_attack():
 	velocity.x = facing * attack_lunge
 	stealthed = false
 	_spawn_attack_hitbox()
-	_spawn_slash(false)
+	_spawn_slash(combo_step)
 	_combat_timer = combat_linger
 	_sheathe_timer = 0.0    # 재발도 시 진행 중이던 납도 취소
 	_play_sfx(sfx_draw)     # 발도음
@@ -470,20 +470,27 @@ func _on_hitbox_body_entered(body, hb):
 		_play_sfx(sfx_hit)    # 타격음 (적에 실제로 맞을 때만)
 
 
-func _spawn_slash(low: bool):
-	# 거합 섬광: 칼날을 대신하는 크고 굵은 초승달. 글로우(넓고 흐림)+코어(밝고 선명) 2겹.
+func _spawn_slash(step: int):
+	# 거합 섬광: 칼날 대신. 콤보 단계별로 다른 궤적(내려/올려/찌르기). 길이는 사거리에 연동.
+	var r := (attack_reach + attack_hit_size.x * 0.5) * 1.35
 	var pts: PackedVector2Array
-	if low:
-		# 하단베기: 앞→아래로 길게 훑는 호 (크게)
-		pts = PackedVector2Array([
-			Vector2(12, -8), Vector2(52, 8), Vector2(84, 30), Vector2(92, 52)
-		])
-	else:
-		# 기본(내려베기): 위→앞→아래로 크게 도는 초승달, 사거리보다 길게
-		pts = PackedVector2Array([
-			Vector2(8, -46), Vector2(44, -34), Vector2(76, -10),
-			Vector2(92, 14), Vector2(76, 38), Vector2(50, 56)
-		])
+	match step:
+		1:  # 2타 올려베기: 아래→앞→위
+			pts = PackedVector2Array([
+				Vector2(0.08 * r, 0.52 * r), Vector2(0.46 * r, 0.40 * r),
+				Vector2(0.82 * r, 0.14 * r), Vector2(1.0 * r, -0.10 * r),
+				Vector2(0.84 * r, -0.36 * r), Vector2(0.55 * r, -0.56 * r)
+			])
+		2:  # 3타 찌르기: 앞으로 쭉 뻗는 직선 렌즈
+			pts = PackedVector2Array([
+				Vector2(0.10 * r, 0.0), Vector2(0.58 * r, 0.0), Vector2(1.15 * r, 0.0)
+			])
+		_:  # 1타 내려베기: 위→앞→아래
+			pts = PackedVector2Array([
+				Vector2(0.08 * r, -0.52 * r), Vector2(0.46 * r, -0.40 * r),
+				Vector2(0.82 * r, -0.14 * r), Vector2(1.0 * r, 0.10 * r),
+				Vector2(0.84 * r, 0.36 * r), Vector2(0.55 * r, 0.56 * r)
+			])
 	for i in pts.size():
 		pts[i] = Vector2(pts[i].x * facing, pts[i].y)
 	var fx := Node2D.new()
@@ -491,10 +498,10 @@ func _spawn_slash(low: bool):
 	fx.add_child(_make_slash_arc(pts, 60.0, Color(0.65, 0.82, 1.0), 0.32))  # 글로우
 	fx.add_child(_make_slash_arc(pts, 36.0, Color(1.0, 1.0, 1.0), 1.0))     # 코어
 	add_child(fx)
-	# 작게 시작 → 크게 번쩍 → 빠르게 사라짐 (임팩트)
-	fx.scale = Vector2(0.8, 0.8)
+	# 처음부터 풀 길이로 번쩍 → 살짝 더 커지며 사라짐
+	fx.scale = Vector2(1.0, 1.0)
 	var tw := create_tween()
-	tw.parallel().tween_property(fx, "scale", Vector2(1.3, 1.3), 0.18).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(fx, "scale", Vector2(1.18, 1.18), 0.18).set_ease(Tween.EASE_OUT)
 	tw.parallel().tween_property(fx, "modulate:a", 0.0, 0.18).set_ease(Tween.EASE_OUT)
 	tw.tween_callback(fx.queue_free)
 
