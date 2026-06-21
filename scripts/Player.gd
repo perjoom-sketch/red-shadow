@@ -67,7 +67,7 @@ extends CharacterBody2D
 @export_group("Combat")
 @export var attack_duration := 0.30
 @export var attack_lunge := 130.0
-@export var attack_combo_window := 0.5
+@export var attack_combo_window := 0.8
 @export var attack_damage := 10.0
 @export var combat_linger := 1.5
 @export var sheathe_time := 0.28    # 자동 납도 애니 길이 = anim_sheathe length
@@ -205,9 +205,13 @@ func _handle_horizontal(delta, on_floor):
 	if _wall_jump_lock > 0.0:
 		return
 
-	# During an attack we let the lunge play out (just apply friction).
+	# During an attack: hold a direction to keep advancing; otherwise the lunge decays.
 	if attacking:
-		velocity.x = move_toward(velocity.x, 0.0, ground_accel * delta)
+		var adir := Input.get_axis("move_left", "move_right")
+		if adir != 0.0:
+			velocity.x = move_toward(velocity.x, adir * _move_speed(), ground_accel * delta)
+		else:
+			velocity.x = move_toward(velocity.x, 0.0, ground_accel * delta)
 		return
 
 	var accel := ground_accel if on_floor else air_accel
@@ -308,12 +312,11 @@ func _handle_combat():
 		if Input.is_action_just_pressed("attack"):
 			_attack_buffered = true
 		return
-	# 스윙이 끝났고 버퍼가 차 있으면, 콤보 윈도우 안에서 다음 타 자동 발동
+	# 스윙이 끝났고 버퍼가 차 있으면 무조건 다음 타 발동 (콤보 단계는 start_attack 이 판단)
 	if _attack_buffered:
 		_attack_buffered = false
-		if _combo_timer > 0.0:
-			start_attack()
-			return
+		start_attack()
+		return
 	if Input.is_action_just_pressed("attack"):
 		start_attack()
 
