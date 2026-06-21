@@ -64,7 +64,7 @@ extends CharacterBody2D
 @export var dash_invuln := 0.12
 
 @export_group("Combat")
-@export var attack_duration := 0.22
+@export var attack_duration := 0.30
 @export var attack_lunge := 130.0
 @export var attack_combo_window := 0.5
 @export var kick_duration := 0.26
