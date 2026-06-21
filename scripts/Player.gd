@@ -92,7 +92,7 @@ var current_action := ""         # "attack" for the active swing.
 var combo_step := 0              # 0..4 sword combo index.
 var _spin_t := 0.0               # 회전베기 진행 타이머(>0이면 몸이 회전 중)
 var _spin_dir := 1               # 회전 방향(facing 기준)
-var _attack_buffered := false    # 스윙 중 누른 공격 (콤보 끊김 방지용 버퍼)
+var _auto_combo := false         # true면 연타로 발동된 5타 자동 콤보가 진행 중
 var _combat_timer := 0.0
 var _was_drawn := false       # 직전 프레임에 발도(전투) 상태였는지
 var _sheathe_timer := 0.0     # >0 이면 납도 애니 재생 중
@@ -317,17 +317,24 @@ func _handle_stealth():
 func _handle_combat():
 	if flipping:
 		return
+	# 자동 콤보 진행 중: 입력과 무관하게 스윙이 끝날 때마다 다음 타 (2→3→4→5), 끝나면 기본으로.
+	if _auto_combo:
+		if not attacking:
+			combo_step += 1
+			if combo_step >= 5:
+				_auto_combo = false
+				combo_step = 0
+			else:
+				start_attack()
+		return
 	if attacking:
-		# 스윙 중 누른 공격은 버퍼에 저장 (콤보 끊김 방지)
+		# 첫 타(내려베기) 스윙 중에 다시 누름 = 연타 → 자동 5타 콤보 발동
 		if Input.is_action_just_pressed("attack"):
-			_attack_buffered = true
+			_auto_combo = true
 		return
-	# 스윙이 끝났고 버퍼가 차 있으면 무조건 다음 타 발동 (콤보 단계는 start_attack 이 판단)
-	if _attack_buffered:
-		_attack_buffered = false
-		start_attack()
-		return
+	# 단발: 누를 때마다 항상 기본 베기(내려베기) 1타
 	if Input.is_action_just_pressed("attack"):
+		combo_step = 0
 		start_attack()
 
 
@@ -372,8 +379,7 @@ func do_blink():
 func start_attack():
 	attacking = true
 	current_action = "attack"
-	# 5타 콤보: 내려 → 올려 → 회전 → 회전 → 찌르기(피니시)
-	combo_step = (combo_step + 1) % 5 if _combo_timer > 0.0 else 0
+	# combo_step 은 호출자(_handle_combat)가 결정한다: 단발=0(내려베기), 자동 콤보=1~4.
 	# 5타 마무리(찌르기)는 살짝 길게 머문다 (묵직한 피니시).
 	_attack_timer = attack_duration + 0.04 if combo_step == 4 else attack_duration
 	# 3·4타는 회전베기: 몸을 한 바퀴 돌린다 (flip 과 같은 visual.rotation 방식).
