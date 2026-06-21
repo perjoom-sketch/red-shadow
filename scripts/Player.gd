@@ -72,6 +72,7 @@ extends CharacterBody2D
 @export var attack_damage := 10.0
 @export var kick_damage := 14.0
 @export var combat_linger := 1.5
+@export var sheathe_time := 0.28    # 자동 납도 애니 길이 = anim_sheathe length
 
 # --- State ---
 var facing := 1                  # 1 = right, -1 = left.
@@ -82,6 +83,8 @@ var attacking := false
 var current_action := ""         # "attack" or "kick" for the active swing.
 var combo_step := 0              # 0..2 sword combo index.
 var _combat_timer := 0.0
+var _was_drawn := false       # 직전 프레임에 발도(전투) 상태였는지
+var _sheathe_timer := 0.0     # >0 이면 납도 애니 재생 중
 var on_wall_slide := false       # True while clinging/sliding on a wall.
 var dashing := false             # True during a 경공 dash burst.
 
@@ -167,6 +170,13 @@ func _tick_timers(delta):
 	_invuln_timer = max(_invuln_timer - delta, 0.0)
 	_combo_timer = max(_combo_timer - delta, 0.0)
 	_combat_timer = max(_combat_timer - delta, 0.0)
+	# 전투 종료(_combat_timer 가 0 도달) 순간 자동 납도 트리거
+	_sheathe_timer = max(_sheathe_timer - delta, 0.0)
+	if _combat_timer > 0.0:
+		_was_drawn = true
+	elif _was_drawn and not attacking:
+		_was_drawn = false
+		_sheathe_timer = sheathe_time
 	_wall_jump_lock = max(_wall_jump_lock - delta, 0.0)
 	invulnerable = _invuln_timer > 0.0
 	if attacking:
@@ -329,6 +339,7 @@ func start_attack():
 	_spawn_hitbox(Vector2(facing * 26, -4), Vector2(40, 28), attack_damage)
 	_spawn_slash(false)
 	_combat_timer = combat_linger
+	_sheathe_timer = 0.0    # 재발도 시 진행 중이던 납도 취소
 
 
 func start_kick():
@@ -368,6 +379,11 @@ func _update_animation() -> void:
 			next = ["slash_down", "slash_up", "thrust"][combo_step]
 		elif current_action == "kick":
 			return
+	elif _sheathe_timer > 0.0:
+		# 전투 종료 → 납도 애니를 끝까지 재생 (idle 이 덮어쓰지 않게)
+		if anim.current_animation != "sheathe":
+			anim.play("sheathe")
+		return
 	elif is_on_floor() and not dashing:
 		# run/walk 애니 생기기 전까지 idle 유지 (전투상태면 눈 뜬 idle)
 		pass
