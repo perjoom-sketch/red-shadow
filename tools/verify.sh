@@ -10,14 +10,31 @@ echo "== files changed vs $BASE =="
 git diff --stat "$BASE"...HEAD
 
 echo ""
-echo "== Gate 1: uid =="
-BAD=$(git diff "$BASE"...HEAD -- '*.tscn' '*.tres' | grep -E '^-.*uid://' || true)
+echo "== Gate 1: uid (re-serialization only; add/remove of resources is allowed) =="
+# A uid is "bad" only when the SAME path keeps existing but its uid CHANGED
+# (that is the Godot whole-scene re-serialization signature, e.g. the 188-line incident).
+# Removing a resource outright (path+uid gone, not re-added) is legitimate and allowed.
+DIFF=$(git diff "$BASE"...HEAD -- '*.tscn' '*.tres')
+BAD=""
+removed=$(printf '%s\n' "$DIFF" | grep -E '^-.*uid://.*path=' || true)
+while IFS= read -r line; do
+  [ -z "$line" ] && continue
+  p=$(printf '%s' "$line" | grep -oE 'path="[^"]+"')
+  u=$(printf '%s' "$line" | grep -oE 'uid://[a-z0-9]+')
+  [ -z "$p" ] && continue
+  added=$(printf '%s\n' "$DIFF" | grep -F "$p" | grep -E '^\+.*uid://' || true)
+  if [ -n "$added" ]; then
+    au=$(printf '%s' "$added" | grep -oE 'uid://[a-z0-9]+' | head -1)
+    [ "$au" != "$u" ] && BAD="${BAD}${p}: uid ${u} -> ${au}\n"
+  fi
+done < <(printf '%s\n' "$removed")
 if [ -n "$BAD" ]; then
-  echo "FAIL: uid:// removed/changed in a scene/resource (Godot re-serialization)."
-  printf '%s\n' "$BAD"
+  echo "FAIL: uid changed for an existing resource (same path, new uid = Godot re-serialization)."
+  printf '%b' "$BAD"
+  echo "Fix: edit the .tscn as TEXT; never re-save the scene through the editor for a change."
   exit 1
 fi
-echo "OK: no uid regeneration."
+echo "OK: no uid re-serialization (adding/removing resources is fine)."
 
 # Gate 2 runs only if godot is on PATH (skipped otherwise; CI still enforces it).
 if command -v godot >/dev/null 2>&1; then

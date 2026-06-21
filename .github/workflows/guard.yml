@@ -20,15 +20,28 @@ jobs:
       - name: uid gate
         run: |
           BASE="${{ github.event.pull_request.base.sha }}"
-          # A REMOVED uid:// line in an existing .tscn/.tres == Godot re-serialized it.
-          # (A brand-new resource only ADDS uid lines, so we fail only on removals.)
-          BAD=$(git diff "$BASE" HEAD -- '*.tscn' '*.tres' | grep -E '^-.*uid://' || true)
+          # Only a CHANGED uid for the SAME path == Godot re-serialization (the 188-line incident).
+          # Removing/adding a resource outright is legitimate and allowed.
+          DIFF=$(git diff "$BASE" HEAD -- '*.tscn' '*.tres')
+          BAD=""
+          removed=$(printf '%s\n' "$DIFF" | grep -E '^-.*uid://.*path=' || true)
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            p=$(printf '%s' "$line" | grep -oE 'path="[^"]+"')
+            u=$(printf '%s' "$line" | grep -oE 'uid://[a-z0-9]+')
+            [ -z "$p" ] && continue
+            added=$(printf '%s\n' "$DIFF" | grep -F "$p" | grep -E '^\+.*uid://' || true)
+            if [ -n "$added" ]; then
+              au=$(printf '%s' "$added" | grep -oE 'uid://[a-z0-9]+' | head -1)
+              [ "$au" != "$u" ] && BAD="${BAD}${p}: uid ${u} -> ${au}\n"
+            fi
+          done < <(printf '%s\n' "$removed")
           if [ -n "$BAD" ]; then
-            echo "::error::uid:// removed/changed in a scene/resource = Godot re-serialization. Edit .tscn as TEXT; never re-save a scene through the editor for a change."
-            printf '%s\n' "$BAD"
+            echo "::error::uid changed for an existing resource (same path, new uid = re-serialization). Edit the .tscn as TEXT; never re-save the scene through the editor."
+            printf '%b' "$BAD"
             exit 1
           fi
-          echo "uid gate OK"
+          echo "uid gate OK (re-serialization only; resource add/remove allowed)"
 
       # ---- Gate 2: Godot headless parse/import ----
       # URL verified working: 4.6.3-stable Linux asset returns HTTP 302 (exists).
