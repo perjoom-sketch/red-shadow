@@ -89,7 +89,9 @@ var stealthed := false           # Stealth toggle state.
 var flipping := false
 var attacking := false
 var current_action := ""         # "attack" for the active swing.
-var combo_step := 0              # 0..2 sword combo index.
+var combo_step := 0              # 0..4 sword combo index.
+var _spin_t := 0.0               # 회전베기 진행 타이머(>0이면 몸이 회전 중)
+var _spin_dir := 1               # 회전 방향(facing 기준)
 var _attack_buffered := false    # 스윙 중 누른 공격 (콤보 끊김 방지용 버퍼)
 var _combat_timer := 0.0
 var _was_drawn := false       # 직전 프레임에 발도(전투) 상태였는지
@@ -188,6 +190,7 @@ func _tick_timers(delta):
 		_was_drawn = false
 		_sheathe_timer = sheathe_time
 	_wall_jump_lock = max(_wall_jump_lock - delta, 0.0)
+	_spin_t = max(_spin_t - delta, 0.0)
 	invulnerable = _invuln_timer > 0.0
 	if attacking:
 		_attack_timer -= delta
@@ -369,10 +372,14 @@ func do_blink():
 func start_attack():
 	attacking = true
 	current_action = "attack"
-	# Advance the 3-hit combo if we are still inside the window.
-	combo_step = (combo_step + 1) % 3 if _combo_timer > 0.0 else 0
-	# 3rd hit lingers for a heavier finish (matches anim_attack_dash length 0.26).
-	_attack_timer = attack_duration + 0.04 if combo_step == 2 else attack_duration
+	# 5타 콤보: 내려 → 올려 → 회전 → 회전 → 찌르기(피니시)
+	combo_step = (combo_step + 1) % 5 if _combo_timer > 0.0 else 0
+	# 5타 마무리(찌르기)는 살짝 길게 머문다 (묵직한 피니시).
+	_attack_timer = attack_duration + 0.04 if combo_step == 4 else attack_duration
+	# 3·4타는 회전베기: 몸을 한 바퀴 돌린다 (flip 과 같은 visual.rotation 방식).
+	if combo_step == 2 or combo_step == 3:
+		_spin_t = attack_duration
+		_spin_dir = facing
 	_combo_timer = attack_combo_window
 	velocity.x = facing * attack_lunge
 	stealthed = false
@@ -413,14 +420,20 @@ func _pressing_into_wall() -> bool:
 func _update_visual():
 	visual.scale.x = facing
 	visual.modulate.a = stealth_alpha if stealthed else 1.0
+	# 회전베기: _spin_t 동안 몸을 0→360° 돌린다. (flip 중에는 flip 이 rotation 을 관리)
+	if _spin_t > 0.0:
+		var st := 1.0 - _spin_t / attack_duration   # 0→1
+		visual.rotation = TAU * st * float(_spin_dir)
+	elif not flipping:
+		visual.rotation = 0.0
 
 
 func _update_animation() -> void:
 	var next := "idle_alert" if (_combat_timer > 0.0 or not is_on_floor() or dashing) else "idle_relaxed"
 	if attacking:
 		if current_action == "attack":
-			# 콤보 3단: 내려 → 올려 → 찌르기
-			next = ["slash_down", "slash_up", "thrust"][combo_step]
+			# 콤보 5단: 내려 → 올려 → 회전 → 회전 → 찌르기 (회전 중엔 팔 뻗은 자세)
+			next = ["slash_down", "slash_up", "thrust", "thrust", "thrust"][combo_step]
 	elif _sheathe_timer > 0.0:
 		# 전투 종료 → 납도 애니를 끝까지 재생 (idle 이 덮어쓰지 않게)
 		if anim.current_animation != "sheathe":
@@ -481,9 +494,15 @@ func _spawn_slash(step: int):
 				Vector2(0.82 * r, 0.14 * r), Vector2(1.0 * r, -0.10 * r),
 				Vector2(0.84 * r, -0.36 * r), Vector2(0.55 * r, -0.56 * r)
 			])
-		2:  # 3타 찌르기: 앞으로 쭉 뻗는 직선 렌즈
+		2, 3:  # 3·4타 회전베기: 몸 주위를 한 바퀴 도는 원형 섬광
+			pts = PackedVector2Array()
+			var seg := 18
+			for s in seg + 1:
+				var a := TAU * float(s) / float(seg) - PI / 2.0
+				pts.append(Vector2(cos(a), sin(a)) * (r * 0.72))
+		4:  # 5타 찌르기(피니시): 앞으로 더 길게 뻗는 직선 렌즈
 			pts = PackedVector2Array([
-				Vector2(0.10 * r, 0.0), Vector2(0.58 * r, 0.0), Vector2(1.15 * r, 0.0)
+				Vector2(0.10 * r, 0.0), Vector2(0.58 * r, 0.0), Vector2(1.25 * r, 0.0)
 			])
 		_:  # 1타 내려베기: 위→앞→아래
 			pts = PackedVector2Array([
