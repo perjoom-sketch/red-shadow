@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://bredshadowplyr1"]
+[gd_scene format=3 uid="uid://c0mpe0ys4s0jo"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://bhuilbc7l3m4n" path="res://scripts/Player.gd" id="1_player"]
+[ext_resource type="AudioStream" uid="uid://8nbeuqk8k45g" path="res://assets/audio/sfx/blade_swing_tight.ogg" id="2_3li8b"]
 [ext_resource type="PackedScene" uid="uid://d1lox2fmfg3r4" path="res://scenes/PlayerRigChibi.tscn" id="4_rig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(36, 92)
 
 [sub_resource type="Gradient" id="grad_aura"]
-offsets = PackedFloat32Array(0, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="tex_aura"]
@@ -18,27 +18,26 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 1)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=876798569]
 script = ExtResource("1_player")
+sfx_draw = ExtResource("2_3li8b")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=731945339]
 shape = SubResource("RectangleShape2D_1")
 
-[node name="Visual" type="Node2D" parent="."]
+[node name="Visual" type="Node2D" parent="." unique_id=1775569749]
 
-[node name="Rig" parent="Visual" instance=ExtResource("4_rig")]
+[node name="Rig" parent="Visual" unique_id=1273368516 instance=ExtResource("4_rig")]
 position = Vector2(0, -14)
 scale = Vector2(0.4, 0.4)
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=706492694]
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
 
-[node name="Aura" type="PointLight2D" parent="."]
+[node name="Aura" type="PointLight2D" parent="." unique_id=1232877922]
 position = Vector2(0, -10)
 scale = Vector2(1.6, 1.6)
 color = Color(0.4, 0.62, 1, 1)
 energy = 0.9
-blend_mode = 0
 texture = SubResource("tex_aura")
