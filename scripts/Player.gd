@@ -385,8 +385,11 @@ func _update_animation() -> void:
 			anim.play("sheathe")
 		return
 	elif is_on_floor() and not dashing:
-		# run/walk 애니 생기기 전까지 idle 유지 (전투상태면 눈 뜬 idle)
-		pass
+		var spd := absf(velocity.x)
+		if spd >= 150.0:
+			next = "run"
+		elif spd >= 30.0:
+			next = "walk"
 	if anim.current_animation != next:
 		anim.play(next)
 
