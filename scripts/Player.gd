@@ -9,7 +9,6 @@ extends CharacterBody2D
 ##   - Blink / teleport (short dash with i-frames)
 ##   - Stealth (toggle: fade + speed boost, broken by attacking)
 ##   - Sword attack (3-hit combo, 검술)
-##   - Kick (발차기)
 ##
 ## IMPORTANT design rule:
 ##   Only the "Visual" node rotates during the flip.
@@ -22,6 +21,8 @@ extends CharacterBody2D
 # --- Movement tuning (live-editable in the Inspector) ---
 @export_group("Movement")
 @export var speed := 220.0
+@export var walk_speed := 140.0       # 단일 입력(걷기) 속도. 방향키 연타 시 speed(달리기)로
+@export var double_tap_window := 0.25  # 더블탭 달리기 인식 시간(초)
 @export var ground_accel := 2000.0
 @export var air_accel := 1200.0
 @export var jump_velocity := -560.0   # Cat-like: jumps high by default.
@@ -67,21 +68,22 @@ extends CharacterBody2D
 @export var attack_duration := 0.30
 @export var attack_lunge := 130.0
 @export var attack_combo_window := 0.5
-@export var kick_duration := 0.26
-@export var kick_lunge := 190.0
 @export var attack_damage := 10.0
-@export var kick_damage := 14.0
 @export var combat_linger := 1.5
 @export var sheathe_time := 0.28    # 자동 납도 애니 길이 = anim_sheathe length
 
 # --- State ---
 var facing := 1                  # 1 = right, -1 = left.
+var _running := false            # 더블탭 달리기 상태
+var _tap_dir := 0                # 직전 탭 방향 (더블탭 감지용)
+var _tap_timer := 0.0            # 더블탭 유효시간 남음
 var invulnerable := false        # True while any i-frame timer is active.
 var stealthed := false           # Stealth toggle state.
 var flipping := false
 var attacking := false
-var current_action := ""         # "attack" or "kick" for the active swing.
+var current_action := ""         # "attack" for the active swing.
 var combo_step := 0              # 0..2 sword combo index.
+var _attack_buffered := false    # 스윙 중 누른 공격 (콤보 끊김 방지용 버퍼)
 var _combat_timer := 0.0
 var _was_drawn := false       # 직전 프레임에 발도(전투) 상태였는지
 var _sheathe_timer := 0.0     # >0 이면 납도 애니 재생 중
@@ -169,6 +171,7 @@ func _tick_timers(delta):
 	_dash_cd = max(_dash_cd - delta, 0.0)
 	_invuln_timer = max(_invuln_timer - delta, 0.0)
 	_combo_timer = max(_combo_timer - delta, 0.0)
+	_tap_timer = max(_tap_timer - delta, 0.0)
 	_combat_timer = max(_combat_timer - delta, 0.0)
 	# 전투 종료(_combat_timer 가 0 도달) 순간 자동 납도 트리거
 	_sheathe_timer = max(_sheathe_timer - delta, 0.0)
@@ -188,6 +191,7 @@ func _tick_timers(delta):
 
 func _handle_horizontal(delta, on_floor):
 	var direction := Input.get_axis("move_left", "move_right")
+	_update_run_state(direction)
 
 	# During a flip we keep momentum but allow one decisive aerial turn.
 	if flipping:
@@ -201,7 +205,7 @@ func _handle_horizontal(delta, on_floor):
 	if _wall_jump_lock > 0.0:
 		return
 
-	# During an attack/kick we let the lunge play out (just apply friction).
+	# During an attack we let the lunge play out (just apply friction).
 	if attacking:
 		velocity.x = move_toward(velocity.x, 0.0, ground_accel * delta)
 		return
@@ -210,6 +214,23 @@ func _handle_horizontal(delta, on_floor):
 	velocity.x = move_toward(velocity.x, direction * _move_speed(), accel * delta)
 	if direction != 0:
 		facing = int(sign(direction))
+
+
+func _update_run_state(direction: float) -> void:
+	# 달리던 방향에서 멈추거나 반대로 틀면 먼저 해제 (탭 갱신 전, 옛 방향 기준)
+	if _running and (direction == 0.0 or int(sign(direction)) != _tap_dir):
+		_running = false
+	# 같은 방향키를 double_tap_window 안에 두 번 누르면 달리기 진입
+	if Input.is_action_just_pressed("move_left"):
+		if _tap_dir == -1 and _tap_timer > 0.0:
+			_running = true
+		_tap_dir = -1
+		_tap_timer = double_tap_window
+	elif Input.is_action_just_pressed("move_right"):
+		if _tap_dir == 1 and _tap_timer > 0.0:
+			_running = true
+		_tap_dir = 1
+		_tap_timer = double_tap_window
 
 
 func _handle_jump(delta, on_floor, on_wall):
@@ -280,12 +301,21 @@ func _handle_stealth():
 
 
 func _handle_combat():
-	if attacking or flipping:
+	if flipping:
 		return
+	if attacking:
+		# 스윙 중 누른 공격은 버퍼에 저장 (콤보 끊김 방지)
+		if Input.is_action_just_pressed("attack"):
+			_attack_buffered = true
+		return
+	# 스윙이 끝났고 버퍼가 차 있으면, 콤보 윈도우 안에서 다음 타 자동 발동
+	if _attack_buffered:
+		_attack_buffered = false
+		if _combo_timer > 0.0:
+			start_attack()
+			return
 	if Input.is_action_just_pressed("attack"):
 		start_attack()
-	elif Input.is_action_just_pressed("kick"):
-		start_kick()
 
 
 # --- Skills ------------------------------------------------------------
@@ -342,20 +372,11 @@ func start_attack():
 	_sheathe_timer = 0.0    # 재발도 시 진행 중이던 납도 취소
 
 
-func start_kick():
-	attacking = true
-	current_action = "kick"
-	_attack_timer = kick_duration
-	velocity.x = facing * kick_lunge
-	stealthed = false
-	_spawn_hitbox(Vector2(facing * 24, 14), Vector2(34, 22), kick_damage)
-	_spawn_slash(true)
-
-
 # --- Helpers -----------------------------------------------------------
 
 func _move_speed() -> float:
-	return speed * (stealth_speed_mult if stealthed else 1.0)
+	var base := speed if _running else walk_speed
+	return base * (stealth_speed_mult if stealthed else 1.0)
 
 
 func _pressing_into_wall() -> bool:
@@ -377,19 +398,14 @@ func _update_animation() -> void:
 		if current_action == "attack":
 			# 콤보 3단: 내려 → 올려 → 찌르기
 			next = ["slash_down", "slash_up", "thrust"][combo_step]
-		elif current_action == "kick":
-			return
 	elif _sheathe_timer > 0.0:
 		# 전투 종료 → 납도 애니를 끝까지 재생 (idle 이 덮어쓰지 않게)
 		if anim.current_animation != "sheathe":
 			anim.play("sheathe")
 		return
 	elif is_on_floor() and not dashing:
-		var spd := absf(velocity.x)
-		if spd >= 150.0:
-			next = "run"
-		elif spd >= 30.0:
-			next = "walk"
+		if absf(velocity.x) >= 30.0:
+			next = "run" if _running else "walk"
 	if anim.current_animation != next:
 		anim.play(next)
 
