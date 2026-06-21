@@ -453,27 +453,45 @@ func _on_hitbox_body_entered(body, hb):
 
 
 func _spawn_slash(low: bool):
-	# Lightweight white arc that fades out — visual feedback for the swing.
+	# 할로우나이트풍 초승달 섬광: 굵은 테이퍼 호 + 선명한 흰빛 + 빠른 번쩍 페이드.
 	var fx := Line2D.new()
-	fx.width = 4.0
-	fx.default_color = Color(0.95, 0.96, 1.0, 0.9)
-	fx.z_index = 5
+	fx.width = 22.0
+	fx.z_index = 10
+	fx.joint_mode = Line2D.LINE_JOINT_ROUND
+	fx.begin_cap_mode = Line2D.LINE_CAP_ROUND
+	fx.end_cap_mode = Line2D.LINE_CAP_ROUND
+	# 가운데 두껍고 양끝 얇은 테이퍼 → 초승달 실루엣
+	var wc := Curve.new()
+	wc.add_point(Vector2(0.0, 0.12))
+	wc.add_point(Vector2(0.5, 1.0))
+	wc.add_point(Vector2(1.0, 0.12))
+	fx.width_curve = wc
+	# 시작은 새하얗게, 끝으로 갈수록 차가운 푸른빛으로
+	var grad := Gradient.new()
+	grad.set_color(0, Color(1.0, 1.0, 1.0, 1.0))
+	grad.set_color(1, Color(0.7, 0.85, 1.0, 0.55))
+	fx.gradient = grad
 	var pts: PackedVector2Array
 	if low:
+		# 하단베기: 앞→아래로 길게 훑는 호
 		pts = PackedVector2Array([
-			Vector2(8, 12), Vector2(22, 16), Vector2(32, 22), Vector2(38, 30)
+			Vector2(10, -6), Vector2(40, 6), Vector2(64, 22), Vector2(70, 40)
 		])
 	else:
+		# 기본(내려베기): 위→앞→아래로 크게 도는 초승달, 사거리만큼 길게
 		pts = PackedVector2Array([
-			Vector2(8, -20), Vector2(24, -12), Vector2(34, 0),
-			Vector2(30, 14), Vector2(18, 24)
+			Vector2(6, -36), Vector2(34, -26), Vector2(58, -8),
+			Vector2(70, 10), Vector2(58, 28), Vector2(38, 42)
 		])
 	for i in pts.size():
 		pts[i] = Vector2(pts[i].x * facing, pts[i].y)
 	fx.points = pts
 	add_child(fx)
+	# 살짝 커지며 번쩍 → 빠르게 사라짐 (스냅감)
+	fx.scale = Vector2(0.85, 0.85)
 	var tw := create_tween()
-	tw.tween_property(fx, "modulate:a", 0.0, attack_duration)
+	tw.parallel().tween_property(fx, "scale", Vector2(1.12, 1.12), 0.16).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(fx, "modulate:a", 0.0, 0.16).set_ease(Tween.EASE_OUT)
 	tw.tween_callback(fx.queue_free)
 
 
