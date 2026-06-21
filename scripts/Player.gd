@@ -75,6 +75,10 @@ extends CharacterBody2D
 @export var combat_linger := 1.5
 @export var sheathe_time := 0.28    # 자동 납도 애니 길이 = anim_sheathe length
 
+@export_group("Audio")
+@export var sfx_draw: AudioStream   # 발도음(스릉/챙). 비우면 무음
+@export var sfx_hit: AudioStream    # 타격음(챙!). 비우면 무음
+
 # --- State ---
 var facing := 1                  # 1 = right, -1 = left.
 var _running := false            # 더블탭 달리기 상태
@@ -376,6 +380,7 @@ func start_attack():
 	_spawn_slash(false)
 	_combat_timer = combat_linger
 	_sheathe_timer = 0.0    # 재발도 시 진행 중이던 납도 취소
+	_play_sfx(sfx_draw)     # 발도음
 
 
 # --- Helpers -----------------------------------------------------------
@@ -383,6 +388,18 @@ func start_attack():
 func _move_speed() -> float:
 	var base := speed if _running else walk_speed
 	return base * (stealth_speed_mult if stealthed else 1.0)
+
+
+func _play_sfx(stream: AudioStream) -> void:
+	# 일회성 재생기. stream 이 비어있으면(파일 미할당) 그냥 무음.
+	if stream == null:
+		return
+	var p := AudioStreamPlayer.new()
+	p.stream = stream
+	p.bus = "SFX"
+	add_child(p)
+	p.play()
+	p.finished.connect(p.queue_free)
 
 
 func _pressing_into_wall() -> bool:
@@ -450,6 +467,7 @@ func _on_hitbox_body_entered(body, hb):
 		if dir == 0.0:
 			dir = float(facing)
 		body.take_hit(hb.get_meta("dmg", 0.0), dir)
+		_play_sfx(sfx_hit)    # 타격음 (적에 실제로 맞을 때만)
 
 
 func _spawn_slash(low: bool):
