@@ -372,7 +372,7 @@ func _update_visual():
 
 
 func _update_animation() -> void:
-	var next := "idle_alert" if _combat_timer > 0.0 else "idle_relaxed"
+	var next := "idle_alert" if (_combat_timer > 0.0 or not is_on_floor() or dashing) else "idle_relaxed"
 	if attacking:
 		if current_action == "attack":
 			# 콤보 3단: 내려 → 올려 → 찌르기
