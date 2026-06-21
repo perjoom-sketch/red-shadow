@@ -71,6 +71,7 @@ extends CharacterBody2D
 @export var kick_lunge := 190.0
 @export var attack_damage := 10.0
 @export var kick_damage := 14.0
+@export var combat_linger := 1.5
 
 # --- State ---
 var facing := 1                  # 1 = right, -1 = left.
@@ -80,6 +81,7 @@ var flipping := false
 var attacking := false
 var current_action := ""         # "attack" or "kick" for the active swing.
 var combo_step := 0              # 0..2 sword combo index.
+var _combat_timer := 0.0
 var on_wall_slide := false       # True while clinging/sliding on a wall.
 var dashing := false             # True during a 경공 dash burst.
 
@@ -164,6 +166,7 @@ func _tick_timers(delta):
 	_dash_cd = max(_dash_cd - delta, 0.0)
 	_invuln_timer = max(_invuln_timer - delta, 0.0)
 	_combo_timer = max(_combo_timer - delta, 0.0)
+	_combat_timer = max(_combat_timer - delta, 0.0)
 	_wall_jump_lock = max(_wall_jump_lock - delta, 0.0)
 	invulnerable = _invuln_timer > 0.0
 	if attacking:
@@ -325,6 +328,7 @@ func start_attack():
 	stealthed = false
 	_spawn_hitbox(Vector2(facing * 26, -4), Vector2(40, 28), attack_damage)
 	_spawn_slash(false)
+	_combat_timer = combat_linger
 
 
 func start_kick():
@@ -357,19 +361,16 @@ func _update_visual():
 
 
 func _update_animation() -> void:
-	var next := "idle_relaxed"
+	var next := "idle_alert" if _combat_timer > 0.0 else "idle_relaxed"
 	if attacking:
 		if current_action == "attack":
 			# 콤보 3단: 내려 → 올려 → 찌르기
 			next = ["slash_down", "slash_up", "thrust"][combo_step]
 		elif current_action == "kick":
-			return  # kick 애니메이션 없음 — 스킵
+			return
 	elif is_on_floor() and not dashing:
-		var spd := absf(velocity.x)
-		if spd >= 150.0:
-			next = "idle_relaxed"  # run 폴백
-		elif spd >= 30.0:
-			next = "idle_relaxed"  # walk 폴백
+		# run/walk 애니 생기기 전까지 idle 유지 (전투상태면 눈 뜬 idle)
+		pass
 	if anim.current_animation != next:
 		anim.play(next)
 
