@@ -132,6 +132,59 @@ tracks/4/keys = {
 "values": [0.0, -0.05, -0.05, 0.0]
 }
 
+[sub_resource type="Animation" id="anim_draw"]
+resource_name = "draw"
+length = 0.22
+step = 0.0166
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NearArm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.22),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.47413176, -0.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BackSword:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NearArm/SlashBlade:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Torso/Head:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("12_head_a"), ExtResource("13_head_b")]
+}
+
 [sub_resource type="Animation" id="anim_idle_alert"]
 resource_name = "idle_alert"
 length = 1.6
@@ -240,124 +293,6 @@ tracks/3/keys = {
 "values": [ExtResource("12_head_a")]
 }
 
-[sub_resource type="Animation" id="anim_draw"]
-resource_name = "draw"
-length = 0.22
-step = 0.0166
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NearArm:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.22),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.47413176, -0.4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BackSword:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("NearArm/SlashBlade:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Torso/Head:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.14),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("12_head_a"), ExtResource("13_head_b")]
-}
-
-[sub_resource type="Animation" id="anim_slash_down"]
-resource_name = "slash_down"
-length = 0.3
-step = 0.0166
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NearArm:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [-0.4, 1.2, -0.4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Torso/Head:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.26),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("13_head_b"), ExtResource("8_0yksh"), ExtResource("13_head_b")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Torso/Head:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.12, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, -0.05, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("NearArm/SlashBlade:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("BackSword:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="Animation" id="anim_sheathe"]
 resource_name = "sheathe"
 length = 0.28
@@ -411,8 +346,8 @@ tracks/3/keys = {
 "values": [ExtResource("13_head_b"), ExtResource("12_head_a")]
 }
 
-[sub_resource type="Animation" id="anim_slash_up"]
-resource_name = "slash_up"
+[sub_resource type="Animation" id="anim_slash_down"]
+resource_name = "slash_down"
 length = 0.3
 step = 0.0166
 tracks/0/type = "value"
@@ -422,10 +357,10 @@ tracks/0/path = NodePath("NearArm:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.12, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [-0.4, 0.7, -1.4, -0.4]
+"values": [-0.4, 1.2, -0.4]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -434,7 +369,7 @@ tracks/1/path = NodePath("Torso/Head:texture")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.16, 0.28),
+"times": PackedFloat32Array(0, 0.08, 0.26),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [ExtResource("13_head_b"), ExtResource("8_0yksh"), ExtResource("13_head_b")]
@@ -446,75 +381,10 @@ tracks/2/path = NodePath("Torso/Head:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
+"times": PackedFloat32Array(0, 0.12, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, -0.05, 0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("NearArm/SlashBlade:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("BackSword:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="anim_thrust"]
-resource_name = "thrust"
-length = 0.26
-step = 0.0166
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("NearArm:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16, 0.26),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [-0.4, 0.2, 0.2, -0.4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("NearArm:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.16, 0.26),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-56.00002, -2.999998), Vector2(-40, -2.999998), Vector2(-40, -2.999998), Vector2(-56.00002, -2.999998)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Torso/Head:texture")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.22),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("13_head_b"), ExtResource("8_0yksh"), ExtResource("13_head_b")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -671,39 +541,169 @@ tracks/4/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="anim_slash_up"]
+resource_name = "slash_up"
+length = 0.3
+step = 0.0166
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NearArm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.4, 0.7, -1.4, -0.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Torso/Head:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.16, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("13_head_b"), ExtResource("8_0yksh"), ExtResource("13_head_b")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Torso/Head:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.05, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NearArm/SlashBlade:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BackSword:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="anim_thrust"]
+resource_name = "thrust"
+length = 0.26
+step = 0.0166
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NearArm:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.26),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.4, 0.2, 0.2, -0.4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NearArm:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.26),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-56.00002, -2.999998), Vector2(-40, -2.999998), Vector2(-40, -2.999998), Vector2(-56.00002, -2.999998)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Torso/Head:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.22),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("13_head_b"), ExtResource("8_0yksh"), ExtResource("13_head_b")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NearArm/SlashBlade:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BackSword:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="anim_lib"]
 _data = {
 &"RESET": SubResource("anim_RESET"),
 &"attack": SubResource("anim_attack"),
 &"draw": SubResource("anim_draw"),
-&"slash_down": SubResource("anim_slash_down"),
+&"idle_alert": SubResource("anim_idle_alert"),
+&"idle_relaxed": SubResource("anim_idle_relaxed"),
 &"sheathe": SubResource("anim_sheathe"),
-&"slash_up": SubResource("anim_slash_up"),
-&"thrust": SubResource("anim_thrust"),
+&"slash_down": SubResource("anim_slash_down"),
 &"slash_high": SubResource("anim_slash_high"),
 &"slash_low": SubResource("anim_slash_low"),
-&"idle_alert": SubResource("anim_idle_alert"),
-&"idle_relaxed": SubResource("anim_idle_relaxed")
+&"slash_up": SubResource("anim_slash_up"),
+&"thrust": SubResource("anim_thrust")
 }
 
 [node name="PlayerRigChibi" type="Node2D" unique_id=330699588]
 position = Vector2(1, -149)
 
 [node name="BackSword" type="Sprite2D" parent="." unique_id=449706295]
-position = Vector2(-62.000004, -21.000004)
+position = Vector2(-62.593475, -39.60205)
 rotation = -0.7206365
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("10_back_sword")
 
 [node name="FarArm" type="Sprite2D" parent="." unique_id=456139498]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(13, -2)
+position = Vector2(12.406525, -20.60205)
 rotation = -0.83618444
 texture = ExtResource("2_left_arm")
 offset = Vector2(0, 25)
 
 [node name="Tail" type="Sprite2D" parent="." unique_id=1579025982]
-position = Vector2(-129.94601, 86)
+position = Vector2(-130.53949, 67.39795)
 scale = Vector2(0.42667425, 0.6515152)
 texture = ExtResource("3_tail")
 offset = Vector2(60, 0)
@@ -713,18 +713,19 @@ speed = 2.5
 
 [node name="FarLeg" type="Sprite2D" parent="." unique_id=842828410]
 modulate = Color(0.62, 0.62, 0.62, 1)
-position = Vector2(12.999985, 75.76296)
-scale = Vector2(0.81410253, 0.78207403)
+position = Vector2(11.960373, 54.441788)
+scale = Vector2(0.8687312, 1.0914502)
 texture = ExtResource("1_left_leg")
 offset = Vector2(0, 30)
 
 [node name="NearLeg" type="Sprite2D" parent="." unique_id=462082129]
-position = Vector2(-30.946045, 69)
+position = Vector2(-31.53952, 55.811737)
+scale = Vector2(1, 1.0862069)
 texture = ExtResource("7_right_leg")
 offset = Vector2(0, 30)
 
 [node name="Torso" type="Sprite2D" parent="." unique_id=520478125]
-position = Vector2(-41, 27)
+position = Vector2(-41.593475, 8.397949)
 texture = ExtResource("4_torso")
 offset = Vector2(0, 20)
 
@@ -750,7 +751,7 @@ texture = ExtResource("12_head_a")
 offset = Vector2(0, -30)
 
 [node name="NearArm" type="Sprite2D" parent="." unique_id=1793171012]
-position = Vector2(-56.00002, -2.999998)
+position = Vector2(-56.59349, -21.60205)
 rotation = 0.47413176
 scale = Vector2(0.9684054, 0.8909265)
 texture = ExtResource("11_0yksh")
