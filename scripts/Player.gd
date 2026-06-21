@@ -471,46 +471,51 @@ func _on_hitbox_body_entered(body, hb):
 
 
 func _spawn_slash(low: bool):
-	# 할로우나이트풍 초승달 섬광: 굵은 테이퍼 호 + 선명한 흰빛 + 빠른 번쩍 페이드.
-	var fx := Line2D.new()
-	fx.width = 22.0
-	fx.z_index = 10
-	fx.joint_mode = Line2D.LINE_JOINT_ROUND
-	fx.begin_cap_mode = Line2D.LINE_CAP_ROUND
-	fx.end_cap_mode = Line2D.LINE_CAP_ROUND
-	# 가운데 두껍고 양끝 얇은 테이퍼 → 초승달 실루엣
-	var wc := Curve.new()
-	wc.add_point(Vector2(0.0, 0.12))
-	wc.add_point(Vector2(0.5, 1.0))
-	wc.add_point(Vector2(1.0, 0.12))
-	fx.width_curve = wc
-	# 시작은 새하얗게, 끝으로 갈수록 차가운 푸른빛으로
-	var grad := Gradient.new()
-	grad.set_color(0, Color(1.0, 1.0, 1.0, 1.0))
-	grad.set_color(1, Color(0.7, 0.85, 1.0, 0.55))
-	fx.gradient = grad
+	# 거합 섬광: 칼날을 대신하는 크고 굵은 초승달. 글로우(넓고 흐림)+코어(밝고 선명) 2겹.
 	var pts: PackedVector2Array
 	if low:
-		# 하단베기: 앞→아래로 길게 훑는 호
+		# 하단베기: 앞→아래로 길게 훑는 호 (크게)
 		pts = PackedVector2Array([
-			Vector2(10, -6), Vector2(40, 6), Vector2(64, 22), Vector2(70, 40)
+			Vector2(12, -8), Vector2(52, 8), Vector2(84, 30), Vector2(92, 52)
 		])
 	else:
-		# 기본(내려베기): 위→앞→아래로 크게 도는 초승달, 사거리만큼 길게
+		# 기본(내려베기): 위→앞→아래로 크게 도는 초승달, 사거리보다 길게
 		pts = PackedVector2Array([
-			Vector2(6, -36), Vector2(34, -26), Vector2(58, -8),
-			Vector2(70, 10), Vector2(58, 28), Vector2(38, 42)
+			Vector2(8, -46), Vector2(44, -34), Vector2(76, -10),
+			Vector2(92, 14), Vector2(76, 38), Vector2(50, 56)
 		])
 	for i in pts.size():
 		pts[i] = Vector2(pts[i].x * facing, pts[i].y)
-	fx.points = pts
+	var fx := Node2D.new()
+	fx.z_index = 10
+	fx.add_child(_make_slash_arc(pts, 60.0, Color(0.65, 0.82, 1.0), 0.32))  # 글로우
+	fx.add_child(_make_slash_arc(pts, 36.0, Color(1.0, 1.0, 1.0), 1.0))     # 코어
 	add_child(fx)
-	# 살짝 커지며 번쩍 → 빠르게 사라짐 (스냅감)
-	fx.scale = Vector2(0.85, 0.85)
+	# 작게 시작 → 크게 번쩍 → 빠르게 사라짐 (임팩트)
+	fx.scale = Vector2(0.8, 0.8)
 	var tw := create_tween()
-	tw.parallel().tween_property(fx, "scale", Vector2(1.12, 1.12), 0.16).set_ease(Tween.EASE_OUT)
-	tw.parallel().tween_property(fx, "modulate:a", 0.0, 0.16).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(fx, "scale", Vector2(1.3, 1.3), 0.18).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(fx, "modulate:a", 0.0, 0.18).set_ease(Tween.EASE_OUT)
 	tw.tween_callback(fx.queue_free)
+
+
+func _make_slash_arc(pts: PackedVector2Array, width: float, col: Color, alpha: float) -> Line2D:
+	var l := Line2D.new()
+	l.width = width
+	l.joint_mode = Line2D.LINE_JOINT_ROUND
+	l.begin_cap_mode = Line2D.LINE_CAP_ROUND
+	l.end_cap_mode = Line2D.LINE_CAP_ROUND
+	var wc := Curve.new()                       # 가운데 두껍고 양끝 얇게 → 초승달
+	wc.add_point(Vector2(0.0, 0.08))
+	wc.add_point(Vector2(0.5, 1.0))
+	wc.add_point(Vector2(1.0, 0.08))
+	l.width_curve = wc
+	var g := Gradient.new()                     # 끝으로 갈수록 옅게
+	g.set_color(0, Color(col.r, col.g, col.b, alpha))
+	g.set_color(1, Color(col.r, col.g, col.b, alpha * 0.4))
+	l.gradient = g
+	l.points = pts
+	return l
 
 
 func _spawn_trail():
