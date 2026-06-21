@@ -69,6 +69,9 @@ extends CharacterBody2D
 @export var attack_lunge := 130.0
 @export var attack_combo_window := 0.8
 @export var attack_damage := 10.0
+@export var attack_reach := 54.0                 # 히트박스 중심 오프셋(사거리). 할나급 길게
+@export var attack_hit_size := Vector2(44, 30)   # 히트박스 크기(폭, 높이) → 도달 ~76px
+@export var attack_windup := 0.0                 # 발도~타격 지연(초). 0 = 즉발
 @export var combat_linger := 1.5
 @export var sheathe_time := 0.28    # 자동 납도 애니 길이 = anim_sheathe length
 
@@ -369,7 +372,7 @@ func start_attack():
 	_combo_timer = attack_combo_window
 	velocity.x = facing * attack_lunge
 	stealthed = false
-	_spawn_hitbox(Vector2(facing * 26, -4), Vector2(40, 28), attack_damage)
+	_spawn_attack_hitbox()
 	_spawn_slash(false)
 	_combat_timer = combat_linger
 	_sheathe_timer = 0.0    # 재발도 시 진행 중이던 납도 취소
@@ -411,6 +414,16 @@ func _update_animation() -> void:
 			next = "run" if _running else "walk"
 	if anim.current_animation != next:
 		anim.play(next)
+
+
+func _spawn_attack_hitbox() -> void:
+	# 사거리/크기는 export 로 튜닝. windup 0 이면 즉발(누르면 바로 타격).
+	var off := Vector2(facing * attack_reach, -4.0)
+	if attack_windup <= 0.0:
+		_spawn_hitbox(off, attack_hit_size, attack_damage)
+		return
+	get_tree().create_timer(attack_windup).timeout.connect(
+		_spawn_hitbox.bind(off, attack_hit_size, attack_damage))
 
 
 func _spawn_hitbox(offset: Vector2, size: Vector2, dmg: float):
