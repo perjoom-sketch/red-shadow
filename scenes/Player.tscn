@@ -20,6 +20,8 @@ fill_to = Vector2(0.5, 1)
 
 [node name="Player" type="CharacterBody2D" unique_id=876798569]
 script = ExtResource("1_player")
+max_air_jumps = 2
+attack_reach = 90.0
 sfx_draw = ExtResource("2_3li8b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=731945339]
