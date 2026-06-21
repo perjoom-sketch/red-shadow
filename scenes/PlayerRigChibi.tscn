@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/ClothSway.gd" id="9_clothsway"]
 [ext_resource type="Texture2D" uid="uid://cqsufdr6iixbu" path="res://assets/chibi/sword/back_sword.png" id="10_back_sword"]
 [ext_resource type="Texture2D" uid="uid://ce6xuoh0xoqb1" path="res://assets/chibi/arm/right_arm_empty.png" id="11_0yksh"]
+[ext_resource type="Texture2D" uid="uid://bxwcsquqhgja4" path="res://assets/chibi/sword/slash_blade.png" id="14_slash_blade"]
 
 [sub_resource type="Animation" id="anim_RESET"]
 resource_name = "RESET"
@@ -175,11 +176,90 @@ tracks/3/keys = {
 "values": [ExtResource("13_head_b")]
 }
 
+[sub_resource type="Animation" id="anim_attack"]
+resource_name = "attack"
+length = 0.52
+loop_mode = 0
+step = 0.0166
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BackSword:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SlashBlade:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NearArm:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.26, 0.4, 0.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.47413176, 0.95, -0.45, -0.45, 0.47413176]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SlashBlade:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.05, 0.12, 0.26, 0.4, 0.48),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-2.4, -2.2, 0.6, 0.6, -2.4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Torso/Head:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.46),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("12_head_a"), ExtResource("8_0yksh"), ExtResource("12_head_a")]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Torso/Head:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.12, 0.4, 0.52),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.05, -0.05, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="anim_lib"]
 _data = {
 &"RESET": SubResource("anim_RESET"),
 &"idle_relaxed": SubResource("anim_idle_relaxed"),
-&"idle_alert": SubResource("anim_idle_alert")
+&"idle_alert": SubResource("anim_idle_alert"),
+&"attack": SubResource("anim_attack")
 }
 
 [node name="PlayerRigChibi" type="Node2D" unique_id=330699588]
@@ -251,6 +331,14 @@ rotation = 0.47413176
 scale = Vector2(0.9684054, 0.8909265)
 texture = ExtResource("11_0yksh")
 offset = Vector2(70, 15)
+
+[node name="SlashBlade" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-95, 0)
+rotation = -2.4
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("14_slash_blade")
+offset = Vector2(0, 180)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=100053449]
 reset_on_save = false
