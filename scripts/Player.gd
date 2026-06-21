@@ -472,17 +472,21 @@ func _on_hitbox_body_entered(body, hb):
 
 func _spawn_slash(low: bool):
 	# 거합 섬광: 칼날을 대신하는 크고 굵은 초승달. 글로우(넓고 흐림)+코어(밝고 선명) 2겹.
+	# 섬광 길이를 실제 사거리에 묶음 (히트박스 끝보다 살짝 길게 = 연출). 좌표는 reach 비율
+	var reach := (attack_reach + attack_hit_size.x * 0.5) * 1.35
 	var pts: PackedVector2Array
 	if low:
-		# 하단베기: 앞→아래로 길게 훑는 호 (크게)
+		# 하단베기: 앞→아래로 길게 훑는 호
 		pts = PackedVector2Array([
-			Vector2(12, -8), Vector2(52, 8), Vector2(84, 30), Vector2(92, 52)
+			Vector2(0.12 * reach, -0.10 * reach), Vector2(0.52 * reach, 0.12 * reach),
+			Vector2(0.86 * reach, 0.36 * reach), Vector2(1.0 * reach, 0.60 * reach)
 		])
 	else:
-		# 기본(내려베기): 위→앞→아래로 크게 도는 초승달, 사거리보다 길게
+		# 기본(내려베기): 위→앞→아래로 크게 도는 초승달, 사거리만큼 길게
 		pts = PackedVector2Array([
-			Vector2(8, -46), Vector2(44, -34), Vector2(76, -10),
-			Vector2(92, 14), Vector2(76, 38), Vector2(50, 56)
+			Vector2(0.08 * reach, -0.52 * reach), Vector2(0.46 * reach, -0.40 * reach),
+			Vector2(0.82 * reach, -0.14 * reach), Vector2(1.0 * reach, 0.10 * reach),
+			Vector2(0.84 * reach, 0.36 * reach), Vector2(0.55 * reach, 0.56 * reach)
 		])
 	for i in pts.size():
 		pts[i] = Vector2(pts[i].x * facing, pts[i].y)
@@ -491,10 +495,10 @@ func _spawn_slash(low: bool):
 	fx.add_child(_make_slash_arc(pts, 60.0, Color(0.65, 0.82, 1.0), 0.32))  # 글로우
 	fx.add_child(_make_slash_arc(pts, 36.0, Color(1.0, 1.0, 1.0), 1.0))     # 코어
 	add_child(fx)
-	# 작게 시작 → 크게 번쩍 → 빠르게 사라짐 (임팩트)
-	fx.scale = Vector2(0.8, 0.8)
+	# 처음부터 풀 길이로 번쩍 → 살짝 더 커지며 사라짐
+	fx.scale = Vector2(1.0, 1.0)
 	var tw := create_tween()
-	tw.parallel().tween_property(fx, "scale", Vector2(1.3, 1.3), 0.18).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(fx, "scale", Vector2(1.18, 1.18), 0.18).set_ease(Tween.EASE_OUT)
 	tw.parallel().tween_property(fx, "modulate:a", 0.0, 0.18).set_ease(Tween.EASE_OUT)
 	tw.tween_callback(fx.queue_free)
 
