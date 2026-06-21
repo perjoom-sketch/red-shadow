@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bredshadowplyr1"]
+[gd_scene load_steps=6 format=3 uid="uid://bredshadowplyr1"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_player"]
-[ext_resource type="Texture2D" path="res://assets/player.png" id="3_tex"]
-[ext_resource type="PackedScene" uid="uid://dyekevua2ri06" path="res://scenes/PlayerRig.tscn" id="4_rig"]
+[ext_resource type="PackedScene" uid="uid://d1lox2fmfg3r4" path="res://scenes/PlayerRigChibi.tscn" id="4_rig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(36, 92)
@@ -28,15 +27,9 @@ shape = SubResource("RectangleShape2D_1")
 
 [node name="Visual" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="Visual"]
-position = Vector2(2, -14)
-scale = Vector2(0.26, 0.26)
-texture = ExtResource("3_tex")
-visible = false
-
 [node name="Rig" parent="Visual" instance=ExtResource("4_rig")]
-position = Vector2(0, 0)
-scale = Vector2(0.15, 0.15)
+position = Vector2(0, 46)
+scale = Vector2(0.4, 0.4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

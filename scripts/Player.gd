@@ -357,18 +357,19 @@ func _update_visual():
 
 
 func _update_animation() -> void:
-	var next := "idle"
+	var next := "idle_relaxed"
 	if attacking:
 		if current_action == "attack":
-			next = ["attack", "attack_heavy", "attack_dash"][combo_step]
-		else:
-			next = current_action          # "kick"
+			# 콤보 3단: 내려 → 올려 → 찌르기
+			next = ["slash_down", "slash_up", "thrust"][combo_step]
+		elif current_action == "kick":
+			return  # kick 애니메이션 없음 — 스킵
 	elif is_on_floor() and not dashing:
 		var spd := absf(velocity.x)
 		if spd >= 150.0:
-			next = "run"
+			next = "idle_relaxed"  # run 폴백
 		elif spd >= 30.0:
-			next = "walk"
+			next = "idle_relaxed"  # walk 폴백
 	if anim.current_animation != next:
 		anim.play(next)
 
