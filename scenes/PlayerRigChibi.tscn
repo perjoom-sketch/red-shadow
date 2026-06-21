@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://8unohn05rdm5" path="res://assets/chibi/leg/right_leg.png" id="7_right_leg"]
 [ext_resource type="Texture2D" uid="uid://cfjmx7d4eicym" path="res://assets/chibi/head/head_c_glare.png" id="8_0yksh"]
 [ext_resource type="Texture2D" uid="uid://ctranm40407a0" path="res://assets/chibi/head/head_a_relaxed.png" id="12_head_a"]
+[ext_resource type="Texture2D" uid="uid://0tomex33hlow" path="res://assets/chibi/head/head_b_alert.png" id="13_head_b"]
 [ext_resource type="Texture2D" uid="uid://co736ryy6irvl" path="res://assets/chibi/arm/right_arm_sword.png" id="8_right_arm"]
 [ext_resource type="Script" path="res://scripts/ClothSway.gd" id="9_clothsway"]
 [ext_resource type="Texture2D" uid="uid://cqsufdr6iixbu" path="res://assets/chibi/sword/back_sword.png" id="10_back_sword"]
@@ -107,11 +108,78 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.47413176, 0.49163176, 0.47413176]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Torso/Head:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("12_head_a")]
+}
+
+[sub_resource type="Animation" id="anim_idle_alert"]
+resource_name = "idle_alert"
+length = 1.6
+loop_mode = 1
+step = 0.0333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Torso:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-41, 27), Vector2(-41, 26), Vector2(-41, 27)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Torso/Head:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, -0.008, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NearArm:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.47413176, 0.46, 0.47413176]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Torso/Head:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("13_head_b")]
+}
 
 [sub_resource type="AnimationLibrary" id="anim_lib"]
 _data = {
 &"RESET": SubResource("anim_RESET"),
-&"idle_relaxed": SubResource("anim_idle_relaxed")
+&"idle_relaxed": SubResource("anim_idle_relaxed"),
+&"idle_alert": SubResource("anim_idle_alert")
 }
 
 [node name="PlayerRigChibi" type="Node2D" unique_id=330699588]
