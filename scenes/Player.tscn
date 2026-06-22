@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d1lox2fmfg3r4" path="res://scenes/PlayerRigChibi.tscn" id="4_rig"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(27, 69)
+size = Vector2(22, 58)
 
 [sub_resource type="Gradient" id="grad_aura"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -31,7 +31,7 @@ shape = SubResource("RectangleShape2D_1")
 
 [node name="Rig" parent="Visual" unique_id=1273368516 instance=ExtResource("4_rig")]
 position = Vector2(0, -14)
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.25, 0.25)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=706492694]
 position_smoothing_enabled = true
