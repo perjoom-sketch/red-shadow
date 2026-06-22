@@ -4,6 +4,7 @@
 [ext_resource type="Shader" path="res://shaders/fog.gdshader" id="2_fog"]
 [ext_resource type="PackedScene" uid="uid://bredshadowenmy1" path="res://scenes/Enemy.tscn" id="3_enemy"]
 [ext_resource type="Script" path="res://scripts/Main.gd" id="4_main"]
+[ext_resource type="Texture2D" uid="uid://dt8g11ky6vl17" path="res://assets/bg/rooftop_start.png" id="5_bgimg"]
 
 [sub_resource type="Gradient" id="grad_bg"]
 offsets = PackedFloat32Array(0, 0.45, 1)
@@ -105,7 +106,8 @@ layer = -10
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
-texture = SubResource("tex_bg")
+texture = ExtResource("5_bgimg")
+stretch_mode = 6
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
 position = Vector2(240, 460)
