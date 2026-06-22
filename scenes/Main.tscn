@@ -130,7 +130,7 @@ position = Vector2(520, 486)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 visible = false
-position = Vector2(576, 608)
+position = Vector2(576, 538)
 
 [node name="V" type="ColorRect" parent="Ground"]
 offset_left = -576.0
