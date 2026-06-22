@@ -36,6 +36,10 @@ scale = Vector2(0.4, 0.4)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=706492694]
 position_smoothing_enabled = true
 position_smoothing_speed = 7.0
+limit_left = 0
+limit_top = 0
+limit_right = 1152
+limit_bottom = 648
 
 [node name="Aura" type="PointLight2D" parent="." unique_id=1232877922]
 position = Vector2(0, -10)
