@@ -44,6 +44,12 @@ size = Vector2(640, 32)
 [sub_resource type="RectangleShape2D" id="shape_ledge"]
 size = Vector2(180, 28)
 
+[sub_resource type="RectangleShape2D" id="shape_roofL"]
+size = Vector2(250, 24)
+
+[sub_resource type="RectangleShape2D" id="shape_roofR"]
+size = Vector2(250, 24)
+
 [sub_resource type="Environment" id="env"]
 background_mode = 3
 glow_enabled = true
@@ -103,20 +109,28 @@ mouse_filter = 2
 layer = -10
 
 [node name="Sky" type="TextureRect" parent="BG"]
+visible = false
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
 texture = ExtResource("5_bgimg")
 stretch_mode = 6
 
+[node name="BGWorld" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(576, 324)
+scale = Vector2(0.689, 0.689)
+texture = ExtResource("5_bgimg")
+
 [node name="Player" parent="." instance=ExtResource("1_player")]
-position = Vector2(240, 460)
+position = Vector2(240, 520)
 
 [node name="Enemy" parent="." instance=ExtResource("3_enemy")]
 position = Vector2(520, 486)
 
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2(576, 560)
+visible = false
+position = Vector2(576, 608)
 
 [node name="V" type="ColorRect" parent="Ground"]
 offset_left = -576.0
@@ -128,7 +142,20 @@ color = Color(0.16, 0.13, 0.15, 1)
 [node name="C" type="CollisionShape2D" parent="Ground"]
 shape = SubResource("shape_ground")
 
+[node name="RoofLeft" type="StaticBody2D" parent="."]
+position = Vector2(225, 412)
+
+[node name="C" type="CollisionShape2D" parent="RoofLeft"]
+shape = SubResource("shape_roofL")
+
+[node name="RoofRight" type="StaticBody2D" parent="."]
+position = Vector2(725, 487)
+
+[node name="C" type="CollisionShape2D" parent="RoofRight"]
+shape = SubResource("shape_roofR")
+
 [node name="WallLeftOuter" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(180, -254)
 
 [node name="V" type="ColorRect" parent="WallLeftOuter"]
@@ -140,8 +167,10 @@ color = Color(0.12, 0.09, 0.11, 1)
 
 [node name="C" type="CollisionShape2D" parent="WallLeftOuter"]
 shape = SubResource("shape_wall_outer")
+disabled = true
 
 [node name="WallLeftInner" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(300, -194)
 
 [node name="V" type="ColorRect" parent="WallLeftInner"]
@@ -153,8 +182,10 @@ color = Color(0.12, 0.09, 0.11, 1)
 
 [node name="C" type="CollisionShape2D" parent="WallLeftInner"]
 shape = SubResource("shape_wall_inner")
+disabled = true
 
 [node name="TopBridge" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(610, -940)
 
 [node name="V" type="ColorRect" parent="TopBridge"]
@@ -166,8 +197,10 @@ color = Color(0.28, 0.2, 0.22, 1)
 
 [node name="C" type="CollisionShape2D" parent="TopBridge"]
 shape = SubResource("shape_bridge")
+disabled = true
 
 [node name="LedgeR1" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(860, -820)
 
 [node name="V" type="ColorRect" parent="LedgeR1"]
@@ -179,8 +212,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR1"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR2" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(760, -680)
 
 [node name="V" type="ColorRect" parent="LedgeR2"]
@@ -192,8 +227,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR2"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR3" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(880, -540)
 
 [node name="V" type="ColorRect" parent="LedgeR3"]
@@ -205,8 +242,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR3"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR4" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(760, -400)
 
 [node name="V" type="ColorRect" parent="LedgeR4"]
@@ -218,8 +257,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR4"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR5" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(900, -260)
 
 [node name="V" type="ColorRect" parent="LedgeR5"]
@@ -231,8 +272,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR5"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR6" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(760, -120)
 
 [node name="V" type="ColorRect" parent="LedgeR6"]
@@ -244,8 +287,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR6"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR7" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(900, 20)
 
 [node name="V" type="ColorRect" parent="LedgeR7"]
@@ -257,8 +302,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR7"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR8" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(760, 180)
 
 [node name="V" type="ColorRect" parent="LedgeR8"]
@@ -270,8 +317,10 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR8"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="LedgeR9" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2(880, 340)
 
 [node name="V" type="ColorRect" parent="LedgeR9"]
@@ -283,6 +332,7 @@ color = Color(0.22, 0.16, 0.18, 1)
 
 [node name="C" type="CollisionShape2D" parent="LedgeR9"]
 shape = SubResource("shape_ledge")
+disabled = true
 
 [node name="Motes" type="CanvasLayer" parent="."]
 layer = 1
