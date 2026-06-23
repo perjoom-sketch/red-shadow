@@ -158,7 +158,7 @@ texture = ExtResource("6_climb")
 [node name="LevelCollision" type="Node2D" parent="."]
 
 [node name="P0" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(528, 1247)
+position = Vector2(528, 1217)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P0"]
 shape = SubResource("v4_0")
@@ -170,13 +170,13 @@ position = Vector2(836, 1062)
 shape = SubResource("v4_1")
 
 [node name="P2" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(434, 1054)
+position = Vector2(434, 1055)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P2"]
 shape = SubResource("v4_2")
 
 [node name="P3" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(618, 953)
+position = Vector2(618, 955)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P3"]
 shape = SubResource("v4_3")
@@ -188,25 +188,25 @@ position = Vector2(890, 953)
 shape = SubResource("v4_4")
 
 [node name="P5" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(386, 826)
+position = Vector2(386, 825)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P5"]
 shape = SubResource("v4_5")
 
 [node name="P6" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(917, 733)
+position = Vector2(917, 716)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P6"]
 shape = SubResource("v4_6")
 
 [node name="P7" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(314, 606)
+position = Vector2(314, 593)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P7"]
 shape = SubResource("v4_7")
 
 [node name="P8" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(928, 576)
+position = Vector2(928, 604)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P8"]
 shape = SubResource("v4_8")
@@ -218,16 +218,16 @@ position = Vector2(698, 405)
 shape = SubResource("v4_9")
 
 [node name="SafetyNet" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(576, 1448)
+position = Vector2(576, 1460)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/SafetyNet"]
 shape = SubResource("v4_10")
 
 [node name="Player" parent="." instance=ExtResource("1_player")]
-position = Vector2(180, 1180)
+position = Vector2(180, 1192)
 
 [node name="Enemy" parent="." instance=ExtResource("3_enemy")]
-position = Vector2(700, 1110)
+position = Vector2(700, 1122)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 visible = false
