@@ -46,34 +46,34 @@ size = Vector2(640, 32)
 size = Vector2(180, 28)
 
 [sub_resource type="RectangleShape2D" id="v4_0"]
-size = Vector2(945, 50)
+size = Vector2(945, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_1"]
-size = Vector2(259, 50)
+size = Vector2(259, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_2"]
-size = Vector2(179, 50)
+size = Vector2(179, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_3"]
-size = Vector2(164, 50)
+size = Vector2(164, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_4"]
-size = Vector2(184, 50)
+size = Vector2(184, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_5"]
-size = Vector2(304, 50)
+size = Vector2(304, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_6"]
-size = Vector2(276, 50)
+size = Vector2(276, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_7"]
-size = Vector2(316, 50)
+size = Vector2(316, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_8"]
-size = Vector2(252, 50)
+size = Vector2(252, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_9"]
-size = Vector2(311, 50)
+size = Vector2(311, 22)
 
 [sub_resource type="RectangleShape2D" id="v4_10"]
 size = Vector2(1300, 60)
@@ -158,61 +158,61 @@ texture = ExtResource("6_climb")
 [node name="LevelCollision" type="Node2D" parent="."]
 
 [node name="P0" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(528, 1261)
+position = Vector2(528, 1247)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P0"]
 shape = SubResource("v4_0")
 
 [node name="P1" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(836, 1076)
+position = Vector2(836, 1062)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P1"]
 shape = SubResource("v4_1")
 
 [node name="P2" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(434, 1068)
+position = Vector2(434, 1054)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P2"]
 shape = SubResource("v4_2")
 
 [node name="P3" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(618, 967)
+position = Vector2(618, 953)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P3"]
 shape = SubResource("v4_3")
 
 [node name="P4" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(890, 967)
+position = Vector2(890, 953)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P4"]
 shape = SubResource("v4_4")
 
 [node name="P5" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(386, 840)
+position = Vector2(386, 826)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P5"]
 shape = SubResource("v4_5")
 
 [node name="P6" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(917, 747)
+position = Vector2(917, 733)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P6"]
 shape = SubResource("v4_6")
 
 [node name="P7" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(314, 620)
+position = Vector2(314, 606)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P7"]
 shape = SubResource("v4_7")
 
 [node name="P8" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(928, 590)
+position = Vector2(928, 576)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P8"]
 shape = SubResource("v4_8")
 
 [node name="P9" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(698, 419)
+position = Vector2(698, 405)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P9"]
 shape = SubResource("v4_9")
