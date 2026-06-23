@@ -39,7 +39,7 @@ position_smoothing_speed = 7.0
 limit_left = 0
 limit_top = 0
 limit_right = 1152
-limit_bottom = 1300
+limit_bottom = 1463
 
 [node name="Aura" type="PointLight2D" parent="." unique_id=1232877922]
 position = Vector2(0, -10)
