@@ -30,9 +30,10 @@ scale = Vector2(1.4, 1.4)
 shape = SubResource("RectangleShape2D_1")
 
 [node name="Visual" type="Node2D" parent="." unique_id=1775569749]
+position = Vector2(0, -46)
 
 [node name="Rig" parent="Visual" unique_id=1273368516 instance=ExtResource("4_rig")]
-position = Vector2(0, -46)
+position = Vector2(0, 0)
 scale = Vector2(0.24, 0.24)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=706492694]
