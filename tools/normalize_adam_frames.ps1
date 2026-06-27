@@ -28,11 +28,16 @@ $airOffsets[29] = 80
 $airOffsets[30] = 120
 $airOffsets[31] = 60
 
+$idleFiles = @(1,2)
+
 function Get-ScaleForFile($num) {
+    if ($idleFiles -contains $num) { return 0.90 }
     if ($walkFiles -contains $num) { return 1.94 }
-    if ($runFiles -contains $num) { return 1.86 }
+    if ($runFiles -contains $num) { return 2.37 }
     if ($turnFiles -contains $num) { return 1.29 }
     if ($backstepFiles -contains $num) { return 1.90 }
+    # 공중 프레임 2% 축소 (idle 대비 크기 통일)
+    if ($airFiles -contains $num) { return 0.98 }
     return 1.0
 }
 
