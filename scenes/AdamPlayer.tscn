@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://adam_player_scene"]
+
+[ext_resource type="SpriteFrames" uid="uid://adam_spriteframes" path="res://assets/characters/adam/adam_sprites.tres" id="1_sprites"]
+
+[node name="AdamPlayer" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -50)
+
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2(0, -46)
+
+[node name="AdamSprite" type="AnimatedSprite2D" parent="Visual"]
+sprite_frames = ExtResource("1_sprites")
+animation = &"idle"
+flip_h = false

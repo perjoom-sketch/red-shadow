@@ -1,0 +1,45 @@
+{
+  "_comment": "아담 SpriteFrames 구성 맵. fps/loop/frames/scale_group/ground_or_air 기준. 파일은 *_alpha.png(투명) 사용.",
+  "scale_groups": {
+    "single":   { "native_canvas": "848x1264", "stand_height_px": 860, "foot_y": 1070, "scale_to_target": 1.0,  "note": "기준 그룹. 단일컷 전부." },
+    "walk":     { "native_canvas": "372x500",  "stand_height_px": 355, "foot_y": 432,  "scale_to_target": 1.94, "note": "walk_frame3/7은 캔버스 상하에 닿아 클리핑 의심 → 빌드 시 확인" },
+    "run":      { "native_canvas": "372x500",  "stand_height_px": 300, "foot_y": 420,  "scale_to_target": 1.90, "note": "기울어 bbox 낮음. 시각 확인 후 미세조정" },
+    "turn":     { "native_canvas": "500x1012", "stand_height_px": 665, "foot_y": 847,  "scale_to_target": 1.29 },
+    "backstep": { "native_canvas": "372x500",  "stand_height_px": 380, "foot_y": 430,  "scale_to_target": 1.90 }
+  },
+  "target": { "canvas": "common, character stand-height ≈ 860px", "ground_baseline": "all GROUND anims feet on one baseline; AIR anims keep relative vertical offset", "facing": "left (back-sword visible); flip in engine for right" },
+  "animations": [
+    { "name": "idle",        "frames": ["idle","idle_breath"], "fps": 2,  "loop": true,  "group": "single", "type": "ground" },
+    { "name": "walk",        "frames": ["walk_frame2","walk_frame3","walk_frame6","walk_frame7"], "fps": 8, "loop": true, "group": "walk", "type": "ground" },
+    { "name": "run",         "frames": ["run_frame1","run_frame2","run_frame3","run_frame4","run_frame5","run_frame6","run_frame7","run_frame8"], "fps": 12, "loop": true, "group": "run", "type": "ground" },
+    { "name": "dash",        "frames": ["dash"], "fps": 1, "loop": false, "group": "single", "type": "ground", "note": "빠른 이동 1프레임 홀드" },
+    { "name": "crouch",      "frames": ["crouch"], "fps": 1, "loop": false, "group": "single", "type": "ground" },
+    { "name": "step_back",   "frames": ["backstep_frame1","backstep_frame2","backstep_frame3","backstep_frame4","backstep_frame5","backstep_frame6","backstep_frame7","backstep_frame8"], "fps": 10, "loop": true, "group": "backstep", "type": "ground", "note": "칼 앞 견제 뒷걸음(슬로우 리트릿)" },
+    { "name": "turn",        "frames": ["turn_frame1","turn_frame2","turn_frame3"], "fps": 10, "loop": false, "group": "turn", "type": "ground", "note": "측면→정면. 반대는 역재생(3→2→1)" },
+
+    { "name": "jump_up",     "frames": ["jump_takeoff","air_up","air_apex"], "fps": 10, "loop": false, "group": "single", "type": "air" },
+    { "name": "fall",        "frames": ["air_down"], "fps": 1, "loop": false, "group": "single", "type": "air" },
+    { "name": "land",        "frames": ["land"], "fps": 1, "loop": false, "group": "single", "type": "ground" },
+
+    { "name": "draw_charge", "frames": ["draw_charge"], "fps": 1, "loop": false, "group": "single", "type": "ground", "note": "발도 응축(공격 윈드업)" },
+    { "name": "slash_h",     "frames": ["slash_h"], "fps": 1, "loop": false, "group": "single", "type": "ground" },
+    { "name": "sheath",      "frames": ["sheath"], "fps": 1, "loop": false, "group": "single", "type": "ground", "note": "또는 slash_h 역재생 파생" },
+    { "name": "attack_up",   "frames": ["attack_up"], "fps": 1, "loop": false, "group": "single", "type": "ground" },
+    { "name": "attack2",     "frames": ["attack2"], "fps": 1, "loop": false, "group": "single", "type": "ground", "note": "콤보 2타: attack_up→attack2" },
+    { "name": "guard",       "frames": ["guard"], "fps": 1, "loop": false, "group": "single", "type": "ground" },
+    { "name": "parry",       "frames": ["parry"], "fps": 1, "loop": false, "group": "single", "type": "ground" },
+
+    { "name": "hurt",        "frames": ["hurt"], "fps": 1, "loop": false, "group": "single", "type": "ground" },
+    { "name": "dizzy",       "frames": ["dizzy"], "fps": 1, "loop": true,  "group": "single", "type": "ground", "note": "기절 루프" },
+    { "name": "die",         "frames": ["die"], "fps": 1, "loop": false, "group": "single", "type": "ground", "note": "마지막 프레임 홀드" },
+    { "name": "victory",     "frames": ["victory"], "fps": 1, "loop": false, "group": "single", "type": "ground" }
+  ],
+  "pose_variants_not_core_anim": {
+    "_comment": "게임 루프 아님. 컷씬/시선/방향 변주용 단일 포즈. 필요 시 1프레임 anim으로 등록.",
+    "frames": ["L_look_idle","R_look_idle","L_side_45","look_up","look_down","back","crossarm","surprise"]
+  },
+  "ui_portraits_not_sprite": {
+    "_comment": "스프라이트 아님. UI/대화 초상화용 클로즈업.",
+    "frames": ["face_idle","face_angry","face_smile"]
+  }
+}
