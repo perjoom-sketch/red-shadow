@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://vd08mypfue2n"]
 
-[ext_resource type="Texture2D" uid="uid://dcakh3y73q571" path="res://assets/characters/adam/frames_normalized/30_adam_air_apex.png" id="t_air_apex"]
-[ext_resource type="Texture2D" uid="uid://c37fn0a5hloeo" path="res://assets/characters/adam/frames_normalized/31_adam_air_down.png" id="t_air_down"]
+[ext_resource type="Texture2D" uid="uid://d1ugrx56vs820" path="res://assets/characters/adam/frames_normalized/4_adam_walk_2.png" id="39_rb8o0"]
+[ext_resource type="Texture2D" uid="uid://7kubtf42562a" path="res://assets/characters/adam/frames_normalized/6_adam_walk_4.png" id="41_kdvgn"]
 [ext_resource type="Texture2D" uid="uid://bdkskl6468jhm" path="res://assets/characters/adam/frames_normalized/29_adam_air_up.png" id="t_air_up"]
 [ext_resource type="Texture2D" uid="uid://cnbugxi3x8h0i" path="res://assets/characters/adam/frames_normalized/46_adam_attack2.png" id="t_atk2"]
 [ext_resource type="Texture2D" uid="uid://hvflixgrl0sl" path="res://assets/characters/adam/frames_normalized/45_adam_attack_up.png" id="t_atk_up"]
@@ -40,9 +40,7 @@
 [ext_resource type="Texture2D" uid="uid://baqknwuawnn30" path="res://assets/characters/adam/frames_normalized/18_adam_right_turn_3.png" id="t_turn3"]
 [ext_resource type="Texture2D" uid="uid://endc4t8xy320" path="res://assets/characters/adam/frames_normalized/55_adam_victory.png" id="t_victory"]
 [ext_resource type="Texture2D" uid="uid://b74nw0j5jel6" path="res://assets/characters/adam/frames_normalized/3_adam_walk_1.png" id="t_walk1"]
-[ext_resource type="Texture2D" uid="uid://d1ugrx56vs820" path="res://assets/characters/adam/frames_normalized/4_adam_walk_2.png" id="t_walk2"]
 [ext_resource type="Texture2D" uid="uid://76ysqgycy4f7" path="res://assets/characters/adam/frames_normalized/5_adam_walk_3.png" id="t_walk3"]
-[ext_resource type="Texture2D" uid="uid://7kubtf42562a" path="res://assets/characters/adam/frames_normalized/6_adam_walk_4.png" id="t_walk4"]
 
 [resource]
 animations = [{
@@ -265,13 +263,13 @@ animations = [{
 "texture": ExtResource("t_walk1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("t_walk2")
+"texture": ExtResource("39_rb8o0")
 }, {
 "duration": 1.0,
 "texture": ExtResource("t_walk3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("t_walk4")
+"texture": ExtResource("41_kdvgn")
 }],
 "loop": true,
 "name": &"walk",

@@ -5,7 +5,7 @@
 [ext_resource type="SpriteFrames" uid="uid://vd08mypfue2n" path="res://assets/characters/adam/adam_spriteframes.tres" id="5_sf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(22, 55)
+size = Vector2(20, 45)
 
 [sub_resource type="Gradient" id="grad_aura"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -25,7 +25,7 @@ attack_reach = 90.0
 sfx_draw = ExtResource("2_3li8b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=731945339]
-position = Vector2(0, -38)
+position = Vector2(-0.5, -29.875)
 scale = Vector2(1.4, 1.4)
 shape = SubResource("RectangleShape2D_1")
 
