@@ -16,7 +16,7 @@ extends CharacterBody2D
 
 # --- Cached child node that we rotate during the flip ---
 @onready var visual: Node2D = $Visual
-@onready var anim: AnimationPlayer = $Visual/Rig/AnimationPlayer
+@onready var sprite: AnimatedSprite2D = $Visual/AdamSprite
 
 # --- Movement tuning (live-editable in the Inspector) ---
 @export_group("Movement")
@@ -435,21 +435,21 @@ func _update_visual():
 
 
 func _update_animation() -> void:
-	var next := "idle_alert" if (_combat_timer > 0.0 or not is_on_floor() or dashing) else "idle_relaxed"
+	var next := "idle"
 	if attacking:
 		if current_action == "attack":
-			# 콤보 5단: 내려 → 올려 → 회전 → 회전 → 찌르기 (회전 중엔 팔 뻗은 자세)
-			next = ["slash_down", "slash_up", "thrust", "thrust", "thrust"][combo_step]
+			next = ["slash_h", "attack_up", "attack2", "attack2", "attack2"][combo_step]
 	elif _sheathe_timer > 0.0:
-		# 전투 종료 → 납도 애니를 끝까지 재생 (idle 이 덮어쓰지 않게)
-		if anim.current_animation != "sheathe":
-			anim.play("sheathe")
+		if sprite.animation != &"sheath":
+			sprite.play(&"sheath")
 		return
+	elif not is_on_floor():
+		next = "fall" if velocity.y > 0 else "jump_up"
 	elif is_on_floor() and not dashing:
 		if absf(velocity.x) >= 30.0:
 			next = "run" if _running else "walk"
-	if anim.current_animation != next:
-		anim.play(next)
+	if sprite.animation != StringName(next):
+		sprite.play(StringName(next))
 
 
 func _spawn_attack_hitbox() -> void:
