@@ -30,7 +30,7 @@ $airOffsets[31] = 60
 
 function Get-ScaleForFile($num) {
     if ($walkFiles -contains $num) { return 1.94 }
-    if ($runFiles -contains $num) { return 1.90 }
+    if ($runFiles -contains $num) { return 1.86 }
     if ($turnFiles -contains $num) { return 1.29 }
     if ($backstepFiles -contains $num) { return 1.90 }
     return 1.0

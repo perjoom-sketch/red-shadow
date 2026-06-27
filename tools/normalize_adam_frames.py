@@ -36,7 +36,7 @@ GROUND_BASELINE_Y = 1070
 SCALE_GROUPS = {
     "single":   {"scale": 1.0,  "native": (848, 1264)},
     "walk":     {"scale": 1.94, "native": (372, 500)},
-    "run":      {"scale": 1.90, "native": (372, 500)},
+    "run":      {"scale": 1.86, "native": (372, 500)},
     "turn":     {"scale": 1.29, "native": (500, 1012)},
     "backstep": {"scale": 1.90, "native": (372, 500)},
 }
