@@ -63,13 +63,12 @@ func _run():
 	sf.set_animation_loop(&"jump_up", false)
 	sf.add_frame(&"jump_up", load(base + "28_adam_jump_takeoff.png"))
 	sf.add_frame(&"jump_up", load(base + "29_adam_air_up.png"))
-	sf.add_frame(&"jump_up", load(base + "30_adam_air_apex.png"))
 	
 	# fall
 	sf.add_animation(&"fall")
 	sf.set_animation_speed(&"fall", 1.0)
 	sf.set_animation_loop(&"fall", false)
-	sf.add_frame(&"fall", load(base + "31_adam_air_down.png"))
+	sf.add_frame(&"fall", load(base + "28_adam_jump_takeoff.png"))
 	
 	# land
 	sf.add_animation(&"land")

@@ -104,7 +104,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("t_air_down")
+"texture": ExtResource("t_takeoff")
 }],
 "loop": false,
 "name": &"fall",
@@ -143,9 +143,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("t_air_up")
-}, {
-"duration": 1.0,
-"texture": ExtResource("t_air_apex")
 }],
 "loop": false,
 "name": &"jump_up",
