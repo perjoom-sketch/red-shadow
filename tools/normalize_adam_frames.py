@@ -39,7 +39,7 @@ SCALE_GROUPS = {
     "run":      {"scale": 1.86, "native": (372, 500)},
     "turn":     {"scale": 1.29, "native": (500, 1012)},
     "backstep": {"scale": 1.90, "native": (372, 500)},
-    "air":      {"scale": 0.91, "native": (848, 1264)},
+    "air":      {"scale": 0.82, "native": (848, 1264)},
 }
 
 # 파일명 → 논리 프레임명 매핑 (animation_map.json 기준)

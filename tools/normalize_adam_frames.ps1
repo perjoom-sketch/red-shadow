@@ -33,7 +33,7 @@ function Get-ScaleForFile($num) {
     if ($runFiles -contains $num) { return 1.86 }
     if ($turnFiles -contains $num) { return 1.29 }
     if ($backstepFiles -contains $num) { return 1.90 }
-    if ($airFiles -contains $num) { return 0.91 }
+    if ($airFiles -contains $num) { return 0.82 }
     return 1.0
 }
 
