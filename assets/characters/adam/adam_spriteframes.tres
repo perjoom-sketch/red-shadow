@@ -1,0 +1,283 @@
+[gd_resource type="SpriteFrames" load_steps=45 format=3 uid="uid://dkx7adam0spr1t"]
+
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/1_adam_idle.png" id="t_idle"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/2_adam_idle_breath.png" id="t_idle_breath"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/3_adam_walk_1.png" id="t_walk1"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/4_adam_walk_2.png" id="t_walk2"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/5_adam_walk_3.png" id="t_walk3"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/6_adam_walk_4.png" id="t_walk4"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/7_adam_run_1.png" id="t_run1"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/8_adam_run_2.png" id="t_run2"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/9_adam_run_3.png" id="t_run3"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/10_adam_run_4.png" id="t_run4"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/11_adam_run_5.png" id="t_run5"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/12_adam_run_6.png" id="t_run6"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/13_adam_run_7.png" id="t_run7"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/14_adam_run_8.png" id="t_run8"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/15_adam_dash.png" id="t_dash"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/16_adam_left_look_turn_1.png" id="t_turn1"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/17_adam_right_turn_2.png" id="t_turn2"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/18_adam_right_turn_3.png" id="t_turn3"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/19_adam_step_back_1.png" id="t_back1"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/20_adam_step_back_2.png" id="t_back2"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/21_adam_step_back_3.png" id="t_back3"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/22_adam_step_back_4.png" id="t_back4"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/23_adam_step_back_5.png" id="t_back5"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/24_adam_step_back_6.png" id="t_back6"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/25_adam_step_back_7.png" id="t_back7"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/26_adam_step_back_8.png" id="t_back8"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/27_adam_crouch.png" id="t_crouch"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/28_adam_jump_takeoff.png" id="t_takeoff"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/29_adam_air_up.png" id="t_air_up"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/30_adam_air_apex.png" id="t_air_apex"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/31_adam_air_down.png" id="t_air_down"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/32_adam_land.png" id="t_land"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/39_adam_L_facing_draw_charge.png" id="t_draw"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/40_adam_L_facing _slash_h.png" id="t_slash"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/43_left-facing_sheath.png" id="t_sheath"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/44_adam_parry.png" id="t_parry"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/45_adam_attack_up.png" id="t_atk_up"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/46_adam_attack2.png" id="t_atk2"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/49_adam_combat_idle.png" id="t_guard"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/52_adam_hurt.png" id="t_hurt"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/53_adam_dizzy.png" id="t_dizzy"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/54_adam_die.png" id="t_die"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/55_adam_victory.png" id="t_victory"]
+[ext_resource type="Texture2D" path="res://assets/characters/adam/frames_normalized/56_adam_dodge.png" id="t_dodge"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_idle")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_idle_breath")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_walk1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_walk2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_walk3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_walk4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_run1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_run2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_run3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_run4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_run5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_run6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_run7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_run8")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_dash")
+}],
+"loop": false,
+"name": &"dash",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_crouch")
+}],
+"loop": false,
+"name": &"crouch",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_back1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_back2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_back3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_back4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_back5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_back6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_back7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_back8")
+}],
+"loop": true,
+"name": &"step_back",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_turn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_turn2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_turn3")
+}],
+"loop": false,
+"name": &"turn",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_takeoff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_air_up")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_air_apex")
+}],
+"loop": false,
+"name": &"jump_up",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_air_down")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_land")
+}],
+"loop": false,
+"name": &"land",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_draw")
+}],
+"loop": false,
+"name": &"draw_charge",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_slash")
+}],
+"loop": false,
+"name": &"slash_h",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_sheath")
+}],
+"loop": false,
+"name": &"sheath",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_atk_up")
+}],
+"loop": false,
+"name": &"attack_up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_atk2")
+}],
+"loop": false,
+"name": &"attack2",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_guard")
+}],
+"loop": false,
+"name": &"guard",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_parry")
+}],
+"loop": false,
+"name": &"parry",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_hurt")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_dizzy")
+}],
+"loop": true,
+"name": &"dizzy",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_die")
+}],
+"loop": false,
+"name": &"die",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_victory")
+}],
+"loop": false,
+"name": &"victory",
+"speed": 1.0
+}]

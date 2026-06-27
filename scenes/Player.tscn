@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bhuilbc7l3m4n" path="res://scripts/Player.gd" id="1_player"]
 [ext_resource type="AudioStream" uid="uid://8nbeuqk8k45g" path="res://assets/audio/sfx/blade_swing_tight.ogg" id="2_3li8b"]
 [ext_resource type="PackedScene" uid="uid://d1lox2fmfg3r4" path="res://scenes/PlayerRigChibi.tscn" id="4_rig"]
+[ext_resource type="SpriteFrames" uid="uid://dkx7adam0spr1t" path="res://assets/characters/adam/adam_spriteframes.tres" id="5_sf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(22, 55)
@@ -35,6 +36,14 @@ position = Vector2(0, -46)
 [node name="Rig" parent="Visual" unique_id=1273368516 instance=ExtResource("4_rig")]
 position = Vector2(0, 0)
 scale = Vector2(0.24, 0.24)
+visible = false
+
+[node name="AdamSprite" type="AnimatedSprite2D" parent="Visual"]
+position = Vector2(0, 2)
+scale = Vector2(0.1, 0.1)
+sprite_frames = ExtResource("5_sf")
+animation = &"idle"
+offset = Vector2(0, -438)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=706492694]
 position_smoothing_enabled = true
