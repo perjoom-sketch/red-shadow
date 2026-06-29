@@ -1,0 +1,186 @@
+[gd_scene load_steps=21 format=3 uid="uid://catmarket00001"]
+
+[ext_resource type="PackedScene" uid="uid://bredshadowplyr1" path="res://scenes/Player.tscn" id="1_player"]
+[ext_resource type="Texture2D" path="res://assets/bg/cat_market.png" id="2_bg"]
+[ext_resource type="Script" path="res://scripts/CatMarket.gd" id="3_script"]
+[ext_resource type="Texture2D" path="res://assets/fx/portal_blue_alpha.png" id="4_portal"]
+[ext_resource type="Shader" path="res://shaders/vortex.gdshader" id="5_vortex"]
+[ext_resource type="PackedScene" path="res://scenes/PortalModal.tscn" id="6_modal"]
+
+[sub_resource type="RectangleShape2D" id="ground_shape"]
+size = Vector2(1104, 50)
+
+[sub_resource type="RectangleShape2D" id="p0_shape"]
+size = Vector2(920, 27)
+
+[sub_resource type="RectangleShape2D" id="p1_shape"]
+size = Vector2(914, 24)
+
+[sub_resource type="RectangleShape2D" id="p2_shape"]
+size = Vector2(915, 22)
+
+[sub_resource type="RectangleShape2D" id="p3_shape"]
+size = Vector2(912, 24)
+
+[sub_resource type="RectangleShape2D" id="p4_shape"]
+size = Vector2(103, 12)
+
+[sub_resource type="RectangleShape2D" id="wall_l_shape"]
+size = Vector2(25, 1840)
+
+[sub_resource type="RectangleShape2D" id="wall_r_shape"]
+size = Vector2(25, 1839)
+
+[sub_resource type="RectangleShape2D" id="ladder_l_shape"]
+size = Vector2(64, 1095)
+
+[sub_resource type="RectangleShape2D" id="ladder_r_shape"]
+size = Vector2(66, 1099)
+
+[sub_resource type="CircleShape2D" id="exit_shape"]
+radius = 40.0
+
+[sub_resource type="Gradient" id="grad_portal"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.4, 0.6, 1, 0.8, 0.6, 0.4, 1, 0.6, 0.3, 0.2, 0.8, 0)
+
+[sub_resource type="GradientTexture2D" id="tex_portal_particle"]
+gradient = SubResource("grad_portal")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ppm_portal"]
+emission_shape = 1
+emission_sphere_radius = 100.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.0
+initial_velocity_max = 0.0
+radial_velocity_min = -80.0
+radial_velocity_max = -40.0
+damping_min = 5.0
+damping_max = 10.0
+scale_min = 0.5
+scale_max = 1.5
+color = Color(0.5, 0.7, 1, 0.7)
+
+[sub_resource type="ShaderMaterial" id="mat_vortex"]
+shader = ExtResource("5_vortex")
+shader_parameter/spin_speed = -1.0
+shader_parameter/spiral_strength = 0.8
+
+[node name="CatMarket" type="Node2D"]
+script = ExtResource("3_script")
+
+[node name="BG" type="Sprite2D" parent="."]
+z_index = -100
+texture_filter = 1
+texture = ExtResource("2_bg")
+centered = false
+
+[node name="LevelCollision" type="Node2D" parent="."]
+
+[node name="Ground" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(575, 1407)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/Ground"]
+shape = SubResource("ground_shape")
+
+[node name="P0" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(580, 1128)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/P0"]
+shape = SubResource("p0_shape")
+one_way_collision = true
+
+[node name="P1" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(580, 874)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/P1"]
+shape = SubResource("p1_shape")
+one_way_collision = true
+
+[node name="P2" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(582, 554)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/P2"]
+shape = SubResource("p2_shape")
+one_way_collision = true
+
+[node name="P3" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(579, 287)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/P3"]
+shape = SubResource("p3_shape")
+one_way_collision = true
+
+[node name="P4" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(574, 166)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/P4"]
+shape = SubResource("p4_shape")
+one_way_collision = true
+
+[node name="WallL" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(3, 525)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/WallL"]
+shape = SubResource("wall_l_shape")
+
+[node name="WallR" type="StaticBody2D" parent="LevelCollision"]
+position = Vector2(1152, 528)
+
+[node name="C" type="CollisionShape2D" parent="LevelCollision/WallR"]
+shape = SubResource("wall_r_shape")
+
+[node name="Ladders" type="Node2D" parent="."]
+
+[node name="LadderL" type="Area2D" parent="Ladders"]
+position = Vector2(80, 818)
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+
+[node name="C" type="CollisionShape2D" parent="Ladders/LadderL"]
+shape = SubResource("ladder_l_shape")
+
+[node name="LadderR" type="Area2D" parent="Ladders"]
+position = Vector2(1083, 818)
+collision_layer = 0
+collision_mask = 1
+monitorable = false
+
+[node name="C" type="CollisionShape2D" parent="Ladders/LadderR"]
+shape = SubResource("ladder_r_shape")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(576, 1300)
+
+[node name="ExitPortal" type="Area2D" parent="."]
+position = Vector2(572, 92)
+
+[node name="C" type="CollisionShape2D" parent="ExitPortal"]
+shape = SubResource("exit_shape")
+
+[node name="Portal" type="Sprite2D" parent="."]
+material = SubResource("mat_vortex")
+position = Vector2(572, 92)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("4_portal")
+
+[node name="PortalSuction" type="GPUParticles2D" parent="."]
+z_index = 1
+position = Vector2(572, 92)
+amount = 50
+lifetime = 1.5
+speed_scale = 1.5
+process_material = SubResource("ppm_portal")
+texture = SubResource("tex_portal_particle")
+
+[node name="PortalModal" parent="." instance=ExtResource("6_modal")]
+visible = false
+

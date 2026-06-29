@@ -32,7 +32,7 @@ shape = SubResource("RectangleShape2D_1")
 [node name="Visual" type="Node2D" parent="." unique_id=1775569749]
 position = Vector2(0, -46)
 
-[node name="AdamSprite" type="AnimatedSprite2D" parent="Visual"]
+[node name="AdamSprite" type="AnimatedSprite2D" parent="Visual" unique_id=2003418369]
 position = Vector2(0, 48)
 scale = Vector2(0.1, 0.1)
 sprite_frames = ExtResource("5_sf")
@@ -40,12 +40,12 @@ animation = &"idle"
 offset = Vector2(0, -438)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=706492694]
-position_smoothing_enabled = true
-position_smoothing_speed = 7.0
 limit_left = 0
 limit_top = 0
 limit_right = 1152
-limit_bottom = 1463
+limit_bottom = 1413
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
 
 [node name="Aura" type="PointLight2D" parent="." unique_id=1232877922]
 position = Vector2(0, -49)
