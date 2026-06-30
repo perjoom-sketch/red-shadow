@@ -41,6 +41,15 @@
 [ext_resource type="Texture2D" uid="uid://endc4t8xy320" path="res://assets/characters/adam/frames_normalized/55_adam_victory.png" id="t_victory"]
 [ext_resource type="Texture2D" uid="uid://b74nw0j5jel6" path="res://assets/characters/adam/frames_normalized/3_adam_walk_1.png" id="t_walk1"]
 [ext_resource type="Texture2D" uid="uid://76ysqgycy4f7" path="res://assets/characters/adam/frames_normalized/5_adam_walk_3.png" id="t_walk3"]
+[ext_resource type="Texture2D" uid="uid://cdvsvi2tujglf" path="res://assets/characters/adam/frames_normalized/59_adam_walk_1.png" id="t_nwalk1"]
+[ext_resource type="Texture2D" uid="uid://c2428xwtfysse" path="res://assets/characters/adam/frames_normalized/60_adam_walk_2.png" id="t_nwalk2"]
+[ext_resource type="Texture2D" uid="uid://cjha5yqgjvucg" path="res://assets/characters/adam/frames_normalized/61_adam_walk_3.png" id="t_nwalk3"]
+[ext_resource type="Texture2D" uid="uid://m8tlgaa35ujh" path="res://assets/characters/adam/frames_normalized/62_adam_walk_4.png" id="t_nwalk4"]
+[ext_resource type="Texture2D" uid="uid://icftgeyc2gra" path="res://assets/characters/adam/frames_normalized/63_adam_walk_5.png" id="t_nwalk5"]
+[ext_resource type="Texture2D" uid="uid://r0jgvb3u2kwb" path="res://assets/characters/adam/frames_normalized/64_adam_walk_6.png" id="t_nwalk6"]
+[ext_resource type="Texture2D" uid="uid://ccbcka44jwlp" path="res://assets/characters/adam/frames_normalized/65_adam_walk_7.png" id="t_nwalk7"]
+[ext_resource type="Texture2D" uid="uid://b0b3r32g1smec" path="res://assets/characters/adam/frames_normalized/66_adam_walk_8.png" id="t_nwalk8"]
+[ext_resource type="Texture2D" uid="uid://b3occ43rp4cn4" path="res://assets/characters/adam/frames_normalized/67_adam_walk_9.png" id="t_nwalk9"]
 
 [resource]
 animations = [{
@@ -260,16 +269,31 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("t_walk1")
+"texture": ExtResource("t_nwalk1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("39_rb8o0")
+"texture": ExtResource("t_nwalk2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("t_walk3")
+"texture": ExtResource("t_nwalk3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("41_kdvgn")
+"texture": ExtResource("t_nwalk4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_nwalk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_nwalk6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_nwalk7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_nwalk8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_nwalk9")
 }],
 "loop": true,
 "name": &"walk",
