@@ -472,8 +472,13 @@ func _update_animation() -> void:
 	elif is_on_floor() and not dashing:
 		if absf(velocity.x) >= 30.0:
 			next = "run" if _running else "walk"
+			if _running:
+				sprite.scale = Vector2(0.1, 0.1)
+			else:
+				sprite.scale = Vector2(0.12, 0.12)  # walk도 20% 크게
+		else:
+			sprite.scale = Vector2(0.12, 0.12)  # idle 20% 크게
 		sprite.flip_h = false
-		sprite.scale = Vector2(0.1, 0.1)
 	if sprite.animation != StringName(next):
 		sprite.play(StringName(next))
 
