@@ -1,7 +1,7 @@
 extends Node2D
 ## CatMarket.gd — 야옹시장 씬 컨트롤러.
 
-@export var bgm_track := "catmarket"
+@export var bgm_track := "bladethunder"
 
 @onready var exit_portal: Area2D = $ExitPortal
 @onready var player = $Player
