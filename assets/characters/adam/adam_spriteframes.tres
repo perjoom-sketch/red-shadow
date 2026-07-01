@@ -53,6 +53,8 @@
 [ext_resource type="Texture2D" uid="uid://ccbcka44jwlp" path="res://assets/characters/adam/frames_normalized/65_adam_walk_7.png" id="t_nwalk7"]
 [ext_resource type="Texture2D" uid="uid://b0b3r32g1smec" path="res://assets/characters/adam/frames_normalized/66_adam_walk_8.png" id="t_nwalk8"]
 [ext_resource type="Texture2D" uid="uid://b3occ43rp4cn4" path="res://assets/characters/adam/frames_normalized/67_adam_walk_9.png" id="t_nwalk9"]
+[ext_resource type="Texture2D" uid="uid://bm3pyaqp8r6xw" path="res://assets/characters/adam/frames_normalized/57_adam_climb1.png" id="t_climb1"]
+[ext_resource type="Texture2D" uid="uid://288ad0l872pb" path="res://assets/characters/adam/frames_normalized/58_adam_climb2.png" id="t_climb2"]
 
 [resource]
 animations = [{
@@ -310,4 +312,15 @@ animations = [{
 "loop": true,
 "name": &"walk",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_climb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_climb2")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 4.0
 }]
