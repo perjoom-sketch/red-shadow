@@ -127,6 +127,12 @@ var _dash_dir := Vector2.RIGHT
 
 
 func _physics_process(delta):
+	# TEMP DEBUG - climb 상태 추적
+	if Engine.get_physics_frames() % 30 == 0:
+		print("[CLIMB] climbing=", climbing, " ladder=", _ladder_area != null,
+			" on_floor=", is_on_floor(), " vel=", velocity,
+			" anim=", sprite.animation)
+
 	var on_floor := is_on_floor()
 	_tick_timers(delta)
 
