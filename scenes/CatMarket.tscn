@@ -130,7 +130,7 @@ shape = SubResource("wall_r_shape")
 [node name="Ladders" type="Node2D" parent="."]
 
 [node name="LadderL" type="Area2D" parent="Ladders"]
-position = Vector2(80, 790)
+position = Vector2(80, 862)
 collision_layer = 0
 collision_mask = 1
 monitorable = false
@@ -139,7 +139,7 @@ monitorable = false
 shape = SubResource("ladder_l_shape")
 
 [node name="LadderR" type="Area2D" parent="Ladders"]
-position = Vector2(1083, 790)
+position = Vector2(1083, 862)
 collision_layer = 0
 collision_mask = 1
 monitorable = false
