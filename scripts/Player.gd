@@ -455,7 +455,7 @@ func _update_animation() -> void:
 	if climbing:
 		next = "climb"
 		sprite.flip_h = false
-		sprite.scale = Vector2(0.1, 0.1)
+		sprite.scale = Vector2(0.105, 0.105)
 	elif attacking:
 		if current_action == "attack":
 			next = ["slash_h", "attack_up", "attack2", "attack2", "attack2"][combo_step]
@@ -468,16 +468,16 @@ func _update_animation() -> void:
 		# 상승 중일 때 이미지 좌우반전
 		sprite.flip_h = (velocity.y < 0)
 		# 점프 중 스케일 10% 축소
-		sprite.scale = Vector2(0.09, 0.09)
+		sprite.scale = Vector2(0.0945, 0.0945)
 	elif is_on_floor() and not dashing:
 		if absf(velocity.x) >= 30.0:
 			next = "run" if _running else "walk"
 			if _running:
-				sprite.scale = Vector2(0.105, 0.105)  # run 1.05배
+				sprite.scale = Vector2(0.11025, 0.11025)  # run 1.05배
 			else:
-				sprite.scale = Vector2(0.1, 0.1)  # walk
+				sprite.scale = Vector2(0.105, 0.105)  # walk
 		else:
-			sprite.scale = Vector2(0.1, 0.1)  # idle
+			sprite.scale = Vector2(0.105, 0.105)  # idle
 		sprite.flip_h = false
 	if sprite.animation != StringName(next):
 		sprite.play(StringName(next))

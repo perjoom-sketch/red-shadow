@@ -5,7 +5,7 @@
 [ext_resource type="SpriteFrames" uid="uid://vd08mypfue2n" path="res://assets/characters/adam/adam_spriteframes.tres" id="5_sf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(20, 45)
+size = Vector2(20, 49.017853)
 
 [sub_resource type="Gradient" id="grad_aura"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -20,12 +20,14 @@ fill_to = Vector2(0.5, 1)
 
 [node name="Player" type="CharacterBody2D" unique_id=876798569]
 script = ExtResource("1_player")
+speed = 260.0
+walk_speed = 180.0
 max_air_jumps = 2
 attack_reach = 90.0
 sfx_draw = ExtResource("2_3li8b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=731945339]
-position = Vector2(-0.5, -29.875)
+position = Vector2(-0.5, -34.687504)
 scale = Vector2(1.4, 1.4)
 shape = SubResource("RectangleShape2D_1")
 
@@ -33,10 +35,10 @@ shape = SubResource("RectangleShape2D_1")
 position = Vector2(0, -46)
 
 [node name="AdamSprite" type="AnimatedSprite2D" parent="Visual" unique_id=2003418369]
-position = Vector2(0, 48)
-scale = Vector2(0.1, 0.1)
+position = Vector2(-1.9999998, 48)
+scale = Vector2(0.105, 0.105)
 sprite_frames = ExtResource("5_sf")
-animation = &"idle"
+animation = &"run"
 offset = Vector2(0, -438)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=706492694]
