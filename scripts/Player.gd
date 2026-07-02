@@ -127,6 +127,12 @@ var _dash_dir := Vector2.RIGHT
 
 
 func _physics_process(delta):
+	# TEMP DEBUG - climb 상태 추적
+	if Engine.get_physics_frames() % 30 == 0:
+		print("[CLIMB] climbing=", climbing, " ladder=", _ladder_area != null,
+			" on_floor=", is_on_floor(), " vel=", velocity,
+			" anim=", sprite.animation)
+
 	var on_floor := is_on_floor()
 	_tick_timers(delta)
 
@@ -609,9 +615,17 @@ func _spawn_ghost():
 
 # --- Ladder / Climb ----------------------------------------------------------
 
-func _handle_climb(delta: float) -> void:
+func _handle_climb(_delta: float) -> void:
 	# 등반 중 상하 이동
 	var vert := Input.get_axis("move_up", "move_down")
+
+	# 바닥에 발이 닿고 위로 올릴 입력이 없으면 등반 종료
+	if is_on_floor() and vert <= 0.0:
+		climbing = false
+		_ladder_area = null
+		set_floor_snap_length(4.0)
+		return
+
 	velocity.y = vert * climb_speed
 	velocity.x = 0.0
 
@@ -619,12 +633,14 @@ func _handle_climb(delta: float) -> void:
 	var horiz := Input.get_axis("move_left", "move_right")
 	if absf(horiz) > 0.5:
 		climbing = false
+		_ladder_area = null
 		velocity.x = horiz * speed * 0.5
 		return
 
 	# 점프로 사다리에서 뛰어내리기
 	if Input.is_action_just_pressed("jump"):
 		climbing = false
+		_ladder_area = null
 		velocity.y = jump_velocity * 0.6
 		_air_jumps_left = max_air_jumps
 		return
@@ -636,6 +652,7 @@ func _handle_climb(delta: float) -> void:
 	# one-way 플랫폼은 통과하므로 Ground에서만 멈춤
 	if is_on_floor() and vert > 0.0:
 		climbing = false
+		_ladder_area = null
 		velocity.y = 0.0
 		set_floor_snap_length(4.0)
 		return
@@ -643,6 +660,7 @@ func _handle_climb(delta: float) -> void:
 	# 사다리 영역 상단을 벗어나면 (위로 올라가는 중) 플랫폼 위로 올라서기
 	if _ladder_area and not _is_overlapping_ladder():
 		climbing = false
+		_ladder_area = null
 		if vert < 0.0:
 			# 위로 올라가는 중이면 살짝 위로 밀어서 플랫폼에 착지
 			velocity.y = -50.0
@@ -686,5 +704,10 @@ func _handle_ladder_entry() -> void:
 	if _ladder_area == null or climbing:
 		return
 	var vert := Input.get_axis("move_up", "move_down")
-	if absf(vert) > 0.1:
-		enter_ladder(_ladder_area)
+	# 바닥에 서 있으면 아래(vert > 0)만 진입, 공중이면 위아래 둘 다 진입
+	if is_on_floor():
+		if vert > 0.1:
+			enter_ladder(_ladder_area)
+	else:
+		if absf(vert) > 0.1:
+			enter_ladder(_ladder_area)
