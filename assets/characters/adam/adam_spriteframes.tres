@@ -1,7 +1,5 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://vd08mypfue2n"]
 
-[ext_resource type="Texture2D" uid="uid://d1ugrx56vs820" path="res://assets/characters/adam/frames_normalized/4_adam_walk_2.png" id="39_rb8o0"]
-[ext_resource type="Texture2D" uid="uid://7kubtf42562a" path="res://assets/characters/adam/frames_normalized/6_adam_walk_4.png" id="41_kdvgn"]
 [ext_resource type="Texture2D" uid="uid://bdkskl6468jhm" path="res://assets/characters/adam/frames_normalized/29_adam_air_up.png" id="t_air_up"]
 [ext_resource type="Texture2D" uid="uid://cnbugxi3x8h0i" path="res://assets/characters/adam/frames_normalized/46_adam_attack2.png" id="t_atk2"]
 [ext_resource type="Texture2D" uid="uid://hvflixgrl0sl" path="res://assets/characters/adam/frames_normalized/45_adam_attack_up.png" id="t_atk_up"]
@@ -13,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://noqal4e07eyn" path="res://assets/characters/adam/frames_normalized/24_adam_step_back_6.png" id="t_back6"]
 [ext_resource type="Texture2D" uid="uid://balsoked4k00n" path="res://assets/characters/adam/frames_normalized/25_adam_step_back_7.png" id="t_back7"]
 [ext_resource type="Texture2D" uid="uid://cwht67xwgnfxj" path="res://assets/characters/adam/frames_normalized/26_adam_step_back_8.png" id="t_back8"]
+[ext_resource type="Texture2D" uid="uid://bm3pyaqp8r6xw" path="res://assets/characters/adam/frames_normalized/57_adam_climb1.png" id="t_climb1"]
+[ext_resource type="Texture2D" uid="uid://288ad0l872pb" path="res://assets/characters/adam/frames_normalized/58_adam_climb2.png" id="t_climb2"]
 [ext_resource type="Texture2D" uid="uid://c3ide1vc2bjil" path="res://assets/characters/adam/frames_normalized/27_adam_crouch.png" id="t_crouch"]
 [ext_resource type="Texture2D" uid="uid://bj6pp7x3k2870" path="res://assets/characters/adam/frames_normalized/15_adam_dash.png" id="t_dash"]
 [ext_resource type="Texture2D" uid="uid://br5a8g4m7dux4" path="res://assets/characters/adam/frames_normalized/54_adam_die.png" id="t_die"]
@@ -23,7 +23,6 @@
 [ext_resource type="Texture2D" uid="uid://dcclwocydla3h" path="res://assets/characters/adam/frames_normalized/1_adam_idle.png" id="t_idle"]
 [ext_resource type="Texture2D" uid="uid://uj322y6s2rkq" path="res://assets/characters/adam/frames_normalized/2_adam_idle_breath.png" id="t_idle_breath"]
 [ext_resource type="Texture2D" uid="uid://ccimlnq7nv3tm" path="res://assets/characters/adam/frames_normalized/32_adam_land.png" id="t_land"]
-[ext_resource type="Texture2D" uid="uid://cu4t5a0ra7xa3" path="res://assets/characters/adam/frames_normalized/44_adam_parry.png" id="t_parry"]
 [ext_resource type="Texture2D" uid="uid://dsfrfrx0i0fxx" path="res://assets/characters/adam/frames_normalized/68_adam_run_1.png" id="t_nrun1"]
 [ext_resource type="Texture2D" uid="uid://mpagk5bruocu" path="res://assets/characters/adam/frames_normalized/69_adam_run_2.png" id="t_nrun2"]
 [ext_resource type="Texture2D" uid="uid://cpj87e6xwbjdm" path="res://assets/characters/adam/frames_normalized/70_adam_run_3.png" id="t_nrun3"]
@@ -35,15 +34,6 @@
 [ext_resource type="Texture2D" uid="uid://dr55vwxc3g76c" path="res://assets/characters/adam/frames_normalized/76_adam_run_9.png" id="t_nrun9"]
 [ext_resource type="Texture2D" uid="uid://cvcha8ntcedg2" path="res://assets/characters/adam/frames_normalized/77_adam_run_10.png" id="t_nrun10"]
 [ext_resource type="Texture2D" uid="uid://d4eas0iw26rt5" path="res://assets/characters/adam/frames_normalized/78_adam_run_11.png" id="t_nrun11"]
-[ext_resource type="Texture2D" uid="uid://jd4flwabyeax" path="res://assets/characters/adam/frames_normalized/43_left-facing_sheath.png" id="t_sheath"]
-[ext_resource type="Texture2D" uid="uid://r8wjle8mi2yn" path="res://assets/characters/adam/frames_normalized/40_adam_L_facing _slash_h.png" id="t_slash"]
-[ext_resource type="Texture2D" uid="uid://clky6ha71nug8" path="res://assets/characters/adam/frames_normalized/28_adam_jump_takeoff.png" id="t_takeoff"]
-[ext_resource type="Texture2D" uid="uid://8nw2mhgqf3gc" path="res://assets/characters/adam/frames_normalized/16_adam_left_look_turn_1.png" id="t_turn1"]
-[ext_resource type="Texture2D" uid="uid://clj0ruy683wct" path="res://assets/characters/adam/frames_normalized/17_adam_right_turn_2.png" id="t_turn2"]
-[ext_resource type="Texture2D" uid="uid://baqknwuawnn30" path="res://assets/characters/adam/frames_normalized/18_adam_right_turn_3.png" id="t_turn3"]
-[ext_resource type="Texture2D" uid="uid://endc4t8xy320" path="res://assets/characters/adam/frames_normalized/55_adam_victory.png" id="t_victory"]
-[ext_resource type="Texture2D" uid="uid://b74nw0j5jel6" path="res://assets/characters/adam/frames_normalized/3_adam_walk_1.png" id="t_walk1"]
-[ext_resource type="Texture2D" uid="uid://76ysqgycy4f7" path="res://assets/characters/adam/frames_normalized/5_adam_walk_3.png" id="t_walk3"]
 [ext_resource type="Texture2D" uid="uid://cdvsvi2tujglf" path="res://assets/characters/adam/frames_normalized/59_adam_walk_1.png" id="t_nwalk1"]
 [ext_resource type="Texture2D" uid="uid://c2428xwtfysse" path="res://assets/characters/adam/frames_normalized/60_adam_walk_2.png" id="t_nwalk2"]
 [ext_resource type="Texture2D" uid="uid://cjha5yqgjvucg" path="res://assets/characters/adam/frames_normalized/61_adam_walk_3.png" id="t_nwalk3"]
@@ -53,8 +43,14 @@
 [ext_resource type="Texture2D" uid="uid://ccbcka44jwlp" path="res://assets/characters/adam/frames_normalized/65_adam_walk_7.png" id="t_nwalk7"]
 [ext_resource type="Texture2D" uid="uid://b0b3r32g1smec" path="res://assets/characters/adam/frames_normalized/66_adam_walk_8.png" id="t_nwalk8"]
 [ext_resource type="Texture2D" uid="uid://b3occ43rp4cn4" path="res://assets/characters/adam/frames_normalized/67_adam_walk_9.png" id="t_nwalk9"]
-[ext_resource type="Texture2D" uid="uid://bm3pyaqp8r6xw" path="res://assets/characters/adam/frames_normalized/57_adam_climb1.png" id="t_climb1"]
-[ext_resource type="Texture2D" uid="uid://288ad0l872pb" path="res://assets/characters/adam/frames_normalized/58_adam_climb2.png" id="t_climb2"]
+[ext_resource type="Texture2D" uid="uid://cu4t5a0ra7xa3" path="res://assets/characters/adam/frames_normalized/44_adam_parry.png" id="t_parry"]
+[ext_resource type="Texture2D" uid="uid://jd4flwabyeax" path="res://assets/characters/adam/frames_normalized/43_left-facing_sheath.png" id="t_sheath"]
+[ext_resource type="Texture2D" uid="uid://r8wjle8mi2yn" path="res://assets/characters/adam/frames_normalized/40_adam_L_facing _slash_h.png" id="t_slash"]
+[ext_resource type="Texture2D" uid="uid://clky6ha71nug8" path="res://assets/characters/adam/frames_normalized/28_adam_jump_takeoff.png" id="t_takeoff"]
+[ext_resource type="Texture2D" uid="uid://8nw2mhgqf3gc" path="res://assets/characters/adam/frames_normalized/16_adam_left_look_turn_1.png" id="t_turn1"]
+[ext_resource type="Texture2D" uid="uid://clj0ruy683wct" path="res://assets/characters/adam/frames_normalized/17_adam_right_turn_2.png" id="t_turn2"]
+[ext_resource type="Texture2D" uid="uid://baqknwuawnn30" path="res://assets/characters/adam/frames_normalized/18_adam_right_turn_3.png" id="t_turn3"]
+[ext_resource type="Texture2D" uid="uid://endc4t8xy320" path="res://assets/characters/adam/frames_normalized/55_adam_victory.png" id="t_victory"]
 
 [resource]
 animations = [{
@@ -73,6 +69,17 @@ animations = [{
 "loop": false,
 "name": &"attack_up",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("t_climb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("t_climb2")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -212,7 +219,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 11.0
+"speed": 25.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -311,16 +318,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("t_climb1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("t_climb2")
-}],
-"loop": true,
-"name": &"climb",
-"speed": 4.0
+"speed": 18.0
 }]
