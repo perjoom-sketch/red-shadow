@@ -84,9 +84,6 @@ size = Vector2(309, 30)
 [sub_resource type="RectangleShape2D" id="v4_p10"]
 size = Vector2(174, 27)
 
-[sub_resource type="RectangleShape2D" id="v4_p11"]
-size = Vector2(112, 22)
-
 [sub_resource type="RectangleShape2D" id="v4_limit_l"]
 size = Vector2(25, 2000)
 
@@ -211,13 +208,13 @@ texture = ExtResource("6_climb")
 
 [node name="Portal" type="Sprite2D" parent="BGWorld"]
 material = SubResource("mat_vortex")
-position = Vector2(436, -447)
+position = Vector2(411, -501)
 scale = Vector2(0.12, 0.12)
 texture = ExtResource("7_portal")
 
 [node name="PortalSuction" type="GPUParticles2D" parent="BGWorld"]
 z_index = 1
-position = Vector2(436, -447)
+position = Vector2(411, -501)
 amount = 50
 lifetime = 1.5
 speed_scale = 1.5
@@ -225,7 +222,7 @@ process_material = SubResource("ppm_portal")
 texture = SubResource("tex_portal_particle")
 
 [node name="PortalTrigger" type="Area2D" parent="BGWorld"]
-position = Vector2(436, -447)
+position = Vector2(411, -501)
 
 [node name="C" type="CollisionShape2D" parent="BGWorld/PortalTrigger"]
 shape = SubResource("portal_trigger_shape")
@@ -303,12 +300,6 @@ position = Vector2(869, 218)
 
 [node name="C" type="CollisionShape2D" parent="LevelCollision/P10"]
 shape = SubResource("v4_p10")
-
-[node name="P11" type="StaticBody2D" parent="LevelCollision"]
-position = Vector2(994, 327)
-
-[node name="C" type="CollisionShape2D" parent="LevelCollision/P11"]
-shape = SubResource("v4_p11")
 
 [node name="LimitL" type="StaticBody2D" parent="LevelCollision"]
 position = Vector2(0, 561)
