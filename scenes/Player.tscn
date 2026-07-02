@@ -21,7 +21,7 @@ fill_to = Vector2(0.5, 1)
 [node name="Player" type="CharacterBody2D" unique_id=876798569]
 script = ExtResource("1_player")
 speed = 260.0
-walk_speed = 180.0
+walk_speed = 120.0
 max_air_jumps = 2
 attack_reach = 90.0
 sfx_draw = ExtResource("2_3li8b")
