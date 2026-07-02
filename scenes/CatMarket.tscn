@@ -29,10 +29,10 @@ size = Vector2(25, 1840)
 size = Vector2(25, 1839)
 
 [sub_resource type="RectangleShape2D" id="ladder_l_shape"]
-size = Vector2(64, 1150)
+size = Vector2(64, 1095)
 
 [sub_resource type="RectangleShape2D" id="ladder_r_shape"]
-size = Vector2(66, 1150)
+size = Vector2(66, 1099)
 
 [sub_resource type="CircleShape2D" id="exit_shape"]
 radius = 40.0
@@ -130,7 +130,7 @@ shape = SubResource("wall_r_shape")
 [node name="Ladders" type="Node2D" parent="."]
 
 [node name="LadderL" type="Area2D" parent="Ladders"]
-position = Vector2(80, 790)
+position = Vector2(80, 818)
 collision_layer = 0
 collision_mask = 1
 monitorable = false
@@ -139,7 +139,7 @@ monitorable = false
 shape = SubResource("ladder_l_shape")
 
 [node name="LadderR" type="Area2D" parent="Ladders"]
-position = Vector2(1083, 790)
+position = Vector2(1083, 818)
 collision_layer = 0
 collision_mask = 1
 monitorable = false
