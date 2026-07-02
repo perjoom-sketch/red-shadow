@@ -698,5 +698,10 @@ func _handle_ladder_entry() -> void:
 	if _ladder_area == null or climbing:
 		return
 	var vert := Input.get_axis("move_up", "move_down")
-	if absf(vert) > 0.1:
-		enter_ladder(_ladder_area)
+	# 바닥에 서 있으면 아래(vert > 0)만 진입, 공중이면 위아래 둘 다 진입
+	if is_on_floor():
+		if vert > 0.1:
+			enter_ladder(_ladder_area)
+	else:
+		if absf(vert) > 0.1:
+			enter_ladder(_ladder_area)
